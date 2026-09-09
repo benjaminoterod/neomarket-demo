@@ -503,13 +503,22 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .tas__result p{color:var(--bone-dim);max-width:40ch;margin:0 auto 2rem}
 
 /* ============================================================
-   FOOTER
+   CIERRE + FOOTER
    ============================================================ */
+.joincta{text-align:center;max-width:42ch;margin-inline:auto;padding-block:clamp(1.5rem,4vw,3.5rem)}
+.joincta h2{margin-bottom:1.5rem}
+.joincta p{color:var(--bone-dim);font-size:clamp(1rem,1.3vw,1.16rem);line-height:1.7;margin-bottom:2.4rem}
+
 .ft{border-top:1px solid var(--hairline);margin-top:var(--section-pad)}
-.ft__cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;padding-block:clamp(3rem,7vw,5rem)}
+.ft__top{display:flex;justify-content:space-between;gap:clamp(2rem,5vw,4rem);align-items:flex-start;padding-block:clamp(3rem,7vw,5rem)}
+.ft__cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;flex:1;min-width:0}
 .ft__cols h4{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:1.1rem}
 .ft__cols a,.ft__cols p{display:block;color:var(--bone-dim);font-size:.88rem;padding:.32rem 0}
 .ft__cols a:hover{color:var(--bone)}
+.ft__social{display:flex;gap:1.15rem;flex:none;padding-top:.2rem}
+.ft__social a{color:var(--bone-faint);transition:color .25s var(--ease)}
+.ft__social a:hover{color:var(--bone)}
+.ft__social svg{width:19px;height:19px;display:block}
 .ft__word{
   font-family:var(--ff-display);font-weight:600;text-transform:uppercase;
   font-size:clamp(2.1rem,12vw,8.5rem);line-height:.9;letter-spacing:.02em;
@@ -574,6 +583,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   .band{grid-template-columns:1fr;gap:1.75rem;padding-block:2.5rem}
   .band:nth-child(even) .band__media{order:0}
   .veh__thumbs{grid-template-columns:repeat(4,1fr)}
+  .ft__top{flex-direction:column-reverse;gap:2.5rem}
   .ft__cols{grid-template-columns:1fr 1fr}
   .fin__out{position:static}
 }
@@ -628,28 +638,36 @@ svg.brand-logo{height:22px;width:auto;display:block}
 
 <footer class="ft">
   <div class="shell">
-    <div class="ft__cols">
-      <div>
-        <h4>Automotora Neomarket</h4>
-        <p>Nuevos y seminuevos en La Serena y la IV Región. Cada auto pasa por una revisión de 120 puntos antes de entrar a la vitrina.</p>
+    <div class="ft__top">
+      <div class="ft__cols">
+        <div>
+          <h4>Automotora Neomarket</h4>
+          <p>Nuevos y seminuevos en La Serena y la IV Región. Cada auto pasa por una revisión de 120 puntos antes de entrar a la vitrina.</p>
+        </div>
+        <div>
+          <h4>Inventario</h4>
+          <a href="#/nuevos">Autos nuevos</a>
+          <a href="#/usados">Autos usados</a>
+          <a href="#/financiamiento">Simulador de crédito</a>
+          <a href="#/tasacion">Tasa tu auto</a>
+        </div>
+        <div>
+          <h4>Sucursales</h4>
+          <p>La Serena Centro<br>Av. Francisco de Aguirre 1200</p>
+          <p>La Serena Norte<br>Ruta 5 Norte km 470</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a href="tel:+56512345678">+56 51 234 5678</a>
+          <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp ventas</a>
+          <p>Lun a Vie 09–19h · Sáb 10–14h</p>
+        </div>
       </div>
-      <div>
-        <h4>Inventario</h4>
-        <a href="#/nuevos">Autos nuevos</a>
-        <a href="#/usados">Autos usados</a>
-        <a href="#/financiamiento">Simulador de crédito</a>
-        <a href="#/tasacion">Tasa tu auto</a>
-      </div>
-      <div>
-        <h4>Sucursales</h4>
-        <p>La Serena Centro<br>Av. Francisco de Aguirre 1200</p>
-        <p>La Serena Norte<br>Ruta 5 Norte km 470</p>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <a href="tel:+56512345678">+56 51 234 5678</a>
-        <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp ventas</a>
-        <p>Lun a Vie 09–19h · Sáb 10–14h</p>
+      <div class="ft__social">
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.65C16.35 3.6 15.3 3.5 14.1 3.5c-2.5 0-4.1 1.5-4.1 4.25v2.15H7.3V13h2.7v8z"/></svg></a>
+        <a href="https://wa.me/56951234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.8l-.3-.2-2.6.8.8-2.5-.2-.3A8 8 0 0 1 12 4zM8.9 7.6c-.15 0-.4.05-.6.3-.2.25-.8.8-.8 1.9s.85 2.2.95 2.35c.1.15 1.65 2.6 4.05 3.55 2 .8 2.4.65 2.85.6.45-.05 1.4-.55 1.6-1.1.2-.55.2-1 .15-1.1-.05-.1-.2-.15-.45-.3-.25-.15-1.4-.7-1.6-.75-.2-.1-.35-.15-.5.1-.15.25-.6.75-.7.9-.15.15-.25.15-.5.05-.25-.15-1-.4-1.9-1.2-.7-.6-1.15-1.35-1.3-1.6-.15-.25 0-.35.1-.5.1-.1.25-.3.35-.45.1-.15.15-.25.25-.4.05-.15 0-.3-.05-.4-.05-.1-.5-1.25-.7-1.7-.2-.4-.35-.35-.5-.35z"/></svg></a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.2 3c.3 2.15 1.55 3.5 3.8 3.7v2.85c-1.45.1-2.75-.35-3.85-1.1v6.45A6.25 6.25 0 1 1 9.9 8.7v3.05a3.2 3.2 0 1 0 3.4 3.15V3z"/></svg></a>
       </div>
     </div>
   </div>
@@ -986,30 +1004,24 @@ function viewHome(){
 
   <section class="section shell reveal">
     <div class="rule" style="margin-bottom:var(--s-7)"></div>
-    <div class="fin" style="align-items:center">
+    <div class="intro">
+      <h2 class="display">Tu auto<br>paga la entrada</h2>
       <div>
-        <p class="eyebrow">Financiamiento</p>
-        <h2 class="display" style="margin:.6rem 0 1.25rem">La cuota primero,<br>el auto después</h2>
-        <p style="color:var(--bone-dim);max-width:42ch">Dinos cuánto puedes pagar al mes y te mostramos qué autos entran. Trabajamos con seis bancos y evaluamos sin costo.</p>
-        <div style="margin-top:2rem"><a class="btn btn--solid" href="#/financiamiento">Abrir simulador</a></div>
-      </div>
-      <div class="fin__out">
-        <div class="fin__cuota-k">Ejemplo · Geely Coolray GT</div>
-        <div class="fin__cuota">${clp(cuotaRef(13990000))}</div>
-        <div class="fin__cuota-sub">48 cuotas · pie 20% · tasa ${TASA_DEFAULT}% mensual</div>
-        <div style="margin-top:1.5rem">${gaugeRow([["Valor",clp(13990000)],["Pie",clp(13990000*0.2)],["CAE ref.",cae(TASA_DEFAULT).toFixed(1)+"%"]])}</div>
+        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. Financiamos con seis bancos y evaluamos sin costo.</p>
+        <div style="margin-top:1.75rem;display:flex;gap:1.75rem;flex-wrap:wrap">
+          <a class="linkline" href="#/tasacion">Tasar mi auto <span class="arw">→</span></a>
+          <a class="linkline" href="#/financiamiento">Simular crédito <span class="arw">→</span></a>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section shell reveal">
     <div class="rule" style="margin-bottom:var(--s-7)"></div>
-    <div class="intro">
-      <h2 class="display">Tu auto<br>paga la entrada</h2>
-      <div>
-        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. El retiro y la transferencia los gestionamos nosotros.</p>
-        <div style="margin-top:1.75rem"><a class="linkline" href="#/tasacion">Tasar mi auto <span class="arw">→</span></a></div>
-      </div>
+    <div class="joincta">
+      <h2 class="display">Ven a verlos<br>en persona</h2>
+      <p>Escríbenos y coordinamos tu visita a la vitrina o un test drive. Respondemos el mismo día.</p>
+      <a class="btn btn--solid" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola, quiero coordinar una visita a la vitrina.")}" target="_blank" rel="noopener">Conversemos</a>
     </div>
   </section>`;
 }
