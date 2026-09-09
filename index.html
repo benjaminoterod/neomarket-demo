@@ -329,7 +329,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   border:1px solid var(--hairline-soft);transition:border-color .3s var(--ease);
 }
 .card:hover{border-color:var(--hairline)}
-.card--rail{min-width:280px;background:transparent;border:0}
+.card--rail{width:clamp(232px,25vw,310px);min-width:0;flex:0 0 auto;background:transparent;border:0}
 .card__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised-2)}
 .card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.05)}
@@ -705,108 +705,108 @@ const HERO_SLIDES = [
   {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
 ];
 const PHOTOS = {
-  n1:  U("1541443131876-44b03de101c5"), // BMW hatch azul
-  n2:  U("1617531653332-bd46c24f2068"), // deportivo rojo (Formentor)
-  n3:  U("1533473359331-0135ef1b58bf"), // SUV grande off-road (Amarok)
-  n4:  U("1519641471654-76ce0107ad1b"), // crossover blanco
-  n5:  U("1617469767053-d3b523a0b982"), // crossover plateado
-  n6:  U("1533473359331-0135ef1b58bf"),
-  n7:  U("1519641471654-76ce0107ad1b"),
-  n8:  U("1541899481282-d53bffe3c35d"), // VW compacto (T-Cross)
-  n9:  U("1546614042-7df3c24c9e5d"),    // BMW oscuro (X1)
-  n10: U("1617469767053-d3b523a0b982"),
-  u1:  U("1617469767053-d3b523a0b982"),
-  u2:  U("1519641471654-76ce0107ad1b"),
-  u3:  U("1533473359331-0135ef1b58bf"),
-  u4:  U("1541899481282-d53bffe3c35d"), // sedán compacto (Onix)
-  u6:  U("1550355291-bbee04a92027"),    // hatch rojo (C3)
-  u7:  U("1549317661-bd32c8ce0db2"),    // hatch clásico (C3)
-  u8:  U("1606664515524-ed2f786a0bd6"), // SUV premium oscuro (C5 Aircross)
-  u9:  U("1617469767053-d3b523a0b982"),
-  u10: U("1558981806-ec527fa84c39"),    // moto trail
-  u11: U("1568772585407-9361f9bf3a87"), // moto
-  u12: U("1449426468159-d96dbf08f19f"), // moto
-  u13: U("1571127236794-81c0bbfe1ce3"), // sedán (Sail)
-  u14: U("1533473359331-0135ef1b58bf"), // pickup / off-road (Amarok usado)
+  n1:  U("1541443131876-44b03de101c5"), // BMW 220i coupé azul
+  n2:  U("1617531653332-bd46c24f2068"), // BMW M4 rojo
+  n3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
+  n4:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
+  n5:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
+  n6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
+  n7:  U("1541899481282-d53bffe3c35d"), // VW Virtus sedán
+  n8:  U("1546614042-7df3c24c9e5d"),    // BMW 520i negro
+  n9:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
+  n10: U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
+  u1:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
+  u2:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
+  u3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
+  u4:  U("1541899481282-d53bffe3c35d"), // VW Vento sedán
+  u6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
+  u7:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
+  u8:  U("1606664515524-ed2f786a0bd6"), // Audi A7 Sportback negro
+  u9:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
+  u10: U("1558981806-ec527fa84c39"),    // moto café racer
+  u11: U("1568772585407-9361f9bf3a87"), // Ducati SuperSport
+  u12: U("1449426468159-d96dbf08f19f"), // KTM 390 Duke
+  u13: U("1571127236794-81c0bbfe1ce3"), // Tesla Model 3
+  u14: U("1533473359331-0135ef1b58bf"), // Jeep Grand Cherokee
   // u5 (furgón): sin foto -> render de estudio SVG
 };
 
 const VEHICULOS = [
   // ---------- NUEVOS ----------
-  {id:"n1",cond:"nuevo",marca:"BMW",modelo:"Serie 1",version:"118 Sport Line",anio:2026,km:0,precio:30900000,combustible:"Bencina",transmision:"Automática",carroceria:"Hatchback",destacado:true,
-   desc:"El hatch premium de entrada a BMW. Tracción delantera, pantalla curva Live Cockpit y una puesta a punto de chasis que sigue siendo la referencia del segmento.",
-   specs:{Motor:"1.5 turbo 3 cil.",Potencia:"156 hp",Torque:"230 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"380 L",Garantía:"3 años / 100.000 km"}},
-  {id:"n2",cond:"nuevo",marca:"Cupra",modelo:"Formentor",version:"VZ e-Hybrid 245",anio:2026,km:0,precio:37990000,combustible:"Híbrido enchufable",transmision:"Automática DSG",carroceria:"SUV",destacado:true,
-   desc:"SUV coupé con alma deportiva. 245 hp combinados, cerca de 50 km en modo eléctrico y detalles en cobre que no vas a ver en ningún otro estacionamiento de La Serena.",
-   specs:{Motor:"1.4 TSI + eléctrico",Potencia:"245 hp",Autonomía_eléctrica:"49 km",Tracción:"Delantera",Puertas:"5",Maletero:"345 L",Garantía:"5 años"}},
-  {id:"n3",cond:"nuevo",marca:"Volkswagen",modelo:"Amarok",version:"Highline 3.0 V6 TDI",anio:2026,km:0,precio:35990000,combustible:"Diésel",transmision:"Automática",carroceria:"Camioneta",destacado:true,
-   desc:"El único V6 diésel del segmento. 258 hp, tracción 4Motion permanente y 3.500 kg de capacidad de arrastre para el trabajo y para el fin de semana.",
-   specs:{Motor:"3.0 V6 TDI",Potencia:"258 hp",Torque:"580 Nm",Tracción:"4Motion permanente",Carga:"1.030 kg",Arrastre:"3.500 kg",Garantía:"5 años"}},
-  {id:"n4",cond:"nuevo",marca:"Geely",modelo:"Coolray",version:"GT 1.5 Turbo",anio:2026,km:0,precio:13990000,combustible:"Bencina",transmision:"Automática DCT",carroceria:"SUV",destacado:false,
-   desc:"El SUV compacto que puso a Geely en el mapa. 177 hp, caja de doble embrague y un nivel de equipamiento que obliga a la competencia a bajar precios.",
-   specs:{Motor:"1.5 turbo",Potencia:"177 hp",Torque:"255 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"330 L",Garantía:"5 años / 100.000 km"}},
-  {id:"n5",cond:"nuevo",marca:"Chery",modelo:"Tiggo 8 Pro Max",version:"1.6 TGDI AWD",anio:2026,km:0,precio:24990000,combustible:"Bencina turbo",transmision:"Automática DCT",carroceria:"SUV",destacado:false,
-   desc:"Siete asientos reales, doble pantalla de 12,3\", sonido Sony y tracción integral. El SUV familiar que redefine cuánto equipamiento entra en su presupuesto.",
-   specs:{Motor:"1.6 TGDI",Potencia:"197 hp",Torque:"290 Nm",Tracción:"AWD",Asientos:"7",Maletero:"889 L",Garantía:"5 años / 150.000 km"}},
-  {id:"n6",cond:"nuevo",marca:"Citroën",modelo:"C3 Aircross",version:"Feel Pack 1.6 AT",anio:2026,km:0,precio:15490000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,
-   desc:"Suspensión con topes hidráulicos progresivos: el confort de rodado marca de la casa. Hasta siete plazas y una modularidad pensada para familias que viajan.",
-   specs:{Motor:"1.6 16V",Potencia:"115 hp",Torque:"150 Nm",Tracción:"Delantera",Asientos:"5 (7 opc.)",Maletero:"410 L",Garantía:"3 años"}},
-  {id:"n7",cond:"nuevo",marca:"Chevrolet",modelo:"Groove",version:"LT 1.5 CVT",anio:2026,km:0,precio:13290000,combustible:"Bencina",transmision:"Automática CVT",carroceria:"SUV",destacado:false,
-   desc:"El SUV urbano de Chevrolet: pantalla de 8\", cámara de retroceso, seis airbags de serie y un consumo mixto cercano a los 16 km/l.",
-   specs:{Motor:"1.5 DOHC",Potencia:"110 hp",Torque:"141 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"338 L",Garantía:"3 años / 100.000 km"}},
-  {id:"n8",cond:"nuevo",marca:"Volkswagen",modelo:"T-Cross",version:"Comfortline 1.4 TSI",anio:2026,km:0,precio:22690000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:false,
-   desc:"El SUV compacto de Volkswagen, ahora con frontal renovado y Digital Cockpit de serie. Banca trasera corrediza y 455 litros de maletero.",
-   specs:{Motor:"1.4 TSI",Potencia:"150 hp",Torque:"250 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"455 L",Garantía:"5 años"}},
-  {id:"n9",cond:"nuevo",marca:"BMW",modelo:"X1",version:"sDrive18i M Sport",anio:2026,km:0,precio:42900000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,
-   desc:"La tercera generación del X1 crece en todo: pantalla curva, paquete M Sport de serie y una micro-hibridación de 48V que suaviza cada partida.",
-   specs:{Motor:"1.5 turbo mild-hybrid 48V",Potencia:"136 hp",Torque:"230 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"540 L",Garantía:"3 años / 100.000 km"}},
-  {id:"n10",cond:"nuevo",marca:"Geely",modelo:"GX3 Pro",version:"1.5 GL MT",anio:2026,km:0,precio:11490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:false,
-   desc:"El acceso más económico a un SUV nuevo con respaldo de red. Pantalla de 10,25\", llave inteligente y un motor 1.5 probado en miles de unidades.",
-   specs:{Motor:"1.5 16V",Potencia:"102 hp",Torque:"142 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"340 L",Garantía:"5 años / 100.000 km"}},
+  {id:"n1",cond:"nuevo",marca:"BMW",modelo:"220i Coupé",version:"M Sport",anio:2026,km:0,precio:44900000,combustible:"Bencina",transmision:"Automática",carroceria:"Coupé",destacado:true,
+   desc:"Coupé de dos puertas con el 2.0 turbo de 184 hp y tracción trasera. Paquete M Sport de serie, pantalla curva y suspensión rebajada.",
+   specs:{Motor:"2.0 turbo",Potencia:"184 hp",Torque:"300 Nm",Tracción:"Trasera",Puertas:"2",Maletero:"390 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n2",cond:"nuevo",marca:"BMW",modelo:"M4 Competition",version:"xDrive",anio:2026,km:0,precio:92900000,combustible:"Bencina",transmision:"Automática",carroceria:"Coupé",destacado:true,
+   desc:"El 3.0 biturbo de seis cilindros lleva 530 hp a las cuatro ruedas. De 0 a 100 en 3,5 segundos y frenos carbono-cerámicos opcionales.",
+   specs:{Motor:"3.0 biturbo 6 cil.",Potencia:"530 hp",Torque:"650 Nm",Tracción:"xDrive","0-100":"3,5 s",Puertas:"2","Garantía":"3 años / 100.000 km"}},
+  {id:"n3",cond:"nuevo",marca:"Ford",modelo:"Explorer",version:"Limited 3.0 EcoBoost",anio:2026,km:0,precio:56900000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,
+   desc:"SUV grande de siete plazas con el V6 3.0 EcoBoost de 365 hp, tracción total y capacidad de arrastre de 2.540 kg.",
+   specs:{Motor:"3.0 V6 EcoBoost",Potencia:"365 hp",Torque:"515 Nm",Tracción:"Total",Asientos:"7",Arrastre:"2.540 kg","Garantía":"3 años / 100.000 km"}},
+  {id:"n4",cond:"nuevo",marca:"Toyota",modelo:"RAV4",version:"2.0 XLI CVT",anio:2026,km:0,precio:28990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"El SUV mediano más vendido del país. Motor 2.0 atmosférico, caja CVT y el paquete Toyota Safety Sense de serie.",
+   specs:{Motor:"2.0 16V",Potencia:"175 hp",Torque:"206 Nm",Tracción:"Delantera",Asientos:"5",Maletero:"580 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n5",cond:"nuevo",marca:"Honda",modelo:"CR-V",version:"1.5 Turbo EXL",anio:2026,km:0,precio:37990000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"El 1.5 turbo de 193 hp con caja CVT, tracción total real y el conjunto Honda Sensing. Interior de los más espaciosos del segmento.",
+   specs:{Motor:"1.5 turbo",Potencia:"193 hp",Torque:"243 Nm",Tracción:"Total",Asientos:"5",Maletero:"589 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n6",cond:"nuevo",marca:"Hyundai",modelo:"i30",version:"1.6 CRDi",anio:2026,km:0,precio:19990000,combustible:"Diésel",transmision:"Automática",carroceria:"Hatchback",destacado:false,
+   desc:"Hatch europeo con el 1.6 turbodiésel de 136 hp y caja de doble embrague. Consumo mixto bajo los 5 L/100 km.",
+   specs:{Motor:"1.6 CRDi",Potencia:"136 hp",Torque:"320 Nm",Tracción:"Delantera",Puertas:"5",Consumo:"4,8 L/100 km","Garantía":"5 años"}},
+  {id:"n7",cond:"nuevo",marca:"Volkswagen",modelo:"Virtus",version:"Highline 1.4 TSI",anio:2026,km:0,precio:22690000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"Sedán",destacado:false,
+   desc:"Sedán compacto con el 1.4 TSI de 150 hp, caja de doble embrague y 521 litros de maletero. Digital Cockpit y VW Play de serie.",
+   specs:{Motor:"1.4 TSI",Potencia:"150 hp",Torque:"250 Nm",Tracción:"Delantera",Puertas:"4",Maletero:"521 L","Garantía":"5 años"}},
+  {id:"n8",cond:"nuevo",marca:"BMW",modelo:"520i",version:"M Sport",anio:2026,km:0,precio:62900000,combustible:"Bencina",transmision:"Automática",carroceria:"Sedán",destacado:false,
+   desc:"El Serie 5 con el 2.0 turbo de 208 hp y micro-hibridación de 48V. Dirección a las cuatro ruedas opcional y pantalla curva de 12,3\" + 14,9\".",
+   specs:{Motor:"2.0 turbo + 48V",Potencia:"208 hp",Torque:"330 Nm",Tracción:"Trasera",Puertas:"4",Maletero:"520 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n9",cond:"nuevo",marca:"Fiat",modelo:"500",version:"1.0 Hybrid Dolcevita",anio:2026,km:0,precio:16490000,combustible:"Bencina mild-hybrid",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,
+   desc:"El citadino italiano con el 1.0 mild-hybrid de 70 hp. Techo de lona, llantas de 15\" y el largo justo para estacionar en cualquier parte.",
+   specs:{Motor:"1.0 mild-hybrid",Potencia:"70 hp",Torque:"92 Nm",Tracción:"Delantera",Puertas:"3",Largo:"3,63 m","Garantía":"3 años"}},
+  {id:"n10",cond:"nuevo",marca:"Toyota",modelo:"RAV4",version:"2.5 Hybrid XLE AWD",anio:2026,km:0,precio:37490000,combustible:"Híbrido",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"La versión híbrida del RAV4: 222 hp combinados, tracción total eléctrica y consumo homologado cercano a los 22 km/l en ciudad.",
+   specs:{Motor:"2.5 + 2 eléctricos",Potencia:"222 hp",Tracción:"Total (E-Four)",Asientos:"5",Consumo:"4,7 L/100 km",Maletero:"580 L","Garantía":"3 años / 100.000 km"}},
 
   // ---------- USADOS / SEMINUEVOS ----------
-  {id:"u1",cond:"usado",marca:"Chery",modelo:"Tiggo 2 Pro",version:"GLS 1.5 MT",anio:2022,km:53806,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:true,duenos:1,
-   desc:"Un dueño, mantenciones al día en la red Chery. Pintura original en las seis caras y set de neumáticos con más del 70% de vida útil.",
-   specs:{Motor:"1.5 16V",Potencia:"106 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Revisión:"120 puntos aprobada",Garantía:"6 meses motor y caja"}},
-  {id:"u2",cond:"usado",marca:"Chery",modelo:"Tiggo 2 Pro Max",version:"GLX 1.5 AUT",anio:2025,km:28903,precio:12990000,combustible:"Bencina",transmision:"Automática CVT",carroceria:"SUV",destacado:true,duenos:1,
-   desc:"Prácticamente nuevo: menos de 30.000 km y aún con garantía de fábrica vigente. Pantalla de 10,25\", cámara 360 y climatizador automático.",
-   specs:{Motor:"1.5 CVT",Potencia:"116 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Garantía_fábrica:"Vigente hasta 2028",Revisión:"120 puntos aprobada"}},
-  {id:"u3",cond:"usado",marca:"Chery",modelo:"Tiggo 3",version:"1.5 Full MT",anio:2021,km:18684,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:true,duenos:1,
-   desc:"Kilometraje excepcionalmente bajo para el año: 18.684 km certificados. Auto de ciudad, siempre en estacionamiento techado.",
-   specs:{Motor:"1.5 16V",Potencia:"137 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Kilometraje:"Certificado",Garantía:"6 meses motor y caja"}},
-  {id:"u4",cond:"usado",marca:"Chevrolet",modelo:"Onix",version:"NB LS 1.2 MT",anio:2021,km:95244,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Sedán",destacado:false,duenos:2,
-   desc:"Sedán compacto ideal para trabajo de app o primer auto. Motor 1.2 de bajo consumo, mantenciones registradas y neumáticos nuevos.",
-   specs:{Motor:"1.2 12V",Potencia:"84 hp",Tracción:"Delantera",Puertas:"4",Dueños:"2",Neumáticos:"Nuevos",Garantía:"6 meses motor y caja"}},
-  {id:"u5",cond:"usado",marca:"Citroën",modelo:"Berlingo",version:"K9 Blue HDi",anio:2020,km:75517,precio:8690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Furgón",destacado:false,duenos:1,
-   desc:"Furgón de carga diésel en liquidación. 3,3 m³ de volumen útil, puerta lateral corrediza y consumo bajo los 5,5 L/100 km en carretera.",
-   specs:{Motor:"1.6 BlueHDi",Potencia:"92 hp",Carga:"800 kg",Volumen:"3,3 m³",Dueños:"1",Estado:"Liquidación",Garantía:"3 meses motor y caja"}},
-  {id:"u6",cond:"usado",marca:"Citroën",modelo:"C3",version:"Blue HDi 1.5 MT",anio:2024,km:65653,precio:13690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:1,
-   desc:"C3 diésel 2024 con el motor 1.5 BlueHDi, uno de los más eficientes del mercado. Pantalla con Apple CarPlay inalámbrico y aire acondicionado.",
-   specs:{Motor:"1.5 BlueHDi",Potencia:"102 hp",Torque:"250 Nm",Puertas:"5",Dueños:"1",Consumo:"4,4 L/100 km",Garantía:"6 meses motor y caja"}},
-  {id:"u7",cond:"usado",marca:"Citroën",modelo:"C3",version:"Blue HDi 1.5 MT",anio:2024,km:78450,precio:11690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:1,
-   desc:"Segunda unidad de C3 diésel 2024, con más kilómetros de carretera y precio ajustado. Ideal para quien maneja largas distancias todas las semanas.",
-   specs:{Motor:"1.5 BlueHDi",Potencia:"102 hp",Torque:"250 Nm",Puertas:"5",Dueños:"1",Uso:"Carretera",Garantía:"6 meses motor y caja"}},
-  {id:"u8",cond:"usado",marca:"Citroën",modelo:"C5 Aircross",version:"Feel 1.6 THP AT",anio:2022,km:81985,precio:16990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
-   desc:"El SUV más confortable de su segmento, en liquidación. Suspensión Advanced Comfort, asientos con espuma de alta densidad y techo panorámico.",
-   specs:{Motor:"1.6 THP",Potencia:"165 hp",Torque:"240 Nm",Tracción:"Delantera",Dueños:"1",Extras:"Techo panorámico",Garantía:"6 meses motor y caja"}},
-  {id:"u9",cond:"usado",marca:"Volkswagen",modelo:"Nivus",version:"Highline 1.0 TSI AT",anio:2022,km:42000,precio:14290000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
-   desc:"SUV coupé con el turbo 1.0 TSI de 128 hp. VW Play de 10\", Digital Cockpit y ADAS con control crucero adaptativo. Un dueño, sin detalles.",
-   specs:{Motor:"1.0 TSI",Potencia:"128 hp",Torque:"200 Nm",Tracción:"Delantera",Dueños:"1",Equipamiento:"ADAS + Digital Cockpit",Garantía:"6 meses motor y caja"}},
-  {id:"u10",cond:"usado",marca:"BMW Motorrad",modelo:"R 1250 GS",version:"Exclusive",anio:2019,km:49020,precio:15990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:2,
-   desc:"La trail más vendida del mundo, con motor boxer ShiftCam de 136 hp. Maletas Vario originales, protecciones de motor y neumáticos mixtos nuevos.",
-   specs:{Motor:"1.254 cc boxer",Potencia:"136 hp",Peso:"249 kg",Dueños:"2",Extras:"Maletas Vario + defensas",Kilometraje:"Certificado",Garantía:"3 meses motor"}},
-  {id:"u11",cond:"usado",marca:"BMW Motorrad",modelo:"R 1300 GS",version:"Triple Black",anio:2024,km:6500,precio:22490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
-   desc:"La nueva generación R 1300 GS con solo 6.500 km. Suspensión semiactiva, faro Matrix LED y modo de conducción Enduro Pro. Como nueva.",
-   specs:{Motor:"1.300 cc boxer",Potencia:"145 hp",Peso:"237 kg",Dueños:"1",Extras:"Suspensión semiactiva",Garantía_fábrica:"Vigente",Kilometraje:"Certificado"}},
-  {id:"u12",cond:"usado",marca:"BMW Motorrad",modelo:"R 1250 GS Adventure",version:"II",anio:2021,km:38040,precio:17990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
-   desc:"La versión Adventure con estanque de 30 litros para viajes largos. Barras de protección, faros auxiliares LED y asiento confort.",
-   specs:{Motor:"1.254 cc boxer",Potencia:"136 hp",Estanque:"30 L",Dueños:"1",Extras:"Faros LED + baúl",Kilometraje:"Certificado",Garantía:"3 meses motor"}},
-  {id:"u13",cond:"usado",marca:"Chevrolet",modelo:"Sail",version:"LS 1.5 MT",anio:2019,km:88300,precio:6990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Sedán",destacado:false,duenos:2,
-   desc:"El sedán más económico de la vitrina. Espacio interior generoso, maletero de 445 litros y un 1.5 sin turbo, simple y barato de mantener.",
-   specs:{Motor:"1.5 16V",Potencia:"106 hp",Tracción:"Delantera",Puertas:"4",Dueños:"2",Maletero:"445 L",Garantía:"3 meses motor y caja"}},
-  {id:"u14",cond:"usado",marca:"Volkswagen",modelo:"Amarok",version:"Trendline 2.0 BiTDI 4x4",anio:2020,km:96400,precio:19990000,combustible:"Diésel",transmision:"Automática",carroceria:"Camioneta",destacado:true,duenos:1,
-   desc:"Amarok 4x4 con el biturbo 2.0 de 180 hp y caja automática de 8 velocidades. Pisadera lateral, cobertor de batea y enganche de arrastre.",
-   specs:{Motor:"2.0 BiTDI",Potencia:"180 hp",Torque:"420 Nm",Tracción:"4Motion",Dueños:"1",Extras:"Cobertor + enganche",Garantía:"6 meses motor y caja"}},
+  {id:"u1",cond:"usado",marca:"Toyota",modelo:"RAV4",version:"2.0 XLI",anio:2019,km:62400,precio:19990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"Un dueño, mantenciones en concesionario Toyota. Neumáticos con más del 70% de vida útil y pintura original en las seis caras.",
+   specs:{Motor:"2.0 16V",Potencia:"175 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1","Revisión":"120 puntos aprobada","Garantía":"6 meses motor y caja"}},
+  {id:"u2",cond:"usado",marca:"Honda",modelo:"CR-V",version:"1.5 Turbo EXL",anio:2020,km:48100,precio:22490000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"Poco kilometraje para el año y aún con garantía de fábrica vigente. Tracción total, cuero, techo eléctrico y Honda Sensing.",
+   specs:{Motor:"1.5 turbo",Potencia:"193 hp",Tracción:"Total",Puertas:"5",Dueños:"1","Garantía de fábrica":"Vigente hasta 2026","Revisión":"120 puntos aprobada"}},
+  {id:"u3",cond:"usado",marca:"Ford",modelo:"Explorer",version:"Limited 3.5 V6",anio:2018,km:89300,precio:21990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:2,
+   desc:"SUV grande de siete plazas, ideal para familia numerosa o viajes largos. Tercera fila eléctrica, cámara 360 y enganche de arrastre.",
+   specs:{Motor:"3.5 V6",Potencia:"294 hp",Tracción:"Total",Asientos:"7",Dueños:"2","Extras":"Enganche de arrastre","Garantía":"6 meses motor y caja"}},
+  {id:"u4",cond:"usado",marca:"Volkswagen",modelo:"Vento",version:"1.6 Comfortline",anio:2019,km:71500,precio:10490000,combustible:"Bencina",transmision:"Automática",carroceria:"Sedán",destacado:false,duenos:1,
+   desc:"Sedán amplio y económico de mantener. Motor 1.6 atmosférico, caja Tiptronic de 6 marchas y maletero de 480 litros.",
+   specs:{Motor:"1.6 16V",Potencia:"110 hp",Tracción:"Delantera",Puertas:"4",Dueños:"1",Maletero:"480 L","Garantía":"6 meses motor y caja"}},
+  {id:"u5",cond:"usado",marca:"Citroën",modelo:"Berlingo Furgón",version:"1.6 BlueHDi",anio:2020,km:75517,precio:8690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Furgón",destacado:false,duenos:1,
+   desc:"Furgón de carga diésel. 3,3 m³ de volumen útil, puerta lateral corrediza y consumo bajo los 5,5 L/100 km en carretera.",
+   specs:{Motor:"1.6 BlueHDi",Potencia:"92 hp",Carga:"800 kg",Volumen:"3,3 m³",Dueños:"1","Garantía":"3 meses motor y caja"}},
+  {id:"u6",cond:"usado",marca:"Hyundai",modelo:"i30",version:"1.6 GLS",anio:2019,km:66800,precio:11990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:1,
+   desc:"Hatch europeo con terminaciones de un segmento superior. Un dueño, libro de mantenciones al día y neumáticos nuevos.",
+   specs:{Motor:"1.6 16V",Potencia:"128 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1","Neumáticos":"Nuevos","Garantía":"6 meses motor y caja"}},
+  {id:"u7",cond:"usado",marca:"Fiat",modelo:"500",version:"1.4 Lounge",anio:2017,km:54200,precio:8290000,combustible:"Bencina",transmision:"Automática",carroceria:"Hatchback",destacado:false,duenos:2,
+   desc:"Citadino con estilo, kilometraje bajo y techo panorámico fijo. Caja automática, perfecto como segundo auto o primer auto.",
+   specs:{Motor:"1.4 16V",Potencia:"100 hp",Tracción:"Delantera",Puertas:"3",Dueños:"2","Extras":"Techo panorámico","Garantía":"6 meses motor y caja"}},
+  {id:"u8",cond:"usado",marca:"Audi",modelo:"A7 Sportback",version:"55 TFSI quattro",anio:2019,km:41900,precio:38990000,combustible:"Bencina",transmision:"Automática",carroceria:"Sedán",destacado:true,duenos:1,
+   desc:"Coupé de cuatro puertas con el 3.0 TFSI de 340 hp y tracción quattro. Suspensión neumática, faros Matrix LED y portón trasero eléctrico.",
+   specs:{Motor:"3.0 TFSI",Potencia:"340 hp",Torque:"500 Nm",Tracción:"quattro",Dueños:"1","Extras":"Suspensión neumática","Garantía":"6 meses motor y caja"}},
+  {id:"u9",cond:"usado",marca:"Toyota",modelo:"RAV4",version:"2.5 Hybrid Limited",anio:2021,km:34700,precio:27990000,combustible:"Híbrido",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"RAV4 híbrido con tracción total eléctrica y bajísimo consumo. Un dueño, sin detalles, y con la garantía de la batería aún vigente.",
+   specs:{Motor:"2.5 + 2 eléctricos",Potencia:"222 hp",Tracción:"Total (E-Four)",Dueños:"1","Garantía batería":"Vigente","Consumo":"4,7 L/100 km"}},
+  {id:"u10",cond:"usado",marca:"Triumph",modelo:"Street Twin",version:"900",anio:2020,km:12400,precio:9990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+   desc:"Roadster clásica con el bicilíndrico de 900 cc y 65 hp. Solo 12.400 km, escape Vance & Hines y manillar bajo instalado.",
+   specs:{Motor:"900 cc bicilíndrico",Potencia:"65 hp",Peso:"216 kg",Dueños:"1","Extras":"Escape deportivo","Garantía":"3 meses motor"}},
+  {id:"u11",cond:"usado",marca:"Ducati",modelo:"SuperSport 950",version:"S",anio:2021,km:8900,precio:14490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+   desc:"Deportiva-turismo con el Testastretta de 937 cc y 110 hp. Suspensión Öhlins, quickshifter y menos de 9.000 km reales.",
+   specs:{Motor:"937 cc L-Twin",Potencia:"110 hp",Peso:"210 kg",Dueños:"1","Extras":"Suspensión Öhlins + quickshifter","Garantía":"3 meses motor"}},
+  {id:"u12",cond:"usado",marca:"KTM",modelo:"390 Duke",version:"",anio:2020,km:18600,precio:5290000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+   desc:"Naked ligera y punzante, ideal para carnet A2. Monocilíndrico de 373 cc y 43 hp, pantalla TFT y ride-by-wire.",
+   specs:{Motor:"373 cc",Potencia:"43 hp",Peso:"149 kg",Dueños:"1","Kilometraje":"Certificado","Garantía":"3 meses motor"}},
+  {id:"u13",cond:"usado",marca:"Tesla",modelo:"Model 3",version:"Standard Range Plus",anio:2021,km:39000,precio:27990000,combustible:"Eléctrico",transmision:"Automática",carroceria:"Sedán",destacado:false,duenos:1,
+   desc:"Eléctrico con autonomía real cercana a 400 km y acceso a la red de Superchargers. Piloto automático incluido, sin costo de mantención mecánica.",
+   specs:{Motor:"Eléctrico trasero",Potencia:"283 hp",Autonomía:"~430 km (WLTP)","0-100":"5,6 s",Dueños:"1","Garantía batería":"Vigente hasta 2029"}},
+  {id:"u14",cond:"usado",marca:"Jeep",modelo:"Grand Cherokee",version:"Limited 3.6 V6",anio:2018,km:82700,precio:22990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"SUV grande con el Pentastar 3.6 V6 de 286 hp y tracción total Quadra-Trac. Cuero ventilado, techo panorámico y sistema de sonido premium.",
+   specs:{Motor:"3.6 V6 Pentastar",Potencia:"286 hp",Torque:"347 Nm",Tracción:"Total Quadra-Trac",Dueños:"1","Extras":"Techo panorámico","Garantía":"6 meses motor y caja"}},
 ];
 
 /* ============================================================
