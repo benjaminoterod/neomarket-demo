@@ -805,7 +805,7 @@ const VEHICULOS = [
   {id:"u11",cond:"usado",marca:"Ducati",modelo:"SuperSport 950",version:"S",anio:2021,km:8900,precio:14490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
    desc:"Deportiva-turismo con el Testastretta de 937 cc y 110 hp. Suspensión Öhlins, quickshifter y menos de 9.000 km reales.",
    specs:{Motor:"937 cc L-Twin",Potencia:"110 hp",Peso:"210 kg",Dueños:"1","Extras":"Suspensión Öhlins + quickshifter","Garantía":"3 meses motor"}},
-  {id:"u12",cond:"usado",marca:"KTM",modelo:"390 Duke",version:"",anio:2020,km:18600,precio:5290000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+  {id:"u12",cond:"usado",marca:"KTM",modelo:"390 Duke",version:"Naked A2",anio:2020,km:18600,precio:5290000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
    desc:"Naked ligera y punzante, ideal para carnet A2. Monocilíndrico de 373 cc y 43 hp, pantalla TFT y ride-by-wire.",
    specs:{Motor:"373 cc",Potencia:"43 hp",Peso:"149 kg",Dueños:"1","Kilometraje":"Certificado","Garantía":"3 meses motor"}},
   {id:"u13",cond:"usado",marca:"Tesla",modelo:"Model 3",version:"Standard Range Plus",anio:2021,km:39000,precio:27990000,combustible:"Eléctrico",transmision:"Automática",carroceria:"Sedán",destacado:false,duenos:1,
@@ -1205,7 +1205,7 @@ function viewVehiculo(id){
     <div class="veh__gallery">
       <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
       ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`
-        :`<p class="veh__imgnote">Imagen referencial del modelo. Las fotos de esta unidad se envían por WhatsApp.</p>`}
+        :`<p class="veh__imgnote">Imagen referencial del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
     </div>
     <div class="veh__layout">
       <div>
@@ -1258,6 +1258,9 @@ function viewFinanciamiento(params){
   const vid = params.get("v");
   const v = vid ? byId(vid) : null;
   const base = v ? v.precio : 15000000;
+  const fMax = Math.max(50000000, Math.ceil(base * 1.15 / 1e6) * 1e6);
+  const fMin = v ? Math.max(3000000, Math.floor(base * 0.35 / 1e6) * 1e6) : 3000000;
+  const fStep = fMax > 60000000 ? 1000000 : 250000;
   return `
   <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
     <p class="eyebrow">Simulador de crédito</p>
@@ -1267,7 +1270,7 @@ function viewFinanciamiento(params){
         ${v?`<div class="fin__veh">${imgHTML(v)}<div><div class="m">${esc(v.marca)} · ${v.cond==="nuevo"?"0 km":v.anio}</div><div class="n">${esc(v.modelo)}</div></div></div>`:""}
         <div class="fgroup">
           <div class="fin__row"><label for="fValor">Valor del vehículo</label><span class="fin__val" id="fValorOut"></span></div>
-          <input class="slider" type="range" id="fValor" min="5000000" max="45000000" step="250000" value="${base}">
+          <input class="slider" type="range" id="fValor" min="${fMin}" max="${fMax}" step="${fStep}" value="${base}">
         </div>
         <div class="fgroup">
           <div class="fin__row"><label for="fPie">Pie</label><span class="fin__val" id="fPieOut"></span></div>
@@ -1302,10 +1305,11 @@ function wireFinanciamiento(){
   const val=$("#fValor"),pie=$("#fPie"),plazo=$("#fPlazo"),tasa=$("#fTasa");
   if(!val) return;
   const cuotaEl=$("#finCuota");
-  let raf, cur=0;
+  let raf, rollSafe, cur=0;
   function roll(to){
     cancelAnimationFrame(raf);
-    if(RM){cur=to;cuotaEl.textContent=clp(to);return;}
+    clearTimeout(rollSafe);
+    if(RM || document.hidden){cur=to;cuotaEl.textContent=clp(to);return;}
     const from=cur, t0=performance.now(), dur=420;
     (function step(now){
       const p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
@@ -1313,6 +1317,7 @@ function wireFinanciamiento(){
       cuotaEl.textContent=clp(cur);
       if(p<1) raf=requestAnimationFrame(step);
     })(performance.now());
+    rollSafe=setTimeout(()=>{ if(Math.abs(cur-to)>1){ cur=to; cuotaEl.textContent=clp(to); } }, 600);
   }
   function recalc(){
     const V=+val.value, P=+pie.value, N=+plazo.value, I=+tasa.value;
