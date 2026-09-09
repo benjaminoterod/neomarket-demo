@@ -1,0 +1,26 @@
+# Nota: en .gitignore los comentarios van en su propia línea, nunca al lado del patrón.
+
+# Dependencias (por si más adelante agregas Node/Vite)
+node_modules/
+
+# Build y variantes que NO se publican
+dist/
+build/
+_artifact/
+_build/
+carmona/
+neomarket/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*

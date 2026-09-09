@@ -1,0 +1,1516 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automotora Neomarket — Concepto</title>
+<meta name="description" content="Concepto de rediseño para Automotora Neomarket. Autos nuevos y seminuevos en La Serena, revisados punto por punto.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AUTOMOTORA NEOMARKET — concepto de rediseño (no oficial)
+   Un archivo. Sin dependencias salvo fuentes de Google.
+   Fotos: mapa PHOTOS más abajo. Sin fotos => render de estudio SVG.
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body,h1,h2,h3,h4,p,figure,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+
+:root{
+  --ink:#0A0B0C;
+  --ink-raised:#131417;
+  --ink-raised-2:#1B1D21;
+  --bone:#EDEBE7;
+  --bone-dim:#9A9A98;
+  --bone-faint:#6A6A69;
+  --hairline:rgba(237,235,231,.14);
+  --hairline-soft:rgba(237,235,231,.08);
+  --chrome-hi:#F7F7F9;
+  --chrome-lo:#83868D;
+
+  --s-1:.5rem; --s-2:.75rem; --s-3:1rem; --s-4:1.5rem;
+  --s-5:2rem; --s-6:3rem; --s-7:4.5rem; --s-8:7rem;
+
+  --shell: 1440px;
+  --pad: clamp(1.25rem, 5vw, 4.5rem);
+  --section-pad: clamp(4rem, 11vw, 9rem);
+
+  --ff-display:"Playfair Display", "Georgia", "Times New Roman", serif;
+  --ff-body:"Manrope", system-ui, -apple-system, sans-serif;
+  --ff-mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease:cubic-bezier(.2,.6,.2,1);
+}
+
+html{background:var(--ink)}
+body{
+  font-family:var(--ff-body);
+  background:var(--ink);
+  color:var(--bone);
+  line-height:1.6;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ---------- typography helpers ---------- */
+.eyebrow{
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--bone-dim);
+  font-weight:500;
+}
+.display{
+  font-family:var(--ff-display);
+  font-weight:600;
+  line-height:1.04;
+  letter-spacing:-.005em;
+  text-wrap:balance;
+}
+h1.display{font-size:clamp(2.6rem,7.2vw,6.4rem);line-height:1.02}
+h2.display{font-size:clamp(1.9rem,4.6vw,3.6rem)}
+h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
+.mono{font-family:var(--ff-mono);font-variant-numeric:tabular-nums}
+.chrome{
+  background:linear-gradient(180deg,var(--chrome-hi) 0%,#cfd0d3 38%,var(--chrome-lo) 62%,#dfe0e2 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ---------- layout ---------- */
+.shell{max-width:var(--shell);margin-inline:auto;padding-inline:var(--pad)}
+.section{padding-block:var(--section-pad)}
+.rule{height:1px;background:var(--hairline);border:0;margin:0}
+
+/* ---------- buttons ---------- */
+.btn{
+  --bg:transparent; --fg:var(--bone); --bd:var(--bone);
+  display:inline-flex;align-items:center;gap:.6em;
+  padding:.9em 1.5em;
+  font-family:var(--ff-mono);font-size:.78rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--bg);color:var(--fg);
+  border:1px solid var(--bd);border-radius:0;
+  cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+}
+.btn:hover{--bg:var(--bone);--fg:var(--ink)}
+.btn--solid{--bg:var(--bone);--fg:var(--ink);--bd:var(--bone)}
+.btn--solid:hover{--bg:transparent;--fg:var(--bone)}
+.btn--ghost{--bd:var(--hairline)}
+.btn--ghost:hover{--bd:var(--bone)}
+.btn--sm{padding:.7em 1.1em;font-size:.72rem}
+.btn--wa{--bd:var(--hairline)}
+.btn--wa:hover{--bg:#EDEBE7;--fg:var(--ink)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.9rem}
+
+.linkline{
+  font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.55em;padding-bottom:.25em;
+  border-bottom:1px solid var(--hairline);transition:border-color .3s var(--ease),gap .3s var(--ease);
+}
+.linkline:hover{border-color:var(--bone);gap:.85em}
+.linkline .arw{transition:transform .3s var(--ease)}
+.linkline:hover .arw{transform:translateX(3px)}
+
+/* ---------- focus ---------- */
+:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+.skip{
+  position:fixed;top:.6rem;left:.6rem;z-index:200;
+  background:var(--bone);color:var(--ink);padding:.6rem 1rem;
+  font-family:var(--ff-mono);font-size:.8rem;transform:translateY(-160%);
+  transition:transform .2s var(--ease);
+}
+.skip:focus{transform:none}
+
+/* ---------- the instrument / gauge motif (signature) ---------- */
+.gauges{display:flex;flex-wrap:wrap;border:1px solid var(--hairline)}
+.gauge{
+  flex:1 1 auto;min-width:0;
+  padding:.7rem 1rem;
+  border-right:1px solid var(--hairline);
+}
+.gauge:last-child{border-right:0}
+.gauge__k{
+  font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--bone-faint);
+}
+.gauge__v{
+  font-family:var(--ff-mono);font-size:.95rem;font-weight:500;
+  color:var(--bone);margin-top:.25rem;white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.gauge--stack{border:0}
+.gauge--stack .gauge{border:0;border-bottom:1px solid var(--hairline);padding-inline:0}
+.gauge--stack .gauge:last-child{border-bottom:0}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.hd{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.hd[data-solid="true"]{
+  background:rgba(10,11,12,.82);
+  backdrop-filter:blur(14px);
+  border-bottom-color:var(--hairline);
+}
+.hd__in{
+  max-width:var(--shell);margin-inline:auto;padding:1.15rem var(--pad);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem;
+}
+.hd__left{display:flex;align-items:center;gap:1.9rem;min-width:0}
+.hd__right{display:flex;align-items:center;gap:1.9rem;justify-content:flex-end;min-width:0}
+.brand{
+  justify-self:center;display:flex;align-items:center;gap:clamp(.7rem,1.4vw,1.15rem);
+  font-family:var(--ff-display);font-weight:600;font-size:clamp(1.05rem,1.5vw,1.3rem);
+  letter-spacing:.3em;text-transform:uppercase;padding-left:.3em;white-space:nowrap;
+}
+.brand::before,.brand::after{content:"";width:clamp(16px,3vw,44px);height:1px;background:var(--bone-dim);flex:none}
+.nav{display:flex;align-items:center;gap:1.9rem}
+.nav a{
+  font-family:var(--ff-mono);font-size:.71rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--bone-dim);white-space:nowrap;
+  padding-block:.4rem;position:relative;transition:color .25s var(--ease);
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--bone);transition:right .3s var(--ease);
+}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--bone)}
+.nav a[aria-current="page"]::after,.nav a:hover::after{right:0}
+@media (max-width:1240px){ .nav--desk{display:none} }
+
+.menu-btn{
+  display:inline-flex;width:26px;height:26px;border:0;
+  background:transparent;cursor:pointer;align-items:center;justify-content:center;flex:none;
+}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{
+  content:"";display:block;width:23px;height:1px;background:var(--bone);position:relative;transition:background .25s var(--ease);
+}
+.menu-btn span::before{position:absolute;top:-7px;left:0}
+.menu-btn span::after{position:absolute;top:7px;left:0}
+
+/* mobile drawer */
+.drawer{
+  position:fixed;inset:0;z-index:99;background:var(--ink);
+  transform:translateY(-100%);transition:transform .45s var(--ease);
+  display:flex;flex-direction:column;padding:6rem var(--pad) 2rem;
+}
+.drawer[data-open="true"]{transform:none}
+.drawer a{
+  font-family:var(--ff-display);font-weight:600;
+  font-size:clamp(1.9rem,7vw,2.6rem);padding:.85rem 0;border-bottom:1px solid var(--hairline);letter-spacing:-.01em;
+}
+.drawer .mono{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-dim);margin-top:auto;padding-top:2rem}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;min-height:100svh;overflow:hidden;background:var(--ink);display:flex;flex-direction:column}
+.hero__slides{position:absolute;inset:0;z-index:0}
+.hslide{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding-block:7rem 9rem;
+  opacity:0;visibility:hidden;transition:opacity .9s var(--ease),visibility .9s;
+}
+.hslide[data-on="true"]{opacity:1;visibility:visible}
+.hero__media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero__media img,.hero__media svg{width:100%;height:100%;object-fit:cover}
+.hero__media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(10,11,12,.9) 0%,rgba(10,11,12,.55) 40%,rgba(10,11,12,.12) 72%,rgba(10,11,12,.05) 100%),
+    linear-gradient(0deg,rgba(10,11,12,.65) 0%,rgba(10,11,12,0) 42%),
+    linear-gradient(180deg,rgba(10,11,12,.55) 0%,rgba(10,11,12,0) 16%);
+}
+.hslide__link{position:absolute;inset:0;z-index:2}
+.hslide__in{
+  position:relative;z-index:3;width:100%;pointer-events:none;
+  max-width:var(--shell);margin-inline:auto;padding-inline:var(--pad);
+}
+.hslide__in > *{text-shadow:0 1px 30px rgba(0,0,0,.45)}
+.hslide h2{max-width:16ch;transition:transform .5s var(--ease)}
+.hslide__link:hover ~ .hslide__in h2{transform:translateX(8px)}
+.hslide__sub{
+  max-width:46ch;margin-top:1.4rem;color:var(--bone);opacity:.84;
+  font-size:clamp(1.02rem,1.25vw,1.18rem);line-height:1.7;
+}
+.hslide[data-on="true"] .hero__media img{animation:kb 9s ease-out both}
+@keyframes kb{from{transform:scale(1.05)}to{transform:scale(1.12)}}
+.hslide[data-on="true"] .hslide__in > *{animation:hrise .9s var(--ease) both}
+.hslide[data-on="true"] .hslide__in > *:nth-child(2){animation-delay:.1s}
+@keyframes hrise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+.hero__dots{
+  position:relative;z-index:4;margin-top:auto;
+  display:flex;gap:.55rem;justify-content:center;
+  padding:0 var(--pad) 1.9rem;
+}
+.hero__dots button{
+  width:22px;height:2px;padding:0;border:0;cursor:pointer;
+  background:rgba(237,235,231,.26);
+  transition:width .45s var(--ease),background .45s var(--ease);
+}
+.hero__dots button[aria-current="true"]{width:46px;background:var(--bone)}
+.hero__dots button:focus-visible{outline:2px solid var(--bone);outline-offset:5px}
+
+.ticker{border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);background:rgba(10,11,12,.55);backdrop-filter:blur(6px);position:relative;z-index:4}
+.ticker__in{
+  max-width:var(--shell);margin-inline:auto;padding:0 var(--pad);
+  display:flex;flex-wrap:wrap;
+}
+.ticker__i{
+  flex:1 1 auto;padding:1.1rem 0;padding-right:2rem;
+  font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bone-dim);display:flex;gap:.7rem;align-items:baseline;
+}
+.ticker__i b{color:var(--bone);font-weight:600}
+
+/* ============================================================
+   HOME — editorial featured bands
+   ============================================================ */
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:end}
+.intro p{color:var(--bone-dim);font-size:clamp(1rem,1.4vw,1.15rem);max-width:40ch}
+
+.band{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);
+  align-items:center;padding-block:clamp(2.5rem,6vw,5rem);
+  border-top:1px solid var(--hairline);
+}
+.band:nth-child(even) .band__media{order:2}
+.band__media{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised)}
+.band__media img,.band__media svg{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.band:hover .band__media img,.band:hover .band__media svg{transform:scale(1.045)}
+.band__no{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.2em;color:var(--bone-faint)}
+.band h3{margin-top:.5rem}
+.band__price{font-family:var(--ff-mono);font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;margin-top:1rem;letter-spacing:-.01em}
+.band__price small{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:.35rem;font-weight:400}
+.band__meta{margin-top:1.25rem}
+.band__meta .gauges{flex-wrap:nowrap}
+.band__meta .gauge__v{white-space:normal;font-size:.86rem;line-height:1.25}
+.band__cta{margin-top:1.75rem}
+
+/* used cars rail */
+.rail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.rail{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding-bottom:1rem;scrollbar-width:thin}
+.rail::-webkit-scrollbar{height:2px}
+.rail::-webkit-scrollbar-thumb{background:var(--hairline)}
+.rail > *{scroll-snap-align:start;flex:0 0 auto}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.card{
+  display:flex;flex-direction:column;background:var(--ink-raised);
+  border:1px solid var(--hairline-soft);transition:border-color .3s var(--ease);
+}
+.card:hover{border-color:var(--hairline)}
+.card--rail{min-width:280px;background:transparent;border:0}
+.card__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised-2)}
+.card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
+.card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.05)}
+.card__tag{
+  position:absolute;top:.8rem;left:.8rem;
+  font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  background:rgba(10,11,12,.72);border:1px solid var(--hairline);padding:.35rem .6rem;backdrop-filter:blur(4px);
+}
+.card__body{padding:1.1rem 1.15rem 1.25rem;display:flex;flex-direction:column;flex:1}
+.card--rail .card__body{padding-inline:0}
+.card__marca{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint)}
+.card__name{font-family:var(--ff-display);font-weight:600;font-size:1.35rem;line-height:1.12;margin-top:.4rem;letter-spacing:0}
+.card__ver{font-size:.82rem;color:var(--bone-dim);margin-top:.3rem;min-height:1.2em}
+.card__spec{
+  display:flex;gap:.9rem;flex-wrap:wrap;margin-top:.9rem;
+  font-family:var(--ff-mono);font-size:.72rem;color:var(--bone-dim);
+}
+.card__spec span{display:inline-flex;gap:.35rem}
+.card__foot{margin-top:auto;padding-top:1.1rem;display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem}
+.card__price{font-family:var(--ff-mono);font-size:1.28rem;font-weight:600;letter-spacing:-.01em}
+.card__price small{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint);font-weight:400;margin-bottom:.2rem}
+.card__cuota{font-family:var(--ff-mono);font-size:.7rem;color:var(--bone-dim);text-align:right}
+.card__link::after{content:"";position:absolute;inset:0}
+.card__media-wrap{position:relative}
+
+/* ============================================================
+   CATALOG
+   ============================================================ */
+.cat{display:grid;grid-template-columns:264px 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.cat__filters{position:sticky;top:96px}
+.fgroup{border-top:1px solid var(--hairline);padding-block:1.25rem}
+.fgroup:first-child{border-top:0;padding-top:0}
+.fgroup__h{
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--bone-dim);margin-bottom:.9rem;
+}
+.check{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;cursor:pointer;font-size:.86rem;color:var(--bone-dim)}
+.check:hover{color:var(--bone)}
+.check input{position:absolute;opacity:0;width:0;height:0}
+.check .box{width:15px;height:15px;border:1px solid var(--bone-faint);flex:none;position:relative;transition:border-color .2s}
+.check input:checked + .box{border-color:var(--bone);background:var(--bone)}
+.check input:checked + .box::after{content:"";position:absolute;inset:3px;background:var(--ink)}
+.check input:focus-visible + .box{outline:2px solid var(--bone);outline-offset:2px}
+.check input:checked ~ .lbl{color:var(--bone)}
+
+.range{display:flex;gap:.6rem;align-items:center}
+.range input[type=number]{
+  width:100%;background:var(--ink-raised);border:1px solid var(--hairline);
+  padding:.55rem .6rem;font-family:var(--ff-mono);font-size:.8rem;color:var(--bone);
+}
+.range span{color:var(--bone-faint);font-family:var(--ff-mono);font-size:.75rem}
+
+.slider{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--hairline);margin:1.4rem 0 .4rem;cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;background:var(--bone);cursor:pointer;border-radius:0;box-shadow:0 0 0 6px transparent}
+.slider::-moz-range-thumb{width:16px;height:16px;background:var(--bone);border:0;cursor:pointer;border-radius:0}
+.slider:focus-visible{outline:none}
+.slider:focus-visible::-webkit-slider-thumb{outline:2px solid var(--bone);outline-offset:3px}
+
+.cat__bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--hairline)}
+.cat__count{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim)}
+.cat__count b{color:var(--bone)}
+.select{
+  background:var(--ink-raised);border:1px solid var(--hairline);
+  padding:.6rem 2rem .6rem .8rem;font-family:var(--ff-mono);font-size:.76rem;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--bone);cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--bone-dim) 50%),linear-gradient(135deg,var(--bone-dim) 50%,transparent 50%);
+  background-position:calc(100% - 15px) center,calc(100% - 10px) center;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.chip{
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--hairline);padding:.4rem .7rem;display:inline-flex;gap:.5rem;align-items:center;
+  background:var(--ink-raised);cursor:pointer;color:var(--bone-dim);
+}
+.chip:hover{color:var(--bone);border-color:var(--bone)}
+.chip--clear{border-style:dashed}
+
+.empty{border:1px solid var(--hairline);padding:clamp(2rem,6vw,4rem);text-align:center}
+.empty h3{margin-bottom:.75rem}
+.empty p{color:var(--bone-dim);max-width:36ch;margin:0 auto 1.75rem}
+
+.filters-toggle{display:none}
+
+.reveal-grid > *{opacity:0;transform:translateY(14px);animation:pop .5s var(--ease) forwards}
+
+@keyframes pop{to{opacity:1;transform:none}}
+
+/* ============================================================
+   VEHICLE DETAIL
+   ============================================================ */
+.veh__back{margin-bottom:2rem}
+.veh__gallery{display:grid;gap:.75rem}
+.veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised)}
+.veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover}
+.veh__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+.veh__thumb{aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
+.veh__thumb[aria-current="true"]{border-color:var(--bone)}
+.veh__thumb img,.veh__thumb svg{width:100%;height:100%;object-fit:cover}
+
+.veh__layout{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(1.5rem,5vw,4rem);margin-top:clamp(2rem,6vw,4rem);align-items:start}
+.veh__marca{color:var(--bone-dim)}
+.veh__title{margin-top:.4rem}
+.veh__ver{color:var(--bone-dim);font-size:1.05rem;margin-top:.6rem}
+.veh__desc{margin-top:2rem;color:var(--bone-dim);max-width:52ch}
+.veh__specs{margin-top:2.5rem}
+.veh__specs h4{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:1rem}
+.spectable{width:100%;border-collapse:collapse}
+.spectable tr{border-top:1px solid var(--hairline)}
+.spectable tr:last-child{border-bottom:1px solid var(--hairline)}
+.spectable th,.spectable td{text-align:left;padding:.8rem 0;font-family:var(--ff-mono);font-size:.82rem;font-weight:400}
+.spectable th{color:var(--bone-faint);font-weight:400;width:45%;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem}
+.spectable td{color:var(--bone);text-align:right}
+
+.pricebox{position:sticky;top:96px;border:1px solid var(--hairline);padding:1.5rem}
+.pricebox__k{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint)}
+.pricebox__price{font-family:var(--ff-mono);font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.02em;margin:.3rem 0 .2rem}
+.pricebox__cuota{font-family:var(--ff-mono);font-size:.8rem;color:var(--bone-dim)}
+.pricebox__cuota b{color:var(--bone);font-weight:600}
+.pricebox__actions{display:flex;flex-direction:column;gap:.7rem;margin-top:1.5rem}
+.pricebox__actions .btn{justify-content:center}
+.pricebox__note{font-size:.72rem;color:var(--bone-faint);margin-top:1.25rem;line-height:1.5}
+
+/* ============================================================
+   FINANCE
+   ============================================================ */
+.fin{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem);align-items:start}
+.fin__controls .fgroup{border:0;padding:0;margin-bottom:2.25rem}
+.fin__row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
+.fin__row label{font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-dim)}
+.fin__val{font-family:var(--ff-mono);font-size:1rem;color:var(--bone);font-weight:500}
+.fin__hint{font-family:var(--ff-mono);font-size:.68rem;color:var(--bone-faint);margin-top:.3rem}
+.fin__out{border:1px solid var(--hairline);padding:clamp(1.5rem,4vw,2.5rem);position:sticky;top:96px}
+.fin__cuota{font-family:var(--ff-mono);font-size:clamp(2.6rem,6vw,4rem);font-weight:600;letter-spacing:-.03em;line-height:1}
+.fin__cuota-k{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:.5rem}
+.fin__cuota-sub{font-family:var(--ff-mono);font-size:.78rem;color:var(--bone-dim);margin-top:.6rem}
+.fin__veh{
+  display:flex;gap:1rem;align-items:center;border:1px solid var(--hairline);padding:.8rem;margin-bottom:2rem;
+}
+.fin__veh img,.fin__veh svg{width:84px;height:56px;object-fit:cover;flex:none;background:var(--ink-raised)}
+.fin__veh .m{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint)}
+.fin__veh .n{font-family:var(--ff-display);text-transform:uppercase;font-weight:700;font-size:1rem;margin-top:.15rem}
+
+/* ============================================================
+   TASACIÓN
+   ============================================================ */
+.tas{max-width:640px;margin-inline:auto}
+.tas__prog{display:flex;justify-content:space-between;align-items:center;margin-bottom:2.5rem}
+.tas__step{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.16em;color:var(--bone-dim)}
+.tas__bar{flex:1;height:1px;background:var(--hairline);margin-left:1.5rem;position:relative}
+.tas__bar i{position:absolute;left:0;top:0;height:100%;background:var(--bone);transition:width .4s var(--ease)}
+.tas h2{margin-bottom:.6rem}
+.tas__q{color:var(--bone-dim);margin-bottom:2rem;max-width:44ch}
+.field{margin-bottom:1.25rem}
+.field label{display:block;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:.55rem}
+.field input,.field select{
+  width:100%;background:var(--ink-raised);border:1px solid var(--hairline);
+  padding:.85rem .9rem;font-family:var(--ff-body);font-size:.95rem;color:var(--bone);
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--bone)}
+.optgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem}
+.opt{
+  border:1px solid var(--hairline);background:var(--ink-raised);padding:1rem .8rem;cursor:pointer;
+  font-family:var(--ff-mono);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;text-align:left;
+  transition:border-color .2s,background .2s;
+}
+.opt:hover{border-color:var(--bone)}
+.opt[aria-pressed="true"]{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.tas__nav{display:flex;justify-content:space-between;margin-top:2rem}
+.tas__result{text-align:center}
+.tas__range{font-family:var(--ff-mono);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;letter-spacing:-.02em;margin:1rem 0}
+.tas__result p{color:var(--bone-dim);max-width:40ch;margin:0 auto 2rem}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.ft{border-top:1px solid var(--hairline);margin-top:var(--section-pad)}
+.ft__cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;padding-block:clamp(3rem,7vw,5rem)}
+.ft__cols h4{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:1.1rem}
+.ft__cols a,.ft__cols p{display:block;color:var(--bone-dim);font-size:.88rem;padding:.32rem 0}
+.ft__cols a:hover{color:var(--bone)}
+.ft__word{
+  font-family:var(--ff-display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(2.1rem,12vw,8.5rem);line-height:.9;letter-spacing:.02em;
+  padding-block:clamp(1.5rem,4vw,2.5rem);border-top:1px solid var(--hairline);
+  white-space:nowrap;overflow:hidden;
+}
+.ft__legal{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  padding-block:1.75rem;border-top:1px solid var(--hairline);
+  font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.06em;color:var(--bone-faint);text-transform:uppercase;
+}
+.ft__legal p{max-width:60ch;line-height:1.6}
+
+/* ============================================================
+   MODAL + TOAST
+   ============================================================ */
+.modal{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:1.5rem}
+.modal__bg{position:absolute;inset:0;background:rgba(6,7,8,.8);backdrop-filter:blur(3px)}
+.modal__panel{
+  position:relative;background:var(--ink-raised);border:1px solid var(--hairline);
+  max-width:460px;width:100%;padding:clamp(1.5rem,4vw,2.5rem);
+  animation:pop .3s var(--ease);
+}
+.modal__panel h3{margin-bottom:.4rem}
+.modal__panel p{color:var(--bone-dim);font-size:.9rem;margin-bottom:1.5rem}
+.modal__close{position:absolute;top:1rem;right:1rem;background:none;border:0;cursor:pointer;font-family:var(--ff-mono);font-size:1.1rem;color:var(--bone-dim);width:32px;height:32px}
+.modal__close:hover{color:var(--bone)}
+
+.toast-wrap{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:.6rem;align-items:center;width:calc(100% - 3rem);max-width:460px}
+.toast{
+  background:var(--bone);color:var(--ink);width:100%;
+  padding:.9rem 1.1rem;font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.04em;
+  display:flex;gap:.7rem;align-items:flex-start;animation:toastin .3s var(--ease);
+}
+@keyframes toastin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .nav--desk{display:none}
+  .cat{grid-template-columns:1fr}
+  .cat__filters{
+    position:fixed;inset:0;z-index:120;background:var(--ink);
+    padding:5.5rem var(--pad) 6rem;overflow-y:auto;transform:translateX(-100%);
+    transition:transform .4s var(--ease);top:0;
+  }
+  .cat__filters[data-open="true"]{transform:none}
+  .filters-toggle{
+    display:inline-flex;position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:110;
+  }
+  .fin{grid-template-columns:1fr}
+  .fin__out{position:static}
+  .veh__layout{grid-template-columns:1fr}
+  .pricebox{position:static}
+}
+@media (max-width:760px){
+  .ticker__in{flex-direction:column}
+  .ticker__i{padding:.7rem 0;border-bottom:1px solid var(--hairline-soft)}
+  .intro{grid-template-columns:1fr}
+  .band{grid-template-columns:1fr;gap:1.5rem}
+  .band:nth-child(even) .band__media{order:0}
+  .veh__thumbs{grid-template-columns:repeat(4,1fr)}
+  .ft__cols{grid-template-columns:1fr 1fr}
+  .fin__out{position:static}
+}
+@media (max-width:480px){
+  .ft__cols{grid-template-columns:1fr}
+  .hero__actions{flex-direction:column;align-items:stretch}
+  .hero__actions .btn{justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .hslide[data-on="true"] .hero__media img,.hslide[data-on="true"] .hslide__in > *{animation:none}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="hd" id="hd">
+  <div class="hd__in">
+    <div class="hd__left">
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+      <nav class="nav nav--desk" id="nav" aria-label="Principal">
+        <a href="#/nuevos">Nuevos</a>
+        <a href="#/usados">Usados</a>
+        <a href="#/financiamiento">Financiamiento</a>
+      </nav>
+    </div>
+    <a href="#/" class="brand" aria-label="Neomarket — inicio">Neomarket</a>
+    <div class="hd__right">
+      <nav class="nav nav--desk" aria-label="Secundaria">
+        <a href="#/tasacion">Tasación</a>
+        <a href="https://wa.me/56951234567?text=Hola%20Neomarket%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener">Contacto</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <a href="#/nuevos">Nuevos</a>
+  <a href="#/usados">Usados</a>
+  <a href="#/financiamiento">Financiamiento</a>
+  <a href="#/tasacion">Tasación</a>
+  <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp</a>
+  <p class="mono">Av. del Mar 1234, La Serena · +56 51 234 5678</p>
+</div>
+
+<main id="main"><div id="app"></div></main>
+
+<footer class="ft">
+  <div class="shell">
+    <div class="ft__cols">
+      <div>
+        <h4>Automotora Neomarket</h4>
+        <p>Nuevos y seminuevos en La Serena y la IV Región. Cada auto pasa por una revisión de 120 puntos antes de entrar a la vitrina.</p>
+      </div>
+      <div>
+        <h4>Inventario</h4>
+        <a href="#/nuevos">Autos nuevos</a>
+        <a href="#/usados">Autos usados</a>
+        <a href="#/financiamiento">Simulador de crédito</a>
+        <a href="#/tasacion">Tasa tu auto</a>
+      </div>
+      <div>
+        <h4>Sucursales</h4>
+        <p>La Serena Centro<br>Av. Francisco de Aguirre 1200</p>
+        <p>La Serena Norte<br>Ruta 5 Norte km 470</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="tel:+56512345678">+56 51 234 5678</a>
+        <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp ventas</a>
+        <p>Lun a Vie 09–19h · Sáb 10–14h</p>
+      </div>
+    </div>
+  </div>
+  <div class="shell"><div class="ft__word chrome">Neomarket</div></div>
+  <div class="shell">
+    <div class="ft__legal">
+      <p>Concepto de rediseño no oficial. Precios, modelos y kilometrajes son referenciales y se basan en inventario publicado por Automotora Neomarket; no constituyen una oferta comercial.</p>
+      <span>© 2026 · Demo</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script>
+/* ============================================================
+   DATOS
+   ============================================================ */
+const WA = "56951234567";
+
+/* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
+   Si una clave no está, se genera un render de estudio en SVG como respaldo.
+   Set actual: fotografía de stock de Unsplash (uso libre), elegida por carrocería. */
+const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1400&q=75`;
+const HERO_PHOTO = U("1607603750909-408e193868c7");
+
+/* PORTADA: 3 diapositivas. Imagen en alta resolución + frase. */
+const HU = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=76`;
+const HERO_SLIDES = [
+  {img:HU("1607603750909-408e193868c7"), title:"El auto correcto, a la primera", sub:"Autos nuevos y seminuevos revisados punto por punto.", href:"#/nuevos"},
+  {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos con garantía escrita", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
+  {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
+];
+const PHOTOS = {
+  n1:  U("1541443131876-44b03de101c5"), // BMW hatch azul
+  n2:  U("1617531653332-bd46c24f2068"), // deportivo rojo (Formentor)
+  n3:  U("1533473359331-0135ef1b58bf"), // SUV grande off-road (Amarok)
+  n4:  U("1519641471654-76ce0107ad1b"), // crossover blanco
+  n5:  U("1617469767053-d3b523a0b982"), // crossover plateado
+  n6:  U("1533473359331-0135ef1b58bf"),
+  n7:  U("1519641471654-76ce0107ad1b"),
+  n8:  U("1541899481282-d53bffe3c35d"), // VW compacto (T-Cross)
+  n9:  U("1546614042-7df3c24c9e5d"),    // BMW oscuro (X1)
+  n10: U("1617469767053-d3b523a0b982"),
+  u1:  U("1617469767053-d3b523a0b982"),
+  u2:  U("1519641471654-76ce0107ad1b"),
+  u3:  U("1533473359331-0135ef1b58bf"),
+  u4:  U("1541899481282-d53bffe3c35d"), // sedán compacto (Onix)
+  u6:  U("1550355291-bbee04a92027"),    // hatch rojo (C3)
+  u7:  U("1549317661-bd32c8ce0db2"),    // hatch clásico (C3)
+  u8:  U("1606664515524-ed2f786a0bd6"), // SUV premium oscuro (C5 Aircross)
+  u9:  U("1617469767053-d3b523a0b982"),
+  u10: U("1558981806-ec527fa84c39"),    // moto trail
+  u11: U("1568772585407-9361f9bf3a87"), // moto
+  u12: U("1449426468159-d96dbf08f19f"), // moto
+  u13: U("1571127236794-81c0bbfe1ce3"), // sedán (Sail)
+  u14: U("1533473359331-0135ef1b58bf"), // pickup / off-road (Amarok usado)
+  // u5 (furgón): sin foto -> render de estudio SVG
+};
+
+const VEHICULOS = [
+  // ---------- NUEVOS ----------
+  {id:"n1",cond:"nuevo",marca:"BMW",modelo:"Serie 1",version:"118 Sport Line",anio:2026,km:0,precio:30900000,combustible:"Bencina",transmision:"Automática",carroceria:"Hatchback",destacado:true,
+   desc:"El hatch premium de entrada a BMW. Tracción delantera, pantalla curva Live Cockpit y una puesta a punto de chasis que sigue siendo la referencia del segmento.",
+   specs:{Motor:"1.5 turbo 3 cil.",Potencia:"156 hp",Torque:"230 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"380 L",Garantía:"3 años / 100.000 km"}},
+  {id:"n2",cond:"nuevo",marca:"Cupra",modelo:"Formentor",version:"VZ e-Hybrid 245",anio:2026,km:0,precio:37990000,combustible:"Híbrido enchufable",transmision:"Automática DSG",carroceria:"SUV",destacado:true,
+   desc:"SUV coupé con alma deportiva. 245 hp combinados, cerca de 50 km en modo eléctrico y detalles en cobre que no vas a ver en ningún otro estacionamiento de La Serena.",
+   specs:{Motor:"1.4 TSI + eléctrico",Potencia:"245 hp",Autonomía_eléctrica:"49 km",Tracción:"Delantera",Puertas:"5",Maletero:"345 L",Garantía:"5 años"}},
+  {id:"n3",cond:"nuevo",marca:"Volkswagen",modelo:"Amarok",version:"Highline 3.0 V6 TDI",anio:2026,km:0,precio:35990000,combustible:"Diésel",transmision:"Automática",carroceria:"Camioneta",destacado:true,
+   desc:"El único V6 diésel del segmento. 258 hp, tracción 4Motion permanente y 3.500 kg de capacidad de arrastre para el trabajo y para el fin de semana.",
+   specs:{Motor:"3.0 V6 TDI",Potencia:"258 hp",Torque:"580 Nm",Tracción:"4Motion permanente",Carga:"1.030 kg",Arrastre:"3.500 kg",Garantía:"5 años"}},
+  {id:"n4",cond:"nuevo",marca:"Geely",modelo:"Coolray",version:"GT 1.5 Turbo",anio:2026,km:0,precio:13990000,combustible:"Bencina",transmision:"Automática DCT",carroceria:"SUV",destacado:false,
+   desc:"El SUV compacto que puso a Geely en el mapa. 177 hp, caja de doble embrague y un nivel de equipamiento que obliga a la competencia a bajar precios.",
+   specs:{Motor:"1.5 turbo",Potencia:"177 hp",Torque:"255 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"330 L",Garantía:"5 años / 100.000 km"}},
+  {id:"n5",cond:"nuevo",marca:"Chery",modelo:"Tiggo 8 Pro Max",version:"1.6 TGDI AWD",anio:2026,km:0,precio:24990000,combustible:"Bencina turbo",transmision:"Automática DCT",carroceria:"SUV",destacado:false,
+   desc:"Siete asientos reales, doble pantalla de 12,3\", sonido Sony y tracción integral. El SUV familiar que redefine cuánto equipamiento entra en su presupuesto.",
+   specs:{Motor:"1.6 TGDI",Potencia:"197 hp",Torque:"290 Nm",Tracción:"AWD",Asientos:"7",Maletero:"889 L",Garantía:"5 años / 150.000 km"}},
+  {id:"n6",cond:"nuevo",marca:"Citroën",modelo:"C3 Aircross",version:"Feel Pack 1.6 AT",anio:2026,km:0,precio:15490000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"Suspensión con topes hidráulicos progresivos: el confort de rodado marca de la casa. Hasta siete plazas y una modularidad pensada para familias que viajan.",
+   specs:{Motor:"1.6 16V",Potencia:"115 hp",Torque:"150 Nm",Tracción:"Delantera",Asientos:"5 (7 opc.)",Maletero:"410 L",Garantía:"3 años"}},
+  {id:"n7",cond:"nuevo",marca:"Chevrolet",modelo:"Groove",version:"LT 1.5 CVT",anio:2026,km:0,precio:13290000,combustible:"Bencina",transmision:"Automática CVT",carroceria:"SUV",destacado:false,
+   desc:"El SUV urbano de Chevrolet: pantalla de 8\", cámara de retroceso, seis airbags de serie y un consumo mixto cercano a los 16 km/l.",
+   specs:{Motor:"1.5 DOHC",Potencia:"110 hp",Torque:"141 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"338 L",Garantía:"3 años / 100.000 km"}},
+  {id:"n8",cond:"nuevo",marca:"Volkswagen",modelo:"T-Cross",version:"Comfortline 1.4 TSI",anio:2026,km:0,precio:22690000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"El SUV compacto de Volkswagen, ahora con frontal renovado y Digital Cockpit de serie. Banca trasera corrediza y 455 litros de maletero.",
+   specs:{Motor:"1.4 TSI",Potencia:"150 hp",Torque:"250 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"455 L",Garantía:"5 años"}},
+  {id:"n9",cond:"nuevo",marca:"BMW",modelo:"X1",version:"sDrive18i M Sport",anio:2026,km:0,precio:42900000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"La tercera generación del X1 crece en todo: pantalla curva, paquete M Sport de serie y una micro-hibridación de 48V que suaviza cada partida.",
+   specs:{Motor:"1.5 turbo mild-hybrid 48V",Potencia:"136 hp",Torque:"230 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"540 L",Garantía:"3 años / 100.000 km"}},
+  {id:"n10",cond:"nuevo",marca:"Geely",modelo:"GX3 Pro",version:"1.5 GL MT",anio:2026,km:0,precio:11490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:false,
+   desc:"El acceso más económico a un SUV nuevo con respaldo de red. Pantalla de 10,25\", llave inteligente y un motor 1.5 probado en miles de unidades.",
+   specs:{Motor:"1.5 16V",Potencia:"102 hp",Torque:"142 Nm",Tracción:"Delantera",Puertas:"5",Maletero:"340 L",Garantía:"5 años / 100.000 km"}},
+
+  // ---------- USADOS / SEMINUEVOS ----------
+  {id:"u1",cond:"usado",marca:"Chery",modelo:"Tiggo 2 Pro",version:"GLS 1.5 MT",anio:2022,km:53806,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"Un dueño, mantenciones al día en la red Chery. Pintura original en las seis caras y set de neumáticos con más del 70% de vida útil.",
+   specs:{Motor:"1.5 16V",Potencia:"106 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Revisión:"120 puntos aprobada",Garantía:"6 meses motor y caja"}},
+  {id:"u2",cond:"usado",marca:"Chery",modelo:"Tiggo 2 Pro Max",version:"GLX 1.5 AUT",anio:2025,km:28903,precio:12990000,combustible:"Bencina",transmision:"Automática CVT",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"Prácticamente nuevo: menos de 30.000 km y aún con garantía de fábrica vigente. Pantalla de 10,25\", cámara 360 y climatizador automático.",
+   specs:{Motor:"1.5 CVT",Potencia:"116 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Garantía_fábrica:"Vigente hasta 2028",Revisión:"120 puntos aprobada"}},
+  {id:"u3",cond:"usado",marca:"Chery",modelo:"Tiggo 3",version:"1.5 Full MT",anio:2021,km:18684,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"Kilometraje excepcionalmente bajo para el año: 18.684 km certificados. Auto de ciudad, siempre en estacionamiento techado.",
+   specs:{Motor:"1.5 16V",Potencia:"137 hp",Tracción:"Delantera",Puertas:"5",Dueños:"1",Kilometraje:"Certificado",Garantía:"6 meses motor y caja"}},
+  {id:"u4",cond:"usado",marca:"Chevrolet",modelo:"Onix",version:"NB LS 1.2 MT",anio:2021,km:95244,precio:8690000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Sedán",destacado:false,duenos:2,
+   desc:"Sedán compacto ideal para trabajo de app o primer auto. Motor 1.2 de bajo consumo, mantenciones registradas y neumáticos nuevos.",
+   specs:{Motor:"1.2 12V",Potencia:"84 hp",Tracción:"Delantera",Puertas:"4",Dueños:"2",Neumáticos:"Nuevos",Garantía:"6 meses motor y caja"}},
+  {id:"u5",cond:"usado",marca:"Citroën",modelo:"Berlingo",version:"K9 Blue HDi",anio:2020,km:75517,precio:8690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Furgón",destacado:false,duenos:1,
+   desc:"Furgón de carga diésel en liquidación. 3,3 m³ de volumen útil, puerta lateral corrediza y consumo bajo los 5,5 L/100 km en carretera.",
+   specs:{Motor:"1.6 BlueHDi",Potencia:"92 hp",Carga:"800 kg",Volumen:"3,3 m³",Dueños:"1",Estado:"Liquidación",Garantía:"3 meses motor y caja"}},
+  {id:"u6",cond:"usado",marca:"Citroën",modelo:"C3",version:"Blue HDi 1.5 MT",anio:2024,km:65653,precio:13690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:1,
+   desc:"C3 diésel 2024 con el motor 1.5 BlueHDi, uno de los más eficientes del mercado. Pantalla con Apple CarPlay inalámbrico y aire acondicionado.",
+   specs:{Motor:"1.5 BlueHDi",Potencia:"102 hp",Torque:"250 Nm",Puertas:"5",Dueños:"1",Consumo:"4,4 L/100 km",Garantía:"6 meses motor y caja"}},
+  {id:"u7",cond:"usado",marca:"Citroën",modelo:"C3",version:"Blue HDi 1.5 MT",anio:2024,km:78450,precio:11690000,combustible:"Diésel",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:1,
+   desc:"Segunda unidad de C3 diésel 2024, con más kilómetros de carretera y precio ajustado. Ideal para quien maneja largas distancias todas las semanas.",
+   specs:{Motor:"1.5 BlueHDi",Potencia:"102 hp",Torque:"250 Nm",Puertas:"5",Dueños:"1",Uso:"Carretera",Garantía:"6 meses motor y caja"}},
+  {id:"u8",cond:"usado",marca:"Citroën",modelo:"C5 Aircross",version:"Feel 1.6 THP AT",anio:2022,km:81985,precio:16990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"El SUV más confortable de su segmento, en liquidación. Suspensión Advanced Comfort, asientos con espuma de alta densidad y techo panorámico.",
+   specs:{Motor:"1.6 THP",Potencia:"165 hp",Torque:"240 Nm",Tracción:"Delantera",Dueños:"1",Extras:"Techo panorámico",Garantía:"6 meses motor y caja"}},
+  {id:"u9",cond:"usado",marca:"Volkswagen",modelo:"Nivus",version:"Highline 1.0 TSI AT",anio:2022,km:42000,precio:14290000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
+   desc:"SUV coupé con el turbo 1.0 TSI de 128 hp. VW Play de 10\", Digital Cockpit y ADAS con control crucero adaptativo. Un dueño, sin detalles.",
+   specs:{Motor:"1.0 TSI",Potencia:"128 hp",Torque:"200 Nm",Tracción:"Delantera",Dueños:"1",Equipamiento:"ADAS + Digital Cockpit",Garantía:"6 meses motor y caja"}},
+  {id:"u10",cond:"usado",marca:"BMW Motorrad",modelo:"R 1250 GS",version:"Exclusive",anio:2019,km:49020,precio:15990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:2,
+   desc:"La trail más vendida del mundo, con motor boxer ShiftCam de 136 hp. Maletas Vario originales, protecciones de motor y neumáticos mixtos nuevos.",
+   specs:{Motor:"1.254 cc boxer",Potencia:"136 hp",Peso:"249 kg",Dueños:"2",Extras:"Maletas Vario + defensas",Kilometraje:"Certificado",Garantía:"3 meses motor"}},
+  {id:"u11",cond:"usado",marca:"BMW Motorrad",modelo:"R 1300 GS",version:"Triple Black",anio:2024,km:6500,precio:22490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+   desc:"La nueva generación R 1300 GS con solo 6.500 km. Suspensión semiactiva, faro Matrix LED y modo de conducción Enduro Pro. Como nueva.",
+   specs:{Motor:"1.300 cc boxer",Potencia:"145 hp",Peso:"237 kg",Dueños:"1",Extras:"Suspensión semiactiva",Garantía_fábrica:"Vigente",Kilometraje:"Certificado"}},
+  {id:"u12",cond:"usado",marca:"BMW Motorrad",modelo:"R 1250 GS Adventure",version:"II",anio:2021,km:38040,precio:17990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Motocicleta",destacado:false,duenos:1,
+   desc:"La versión Adventure con estanque de 30 litros para viajes largos. Barras de protección, faros auxiliares LED y asiento confort.",
+   specs:{Motor:"1.254 cc boxer",Potencia:"136 hp",Estanque:"30 L",Dueños:"1",Extras:"Faros LED + baúl",Kilometraje:"Certificado",Garantía:"3 meses motor"}},
+  {id:"u13",cond:"usado",marca:"Chevrolet",modelo:"Sail",version:"LS 1.5 MT",anio:2019,km:88300,precio:6990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Sedán",destacado:false,duenos:2,
+   desc:"El sedán más económico de la vitrina. Espacio interior generoso, maletero de 445 litros y un 1.5 sin turbo, simple y barato de mantener.",
+   specs:{Motor:"1.5 16V",Potencia:"106 hp",Tracción:"Delantera",Puertas:"4",Dueños:"2",Maletero:"445 L",Garantía:"3 meses motor y caja"}},
+  {id:"u14",cond:"usado",marca:"Volkswagen",modelo:"Amarok",version:"Trendline 2.0 BiTDI 4x4",anio:2020,km:96400,precio:19990000,combustible:"Diésel",transmision:"Automática",carroceria:"Camioneta",destacado:true,duenos:1,
+   desc:"Amarok 4x4 con el biturbo 2.0 de 180 hp y caja automática de 8 velocidades. Pisadera lateral, cobertor de batea y enganche de arrastre.",
+   specs:{Motor:"2.0 BiTDI",Potencia:"180 hp",Torque:"420 Nm",Tracción:"4Motion",Dueños:"1",Extras:"Cobertor + enganche",Garantía:"6 meses motor y caja"}},
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clp = n => "$" + Math.round(n).toLocaleString("es-CL");
+const km = n => n.toLocaleString("es-CL") + " km";
+const byId = id => VEHICULOS.find(v=>v.id===id);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* crédito: cuota fija sistema francés */
+function cuota(monto, tasaMensual, n){
+  const i = tasaMensual/100;
+  if(i===0) return monto/n;
+  return monto * i / (1 - Math.pow(1+i,-n));
+}
+function cae(tasaMensual){
+  // referencial: tasa anual efectiva + carga de gastos operacionales estimada
+  return (Math.pow(1+tasaMensual/100,12)-1)*100 + 2.4;
+}
+const TASA_DEFAULT = 1.59;
+
+/* estimación de cuota rápida para tarjetas (pie 20%, 48 meses) */
+function cuotaRef(precio){
+  return cuota(precio*0.8, TASA_DEFAULT, 48);
+}
+
+/* ---------- render de estudio SVG (fallback sin foto) ---------- */
+const SIL = {
+  "SUV":"M40 150 L60 150 C70 105 95 92 150 90 L250 88 C300 88 330 100 355 128 L420 138 C445 142 455 150 455 150 L455 168 L40 168 Z M120 168 a24 24 0 1 0 .1 0 M360 168 a24 24 0 1 0 .1 0",
+  "Sedán":"M30 155 L70 155 C90 120 120 112 175 110 L250 108 C300 110 340 128 380 150 L465 156 L465 170 L30 170 Z M115 170 a22 22 0 1 0 .1 0 M370 170 a22 22 0 1 0 .1 0",
+  "Hatchback":"M40 152 L70 152 C88 118 118 110 168 108 L240 108 C290 110 320 128 345 152 L360 160 L360 168 L40 168 Z M120 168 a22 22 0 1 0 .1 0 M320 168 a22 22 0 1 0 .1 0",
+  "Camioneta":"M25 150 L60 150 C72 112 96 104 150 103 L215 103 L225 138 L470 138 L470 165 L25 165 Z M110 165 a24 24 0 1 0 .1 0 M395 165 a24 24 0 1 0 .1 0",
+  "Furgón":"M35 150 L48 92 C50 82 58 78 74 78 L300 78 C330 78 360 100 400 138 L460 146 L460 165 L35 165 Z M115 165 a23 23 0 1 0 .1 0 M395 165 a23 23 0 1 0 .1 0",
+  "Motocicleta":"M110 165 a38 38 0 1 0 .1 0 M360 165 a38 38 0 1 0 .1 0 M148 165 L230 120 L300 120 L345 160 M215 120 L250 95 L300 98 M170 130 L150 105 L120 105",
+};
+function studio(v,w=1200,h=750){
+  const sil = SIL[v.carroceria] || SIL["SUV"];
+  const label = esc((v.marca+" "+v.modelo).toUpperCase());
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 500 312'>
+<defs>
+<radialGradient id='g' cx='50%' cy='34%' r='80%'>
+<stop offset='0%' stop-color='#27292d'/><stop offset='55%' stop-color='#141518'/><stop offset='100%' stop-color='#0b0c0d'/>
+</radialGradient>
+<linearGradient id='f' x1='0' y1='0' x2='0' y2='1'>
+<stop offset='0%' stop-color='#1b1c1f'/><stop offset='100%' stop-color='#0b0c0d'/>
+</linearGradient>
+</defs>
+<rect width='500' height='312' fill='url(#g)'/>
+<rect y='208' width='500' height='104' fill='url(#f)'/>
+<line x1='0' y1='208' x2='500' y2='208' stroke='#EDEBE7' stroke-opacity='.1'/>
+<g transform='translate(58,66) scale(0.76)' stroke='#EDEBE7' stroke-opacity='.85' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+<path d='${sil}'/>
+</g>
+<g transform='translate(58,406) scale(0.76,-0.76)' opacity='.08' stroke='#EDEBE7' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'>
+<path d='${sil}'/>
+</g>
+<text x='24' y='38' fill='#EDEBE7' fill-opacity='.5' font-family='IBM Plex Mono, monospace' font-size='10' letter-spacing='3'>${label}</text>
+<text x='476' y='296' text-anchor='end' fill='#EDEBE7' fill-opacity='.26' font-family='IBM Plex Mono, monospace' font-size='8' letter-spacing='2'>NEOMARKET</text>
+</svg>`);
+}
+function imgHTML(v,cls=""){
+  const real = PHOTOS[v.id];
+  const s = studio(v);
+  if(real){
+    return `<img class="${cls}" src="${esc(real)}" alt="${esc(v.marca+' '+v.modelo+' '+v.version)}" loading="lazy" onerror="this.onerror=null;this.src='${s}'">`;
+  }
+  return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
+}
+/* galería: una foto de origen, varios encuadres */
+function gallery(v){
+  const base = PHOTOS[v.id];
+  if(!base) return [studio(v)];
+  if(!base.includes("w=1400")) return [base, studio(v)];
+  return [
+    base,
+    base.replace("w=1400","w=1000&h=720&crop=left"),
+    base.replace("w=1400","w=1000&h=720&crop=right"),
+    base.replace("w=1400","w=1000&h=720&crop=entropy"),
+  ];
+}
+
+/* ---------- gauges ---------- */
+function gaugeRow(pairs){
+  return `<div class="gauges">${pairs.map(([k,val])=>
+    `<div class="gauge"><div class="gauge__k">${esc(k)}</div><div class="gauge__v">${esc(val)}</div></div>`).join("")}</div>`;
+}
+
+/* ---------- card ---------- */
+function card(v,rail=false){
+  const specBits = v.cond==="nuevo"
+    ? [v.anio, v.combustible, v.transmision.split(" ")[0]]
+    : [v.anio, km(v.km), v.combustible];
+  return `<article class="card ${rail?'card--rail':''}">
+    <div class="card__media-wrap">
+      <div class="card__media">${imgHTML(v)}</div>
+      <span class="card__tag">${v.cond==="nuevo"?"0 KM":"Seminuevo"}</span>
+    </div>
+    <div class="card__body">
+      <div class="card__marca">${esc(v.marca)}</div>
+      <h3 class="card__name">${esc(v.modelo)}</h3>
+      <div class="card__ver">${esc(v.version)}</div>
+      <div class="card__spec">${specBits.map(b=>`<span>${esc(b)}</span>`).join("")}</div>
+      <div class="card__foot">
+        <div class="card__price"><small>${v.cond==="nuevo"?"Desde":"Precio"}</small>${clp(v.precio)}</div>
+        <div class="card__cuota">${clp(cuotaRef(v.precio))}<br>x mes*</div>
+      </div>
+      <a class="card__link" href="#/vehiculo/${v.id}" aria-label="Ver ${esc(v.marca+' '+v.modelo)}"></a>
+    </div>
+  </article>`;
+}
+
+/* ============================================================
+   VISTAS
+   ============================================================ */
+function viewHome(){
+  const nuevosDest = VEHICULOS.filter(v=>v.cond==="nuevo"&&v.destacado).slice(0,3);
+  const usados = VEHICULOS.filter(v=>v.cond==="usado").slice(0,8);
+  return `
+  <section class="hero" aria-roledescription="carrusel" aria-label="Portada">
+    <div class="hero__slides">
+      ${HERO_SLIDES.map((s,i)=>`
+      <article class="hslide" data-i="${i}" data-on="${i===0}" aria-hidden="${i!==0}" aria-roledescription="diapositiva" aria-label="${i+1} de ${HERO_SLIDES.length}">
+        <div class="hero__media"><img src="${s.img}" alt="" ${i===0?'fetchpriority="high"':'loading="lazy"'}></div>
+        <a class="hslide__link" href="${s.href}" tabindex="${i===0?0:-1}" aria-label="${esc(s.title)}"></a>
+        <div class="hslide__in">
+          <h2 class="display">${esc(s.title)}</h2>
+          <p class="hslide__sub">${esc(s.sub)}</p>
+        </div>
+      </article>`).join("")}
+    </div>
+    <div class="hero__dots" role="tablist" aria-label="Diapositivas">
+      ${HERO_SLIDES.map((s,i)=>`<button type="button" role="tab" data-dot="${i}" aria-current="${i===0}" aria-label="${esc(s.title)}"></button>`).join("")}
+    </div>
+    <div class="ticker"><div class="ticker__in">
+      <div class="ticker__i"><b>+2.500</b> autos entregados</div>
+      <div class="ticker__i"><b>120</b> puntos de revisión</div>
+      <div class="ticker__i"><b>2</b> sucursales en La Serena</div>
+      <div class="ticker__i"><b>+20</b> marcas representadas</div>
+    </div></div>
+  </section>
+
+  <section class="section shell reveal">
+    <div class="intro">
+      <h2 class="display">El auto correcto,<br>a la primera</h2>
+      <p>No listamos todo lo que existe. Listamos lo que compraríamos: modelos con repuestos en Chile, buen valor de reventa y una red que responde cuando algo falla.</p>
+    </div>
+  </section>
+
+  <section class="shell">
+    ${nuevosDest.map((v,i)=>`
+    <article class="band reveal">
+      <div class="band__media">${imgHTML(v)}</div>
+      <div>
+        <span class="band__no">NUEVO / 0${i+1}</span>
+        <h3 class="display">${esc(v.marca)}<br>${esc(v.modelo)}</h3>
+        <div class="band__price"><small>Desde</small>${clp(v.precio)}</div>
+        <div class="band__meta">${gaugeRow([["Combustible",v.combustible],["Caja",v.transmision.split(" ")[0]],["Cuota*",clp(cuotaRef(v.precio))+"/mes"]])}</div>
+        <div class="band__cta"><a class="linkline" href="#/vehiculo/${v.id}">Ver detalle <span class="arw">→</span></a></div>
+      </div>
+    </article>`).join("")}
+  </section>
+
+  <section class="section shell reveal">
+    <div class="rail-head">
+      <div><p class="eyebrow">Seminuevos certificados</p><h2 class="display" style="margin-top:.5rem">Usados con<br>garantía escrita</h2></div>
+      <a class="linkline" href="#/usados">Ver los ${VEHICULOS.filter(v=>v.cond==="usado").length} seminuevos <span class="arw">→</span></a>
+    </div>
+    <div class="rail">${usados.map(v=>card(v,true)).join("")}</div>
+  </section>
+
+  <section class="section shell reveal">
+    <div class="rule" style="margin-bottom:var(--s-7)"></div>
+    <div class="fin" style="align-items:center">
+      <div>
+        <p class="eyebrow">Financiamiento</p>
+        <h2 class="display" style="margin:.6rem 0 1.25rem">La cuota primero,<br>el auto después</h2>
+        <p style="color:var(--bone-dim);max-width:42ch">Dinos cuánto puedes pagar al mes y te mostramos qué autos entran. Trabajamos con seis bancos y evaluamos sin costo.</p>
+        <div style="margin-top:2rem"><a class="btn btn--solid" href="#/financiamiento">Abrir simulador</a></div>
+      </div>
+      <div class="fin__out">
+        <div class="fin__cuota-k">Ejemplo · Geely Coolray GT</div>
+        <div class="fin__cuota">${clp(cuotaRef(13990000))}</div>
+        <div class="fin__cuota-sub">48 cuotas · pie 20% · tasa ${TASA_DEFAULT}% mensual</div>
+        <div style="margin-top:1.5rem">${gaugeRow([["Valor",clp(13990000)],["Pie",clp(13990000*0.2)],["CAE ref.",cae(TASA_DEFAULT).toFixed(1)+"%"]])}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell reveal">
+    <div class="rule" style="margin-bottom:var(--s-7)"></div>
+    <div class="intro">
+      <h2 class="display">Tu auto<br>paga la entrada</h2>
+      <div>
+        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. El retiro y la transferencia los gestionamos nosotros.</p>
+        <div style="margin-top:1.75rem"><a class="linkline" href="#/tasacion">Tasar mi auto <span class="arw">→</span></a></div>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ---------- catálogo ---------- */
+const FILTER_STATE = {};
+function catState(cond){
+  if(!FILTER_STATE[cond]) FILTER_STATE[cond] = {marcas:new Set(),carro:new Set(),comb:new Set(),trans:new Set(),pmax:null,q:"",sort:"precio-asc"};
+  return FILTER_STATE[cond];
+}
+function viewCatalogo(cond){
+  const pool = VEHICULOS.filter(v=>v.cond===cond);
+  const st = catState(cond);
+  const priceCap = Math.ceil(Math.max(...pool.map(v=>v.precio))/1e6)*1e6;
+  if(st.pmax===null) st.pmax = priceCap;
+  const marcas = [...new Set(pool.map(v=>v.marca))].sort();
+  const carros = [...new Set(pool.map(v=>v.carroceria))].sort();
+  const combs = [...new Set(pool.map(v=>v.combustible))].sort();
+  const transs = [...new Set(pool.map(v=>v.transmision.split(" ")[0]))].sort();
+
+  const fg = (title,name,opts)=>`<div class="fgroup"><div class="fgroup__h">${title}</div>${
+    opts.map(o=>`<label class="check"><input type="checkbox" data-f="${name}" value="${esc(o)}" ${st[name].has(o)?"checked":""}><span class="box"></span><span class="lbl">${esc(o)}</span></label>`).join("")
+  }</div>`;
+
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <div style="margin-bottom:var(--s-6)">
+      <p class="eyebrow">${cond==="nuevo"?"Inventario · 0 km":"Inventario · Seminuevos"}</p>
+      <h1 class="display" style="margin-top:.6rem;font-size:clamp(2.4rem,6vw,4.5rem)">Autos ${cond==="nuevo"?"nuevos":"usados"}</h1>
+    </div>
+    <div class="cat">
+      <form class="cat__filters" id="filters" data-cond="${cond}" aria-label="Filtros">
+        <div class="fgroup">
+          <div class="fgroup__h">Buscar</div>
+          <input type="search" data-f="q" value="${esc(st.q)}" placeholder="Marca o modelo" style="width:100%;background:var(--ink-raised);border:1px solid var(--hairline);padding:.6rem;font-family:var(--ff-mono);font-size:.8rem;color:var(--bone)">
+        </div>
+        ${fg("Marca","marcas",marcas)}
+        ${fg("Carrocería","carro",carros)}
+        <div class="fgroup">
+          <div class="fgroup__h">Precio máximo</div>
+          <div class="fin__val mono" id="pmaxOut">${clp(st.pmax)}</div>
+          <input class="slider" type="range" data-f="pmax" min="${Math.floor(Math.min(...pool.map(v=>v.precio))/1e6)*1e6}" max="${priceCap}" step="500000" value="${st.pmax}">
+        </div>
+        ${fg("Combustible","comb",combs)}
+        ${fg("Transmisión","trans",transs)}
+        <div class="fgroup"><button type="button" class="btn btn--ghost btn--sm" id="clearAll" style="width:100%;justify-content:center">Limpiar filtros</button></div>
+        <div class="fgroup" style="display:none" id="closeFiltersWrap"><button type="button" class="btn btn--solid btn--sm" id="closeFilters" style="width:100%;justify-content:center">Ver resultados</button></div>
+      </form>
+
+      <div>
+        <div class="cat__bar">
+          <div class="cat__count" aria-live="polite"><b id="rc">0</b> resultados</div>
+          <label style="display:flex;align-items:center;gap:.6rem">
+            <span class="eyebrow">Ordenar</span>
+            <select class="select" id="sort">
+              <option value="precio-asc"${st.sort==="precio-asc"?" selected":""}>Precio ↑</option>
+              <option value="precio-desc"${st.sort==="precio-desc"?" selected":""}>Precio ↓</option>
+              <option value="anio-desc"${st.sort==="anio-desc"?" selected":""}>Más nuevos</option>
+              ${cond==="usado"?`<option value="km-asc"${st.sort==="km-asc"?" selected":""}>Menos km</option>`:""}
+            </select>
+          </label>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="grid" id="results"></div>
+      </div>
+    </div>
+    <button class="btn btn--solid filters-toggle" id="filtersToggle" aria-expanded="false">Filtros</button>
+  </section>`;
+}
+
+function applyFilters(cond){
+  const st = catState(cond);
+  let list = VEHICULOS.filter(v=>v.cond===cond);
+  if(st.q){const q=st.q.toLowerCase();list=list.filter(v=>(v.marca+" "+v.modelo+" "+v.version).toLowerCase().includes(q));}
+  if(st.marcas.size) list=list.filter(v=>st.marcas.has(v.marca));
+  if(st.carro.size) list=list.filter(v=>st.carro.has(v.carroceria));
+  if(st.comb.size) list=list.filter(v=>st.comb.has(v.combustible));
+  if(st.trans.size) list=list.filter(v=>st.trans.has(v.transmision.split(" ")[0]));
+  if(st.pmax!=null) list=list.filter(v=>v.precio<=st.pmax);
+  const [key,dir]=st.sort.split("-");
+  list.sort((a,b)=>{const d=key==="precio"?a.precio-b.precio:key==="km"?a.km-b.km:a.anio-b.anio;return dir==="asc"?d:-d;});
+
+  const results = $("#results");
+  const rc = $("#rc");
+  if(rc) rc.textContent = list.length;
+  if(!results) return;
+
+  // chips
+  const chips = $("#chips");
+  const bits=[];
+  ["marcas","carro","comb","trans"].forEach(f=>st[f].forEach(val=>bits.push([f,val,val])));
+  const poolMax = Math.ceil(Math.max(...VEHICULOS.filter(v=>v.cond===cond).map(v=>v.precio))/1e6)*1e6;
+  if(st.pmax!=null && st.pmax<poolMax) bits.push(["pmax",st.pmax,"Hasta "+clp(st.pmax)]);
+  if(st.q) bits.push(["q",st.q,'"'+st.q+'"']);
+  chips.innerHTML = bits.length
+    ? bits.map(([f,val,lbl])=>`<button class="chip" data-clear-f="${f}" data-clear-v="${esc(val)}">${esc(lbl)} ✕</button>`).join("")
+      + `<button class="chip chip--clear" id="chipClear">Limpiar todo</button>`
+    : "";
+
+  if(!list.length){
+    results.className="";
+    results.innerHTML = `<div class="empty"><h3 class="display">Sin coincidencias</h3><p>Ningún auto calza con esos filtros. Prueba subir el precio máximo o quitar una marca.</p><button class="btn btn--ghost" id="emptyClear">Limpiar filtros</button></div>`;
+    $("#emptyClear")?.addEventListener("click",()=>resetFilters(cond));
+    return;
+  }
+  results.className = RM ? "grid" : "grid reveal-grid";
+  results.innerHTML = list.map((v,i)=>RM?card(v):`<div style="animation-delay:${Math.min(i*25,400)}ms">${card(v)}</div>`).join("");
+}
+
+function resetFilters(cond){
+  const st = catState(cond);
+  st.marcas.clear();st.carro.clear();st.comb.clear();st.trans.clear();st.q="";
+  st.pmax = Math.ceil(Math.max(...VEHICULOS.filter(v=>v.cond===cond).map(v=>v.precio))/1e6)*1e6;
+  const f=$("#filters");
+  if(f){
+    $$('input[type=checkbox]',f).forEach(c=>c.checked=false);
+    const q=$('[data-f=q]',f); if(q) q.value="";
+    const s=$('[data-f=pmax]',f); if(s){s.value=st.pmax; $("#pmaxOut").textContent=clp(st.pmax);}
+  }
+  applyFilters(cond);
+}
+
+function wireCatalogo(cond){
+  const f = $("#filters");
+  if(!f) return;
+  const st = catState(cond);
+  f.addEventListener("change",e=>{
+    const t=e.target, name=t.dataset.f;
+    if(!name) return;
+    if(t.type==="checkbox"){
+      const set = st[{marcas:"marcas",carro:"carro",comb:"comb",trans:"trans"}[name]];
+      t.checked ? set.add(t.value) : set.delete(t.value);
+    } else if(name==="pmax"){ st.pmax=+t.value; $("#pmaxOut").textContent=clp(+t.value); }
+    applyFilters(cond);
+  });
+  f.addEventListener("input",e=>{
+    if(e.target.dataset.f==="q"){ st.q=e.target.value.trim(); applyFilters(cond); }
+    if(e.target.dataset.f==="pmax"){ st.pmax=+e.target.value; $("#pmaxOut").textContent=clp(+e.target.value); }
+  });
+  $("#sort").addEventListener("change",e=>{ st.sort=e.target.value; applyFilters(cond); });
+  $("#clearAll").addEventListener("click",()=>resetFilters(cond));
+  $("#chips").addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    if(b.id==="chipClear") return resetFilters(cond);
+    const fld=b.dataset.clearF, val=b.dataset.clearV;
+    if(fld==="q"){st.q="";const q=$('[data-f=q]',f);if(q)q.value="";}
+    else if(fld==="pmax"){st.pmax=Math.ceil(Math.max(...VEHICULOS.filter(v=>v.cond===cond).map(v=>v.precio))/1e6)*1e6;const s=$('[data-f=pmax]',f);if(s){s.value=st.pmax;$("#pmaxOut").textContent=clp(st.pmax);}}
+    else {const map={marcas:"marcas",carro:"carro",comb:"comb",trans:"trans"};st[map[fld]].delete(val);
+      const cb=$(`input[data-f="${fld}"][value="${CSS.escape(val)}"]`,f); if(cb) cb.checked=false;}
+    applyFilters(cond);
+  });
+
+  // mobile toggle
+  const tg=$("#filtersToggle"), panel=$("#filters"), closeWrap=$("#closeFiltersWrap"), closeBtn=$("#closeFilters");
+  const setOpen=o=>{panel.dataset.open=o;tg.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";};
+  tg.addEventListener("click",()=>setOpen(panel.dataset.open!=="true"));
+  if(closeWrap) closeWrap.style.display="block";
+  closeBtn?.addEventListener("click",()=>setOpen(false));
+
+  applyFilters(cond);
+}
+
+/* ---------- ficha ---------- */
+function viewVehiculo(id){
+  const v = byId(id);
+  if(!v) return viewNotFound();
+  const rel = VEHICULOS.filter(x=>x.cond===v.cond && x.id!==v.id && (x.carroceria===v.carroceria || x.marca===v.marca)).slice(0,3);
+  const c = cuotaRef(v.precio);
+  const shots = gallery(v);
+  const alt = esc(v.marca+" "+v.modelo+" "+v.version);
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <div class="veh__back"><a class="linkline" href="#/${v.cond==="nuevo"?"nuevos":"usados"}"><span class="arw">←</span> Volver al catálogo</a></div>
+    <div class="veh__gallery">
+      <div class="veh__main" id="vehMain"><img src="${shots[0]}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
+      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s)}" aria-current="${i===0}"><img src="${esc(s)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}
+    </div>
+    <div class="veh__layout">
+      <div>
+        <p class="eyebrow veh__marca">${esc(v.marca)} · ${v.cond==="nuevo"?"0 km":v.anio}</p>
+        <h1 class="display veh__title" style="font-size:clamp(2.2rem,5vw,3.6rem)">${esc(v.modelo)}</h1>
+        <p class="veh__ver">${esc(v.version)}</p>
+        <div style="margin-top:1.75rem">${gaugeRow(v.cond==="nuevo"
+          ? [["Año",v.anio],["Combustible",v.combustible],["Transmisión",v.transmision.split(" ")[0]],["Carrocería",v.carroceria]]
+          : [["Año",v.anio],["Kilómetros",km(v.km)],["Combustible",v.combustible],["Dueños",v.duenos]])}</div>
+        <p class="veh__desc">${esc(v.desc)}</p>
+        <div class="veh__specs">
+          <h4>Ficha técnica</h4>
+          <table class="spectable"><tbody>
+          ${Object.entries(v.specs).map(([k,val])=>`<tr><th>${esc(k.replace(/_/g," "))}</th><td>${esc(val)}</td></tr>`).join("")}
+          </tbody></table>
+        </div>
+      </div>
+      <aside class="pricebox">
+        <div class="pricebox__k">${v.cond==="nuevo"?"Precio desde":"Precio"}</div>
+        <div class="pricebox__price">${clp(v.precio)}</div>
+        <div class="pricebox__cuota">o <b>${clp(c)}</b> x mes · 48 cuotas*</div>
+        <div class="pricebox__actions">
+          <a class="btn btn--solid" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola Neomarket, me interesa el "+v.marca+" "+v.modelo+" "+v.version+" ("+(v.cond==="nuevo"?"nuevo":v.anio)+") a "+clp(v.precio)+". ¿Sigue disponible?")}">Cotizar por WhatsApp</a>
+          <button class="btn" data-testdrive="${v.id}">Agendar test drive</button>
+          <a class="btn btn--ghost" href="#/financiamiento?v=${v.id}">Simular crédito</a>
+        </div>
+        <p class="pricebox__note">${v.cond==="nuevo"
+          ? "Precio referencial de lista. No incluye inscripción ni accesorios. Sujeto a stock."
+          : "Precio con financiamiento. Incluye transferencia y garantía escrita de 6 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
+      </aside>
+    </div>
+    ${rel.length?`
+    <div class="section" style="padding-bottom:0">
+      <p class="eyebrow" style="margin-bottom:1.5rem">También podría interesarte</p>
+      <div class="grid">${rel.map(r=>card(r)).join("")}</div>
+    </div>`:""}
+  </section>`;
+}
+function wireVehiculo(id){
+  $$(".veh__thumb").forEach(btn=>btn.addEventListener("click",()=>{
+    $$(".veh__thumb").forEach(b=>b.setAttribute("aria-current", b===btn));
+    const img = $("#vehMain img");
+    if(img) img.src = btn.dataset.src;
+  }));
+  $$("[data-testdrive]").forEach(b=>b.addEventListener("click",()=>openTestDrive(id)));
+}
+
+/* ---------- financiamiento ---------- */
+function viewFinanciamiento(params){
+  const vid = params.get("v");
+  const v = vid ? byId(vid) : null;
+  const base = v ? v.precio : 15000000;
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <p class="eyebrow">Simulador de crédito</p>
+    <h1 class="display" style="margin:.6rem 0 var(--s-6);font-size:clamp(2.4rem,6vw,4.5rem)">Financiamiento</h1>
+    <div class="fin">
+      <div class="fin__controls" id="finControls">
+        ${v?`<div class="fin__veh">${imgHTML(v)}<div><div class="m">${esc(v.marca)} · ${v.cond==="nuevo"?"0 km":v.anio}</div><div class="n">${esc(v.modelo)}</div></div></div>`:""}
+        <div class="fgroup">
+          <div class="fin__row"><label for="fValor">Valor del vehículo</label><span class="fin__val" id="fValorOut"></span></div>
+          <input class="slider" type="range" id="fValor" min="5000000" max="45000000" step="250000" value="${base}">
+        </div>
+        <div class="fgroup">
+          <div class="fin__row"><label for="fPie">Pie</label><span class="fin__val" id="fPieOut"></span></div>
+          <input class="slider" type="range" id="fPie" min="0" max="60" step="5" value="20">
+          <div class="fin__hint" id="fPieMonto"></div>
+        </div>
+        <div class="fgroup">
+          <div class="fin__row"><label for="fPlazo">Plazo</label><span class="fin__val" id="fPlazoOut"></span></div>
+          <input class="slider" type="range" id="fPlazo" min="12" max="60" step="6" value="48">
+        </div>
+        <div class="fgroup">
+          <div class="fin__row"><label for="fTasa">Tasa mensual</label><span class="fin__val" id="fTasaOut"></span></div>
+          <input class="slider" type="range" id="fTasa" min="0.9" max="2.4" step="0.01" value="${TASA_DEFAULT}">
+          <div class="fin__hint">Referencial. La tasa final depende de tu evaluación crediticia.</div>
+        </div>
+      </div>
+      <div class="fin__out">
+        <div class="fin__cuota-k">Cuota mensual estimada</div>
+        <div class="fin__cuota" id="finCuota">$0</div>
+        <div class="fin__cuota-sub" id="finSub"></div>
+        <div style="margin-top:1.75rem" id="finGauges"></div>
+        <div class="pricebox__actions" style="margin-top:1.75rem">
+          <a class="btn btn--solid" id="finWa" target="_blank" rel="noopener" href="#">Solicitar este crédito</a>
+          <a class="btn btn--ghost" href="#/usados">Ver autos en este rango</a>
+        </div>
+        <p class="pricebox__note">Simulación referencial sistema de amortización francés. No constituye una oferta de crédito. CAE calculado de forma aproximada con gastos operacionales estimados.</p>
+      </div>
+    </div>
+  </section>`;
+}
+function wireFinanciamiento(){
+  const val=$("#fValor"),pie=$("#fPie"),plazo=$("#fPlazo"),tasa=$("#fTasa");
+  if(!val) return;
+  const cuotaEl=$("#finCuota");
+  let raf, cur=0;
+  function roll(to){
+    cancelAnimationFrame(raf);
+    if(RM){cur=to;cuotaEl.textContent=clp(to);return;}
+    const from=cur, t0=performance.now(), dur=420;
+    (function step(now){
+      const p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
+      cur=from+(to-from)*e;
+      cuotaEl.textContent=clp(cur);
+      if(p<1) raf=requestAnimationFrame(step);
+    })(performance.now());
+  }
+  function recalc(){
+    const V=+val.value, P=+pie.value, N=+plazo.value, I=+tasa.value;
+    const pieM=V*P/100, monto=V-pieM, q=cuota(monto,I,N);
+    $("#fValorOut").textContent=clp(V);
+    $("#fPieOut").textContent=P+"%";
+    $("#fPieMonto").textContent=clp(pieM);
+    $("#fPlazoOut").textContent=N+" cuotas";
+    $("#fTasaOut").textContent=I.toFixed(2)+"%";
+    $("#finSub").textContent=`${N} cuotas · financia ${clp(monto)}`;
+    $("#finGauges").innerHTML=gaugeRow([["Monto a financiar",clp(monto)],["Total crédito",clp(q*N)],["CAE ref.",cae(I).toFixed(1)+"%"],["Total a pagar",clp(q*N+pieM)]]);
+    const wa=$("#finWa");
+    wa.href=`https://wa.me/${WA}?text=`+encodeURIComponent(`Hola Neomarket, simulé un crédito: valor ${clp(V)}, pie ${clp(pieM)}, ${N} cuotas de ${clp(q)}. Quiero avanzar con la evaluación.`);
+    roll(q);
+  }
+  [val,pie,plazo,tasa].forEach(el=>el.addEventListener("input",recalc));
+  recalc();
+}
+
+/* ---------- tasación ---------- */
+const TAS = {tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0};
+const TAS_BASE = {"Sedán":11500000,"Hatchback":10500000,"SUV":16500000,"Camioneta":23000000,"Furgón":12500000};
+function tasEstimate(){
+  const base = TAS_BASE[TAS.tipo]||13000000;
+  const age = Math.max(0, 2026 - (+TAS.anio||2026));
+  const dep = Math.pow(0.86, age);
+  const kmExpected = age*15000;
+  const kmDelta = ((+TAS.km||kmExpected) - kmExpected);
+  const kmAdj = Math.max(0.72, Math.min(1.06, 1 - kmDelta/900000));
+  const estadoMult = TAS.estado==="Excelente"?1.05:TAS.estado==="Regular"?0.88:1;
+  const mid = base*dep*kmAdj*estadoMult;
+  return [mid*0.93, mid*1.07];
+}
+function viewTasacion(){
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <div class="tas" id="tas">
+      <p class="eyebrow">Tasación online</p>
+      <div id="tasBody"></div>
+    </div>
+  </section>`;
+}
+function renderTas(){
+  const body=$("#tasBody");
+  const steps=5;
+  const s=TAS.step;
+  const prog=`<div class="tas__prog"><span class="tas__step">${s>=steps?"05 / 05":String(s+1).padStart(2,"0")+" / 0"+steps}</span><span class="tas__bar"><i style="width:${Math.min(s/steps*100,100)}%"></i></span></div>`;
+
+  if(s===0){
+    body.innerHTML=prog+`<h2 class="display">¿Qué tipo de auto es?</h2><p class="tas__q">Empecemos por lo general. Esto nos da un punto de partida para el valor.</p>
+    <div class="optgrid">${Object.keys(TAS_BASE).map(t=>`<button class="opt" data-tipo="${t}" aria-pressed="${TAS.tipo===t}">${t}</button>`).join("")}</div>
+    <div class="tas__nav"><span></span><button class="btn btn--solid" id="tasNext" ${TAS.tipo?"":"disabled"}>Siguiente</button></div>`;
+  } else if(s===1){
+    body.innerHTML=prog+`<h2 class="display">Marca, modelo y año</h2><p class="tas__q">Con estos datos ajustamos la estimación a tu vehículo.</p>
+    <div class="field"><label>Marca</label><input id="tMarca" value="${esc(TAS.marca)}" placeholder="Toyota, Chevrolet, Kia…"></div>
+    <div class="field"><label>Modelo</label><input id="tModelo" value="${esc(TAS.modelo)}" placeholder="Yaris, Sail, Sportage…"></div>
+    <div class="field"><label>Año</label><select id="tAnio"><option value="">Selecciona</option>${Array.from({length:17},(_,i)=>2026-i).map(y=>`<option ${TAS.anio==y?"selected":""}>${y}</option>`).join("")}</select></div>
+    <div class="tas__nav"><button class="btn btn--ghost" id="tasBack">Atrás</button><button class="btn btn--solid" id="tasNext">Siguiente</button></div>`;
+  } else if(s===2){
+    body.innerHTML=prog+`<h2 class="display">Kilometraje y caja</h2><p class="tas__q">El kilometraje es el factor que más mueve el valor de un usado.</p>
+    <div class="field"><label>Kilómetros</label><input id="tKm" inputmode="numeric" value="${esc(TAS.km)}" placeholder="Ej. 62000"></div>
+    <div class="field"><label>Transmisión</label>
+      <div class="optgrid">${["Mecánica","Automática"].map(t=>`<button class="opt" data-trans="${t}" aria-pressed="${TAS.trans===t}">${t}</button>`).join("")}</div>
+    </div>
+    <div class="tas__nav"><button class="btn btn--ghost" id="tasBack">Atrás</button><button class="btn btn--solid" id="tasNext">Siguiente</button></div>`;
+  } else if(s===3){
+    body.innerHTML=prog+`<h2 class="display">Estado general</h2><p class="tas__q">Sé honesto: un tasador lo revisa igual antes de cerrar. Esto es solo para la estimación.</p>
+    <div class="optgrid">${["Excelente","Bueno","Regular"].map(t=>`<button class="opt" data-estado="${t}" aria-pressed="${TAS.estado===t}">${t}</button>`).join("")}</div>
+    <div class="tas__nav"><button class="btn btn--ghost" id="tasBack">Atrás</button><button class="btn btn--solid" id="tasNext" ${TAS.estado?"":"disabled"}>Siguiente</button></div>`;
+  } else if(s===4){
+    body.innerHTML=prog+`<h2 class="display">¿A dónde te enviamos la tasación?</h2><p class="tas__q">Te llega al instante y un ejecutivo te contacta si quieres avanzar.</p>
+    <div class="field"><label>Nombre</label><input id="tNombre" value="${esc(TAS.nombre)}"></div>
+    <div class="field"><label>Teléfono</label><input id="tFono" inputmode="tel" value="${esc(TAS.fono)}" placeholder="+56 9 …"></div>
+    <div class="field"><label>Email</label><input id="tEmail" type="email" value="${esc(TAS.email)}"></div>
+    <div class="tas__nav"><button class="btn btn--ghost" id="tasBack">Atrás</button><button class="btn btn--solid" id="tasNext">Ver tasación</button></div>`;
+  } else {
+    const [lo,hi]=tasEstimate();
+    body.innerHTML=`<div class="tas__prog"><span class="tas__step">05 / 05</span><span class="tas__bar"><i style="width:100%"></i></span></div>
+    <div class="tas__result">
+      <p class="eyebrow">Rango estimado de compra</p>
+      <div class="tas__range mono">${clp(lo)} – ${clp(hi)}</div>
+      <p>Para ${esc(TAS.marca||"tu auto")} ${esc(TAS.modelo)} ${esc(TAS.anio)} · ${TAS.km?km(+TAS.km):"km s/i"} · estado ${esc(TAS.estado.toLowerCase())}.</p>
+      <p style="font-size:.8rem;color:var(--bone-faint)">Estimación referencial de lo que Neomarket pagaría al recibirlo en parte de pago. El valor final lo confirma un tasador tras revisar el vehículo y sus papeles.</p>
+      <div class="hero__actions" style="justify-content:center;margin-top:2rem">
+        <a class="btn btn--solid" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola Neomarket, tasé mi ${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km} km) y me interesa avanzar.`)}">Hablar con un ejecutivo</a>
+        <button class="btn" id="tasRestart">Tasar otro auto</button>
+      </div>
+    </div>`;
+    toast("Tasación enviada a "+(TAS.email||"tu correo")+".");
+  }
+  wireTas();
+}
+function wireTas(){
+  const next=$("#tasNext"), back=$("#tasBack");
+  $$("[data-tipo]").forEach(b=>b.onclick=()=>{TAS.tipo=b.dataset.tipo;renderTas();});
+  $$("[data-trans]").forEach(b=>b.onclick=()=>{TAS.trans=b.dataset.trans;renderTas();});
+  $$("[data-estado]").forEach(b=>b.onclick=()=>{TAS.estado=b.dataset.estado;renderTas();});
+  const save=()=>{
+    const g=id=>{const e=$(id);return e?e.value.trim():undefined;};
+    if($("#tMarca")!=null){TAS.marca=g("#tMarca");TAS.modelo=g("#tModelo");TAS.anio=g("#tAnio");}
+    if($("#tKm")!=null){TAS.km=g("#tKm").replace(/\D/g,"");}
+    if($("#tNombre")!=null){TAS.nombre=g("#tNombre");TAS.fono=g("#tFono");TAS.email=g("#tEmail");}
+  };
+  next?.addEventListener("click",()=>{save();TAS.step++;renderTas();window.scrollTo({top:$("#tas").offsetTop-100,behavior:RM?"auto":"smooth"});});
+  back?.addEventListener("click",()=>{save();TAS.step--;renderTas();});
+  $("#tasRestart")?.addEventListener("click",()=>{Object.assign(TAS,{tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0});renderTas();});
+}
+
+function viewNotFound(){
+  return `<section class="section shell" style="padding-top:clamp(6rem,12vw,9rem);min-height:70vh">
+    <p class="eyebrow">Error 404</p>
+    <h1 class="display" style="margin:.6rem 0 1.5rem">Esta página<br>no existe</h1>
+    <p style="color:var(--bone-dim);max-width:36ch;margin-bottom:2rem">El auto pudo haberse vendido o el enlace está mal escrito.</p>
+    <a class="btn btn--solid" href="#/">Volver al inicio</a>
+  </section>`;
+}
+
+/* ============================================================
+   MODAL / TOAST
+   ============================================================ */
+let lastFocus=null;
+function openModal(html){
+  closeModal();
+  lastFocus=document.activeElement;
+  const m=document.createElement("div");
+  m.className="modal";m.id="modal";
+  m.innerHTML=`<div class="modal__bg" data-close></div><div class="modal__panel" role="dialog" aria-modal="true">
+    <button class="modal__close" data-close aria-label="Cerrar">✕</button>${html}</div>`;
+  document.body.appendChild(m);
+  document.body.style.overflow="hidden";
+  m.addEventListener("click",e=>{if(e.target.dataset.close!==undefined)closeModal();});
+  document.addEventListener("keydown",escClose);
+  const foc=m.querySelector("input,button:not(.modal__close)"); (foc||m.querySelector(".modal__close")).focus();
+}
+function closeModal(){
+  const m=$("#modal"); if(!m) return;
+  m.remove(); document.body.style.overflow="";
+  document.removeEventListener("keydown",escClose);
+  lastFocus?.focus();
+}
+function escClose(e){ if(e.key==="Escape") closeModal(); }
+
+function openTestDrive(id){
+  const v=byId(id);
+  openModal(`<p class="eyebrow">Test drive</p><h3 class="display" style="margin:.4rem 0 .3rem">${esc(v.modelo)}</h3>
+  <p>Elige día y sucursal. Confirmamos por teléfono dentro del día hábil.</p>
+  <form id="tdForm">
+    <div class="field"><label>Nombre</label><input required name="n"></div>
+    <div class="field"><label>Teléfono</label><input required name="f" inputmode="tel" placeholder="+56 9 …"></div>
+    <div class="field"><label>Día preferido</label><input required name="d" type="date"></div>
+    <div class="field"><label>Sucursal</label><select name="s"><option>La Serena Centro</option><option>La Serena Norte</option></select></div>
+    <button class="btn btn--solid" style="width:100%;justify-content:center">Agendar test drive</button>
+  </form>`);
+  $("#tdForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    closeModal();
+    toast(`Listo. Te llamamos para confirmar el test drive del ${esc(v.modelo)}.`);
+  });
+}
+
+function toast(msg){
+  const wrap=$("#toasts");
+  const t=document.createElement("div");
+  t.className="toast";
+  t.innerHTML=`<span aria-hidden="true">→</span><span>${msg}</span>`;
+  wrap.appendChild(t);
+  setTimeout(()=>{t.style.transition="opacity .4s, transform .4s";t.style.opacity="0";t.style.transform="translateY(10px)";setTimeout(()=>t.remove(),400);},4200);
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+function parseHash(){
+  const raw = location.hash.replace(/^#/,"") || "/";
+  const [path,query] = raw.split("?");
+  return {parts:path.split("/").filter(Boolean), params:new URLSearchParams(query||"")};
+}
+function render(){
+  const {parts,params} = parseHash();
+  const app = $("#app");
+  let html, after=null, seg=parts[0];
+
+  clearInterval(heroTimer);
+  if(!seg){ html=viewHome(); after=wireHome; }
+  else if(seg==="nuevos"){ html=viewCatalogo("nuevo"); after=()=>wireCatalogo("nuevo"); }
+  else if(seg==="usados"){ html=viewCatalogo("usado"); after=()=>wireCatalogo("usado"); }
+  else if(seg==="vehiculo" && parts[1]){ html=viewVehiculo(parts[1]); after=()=>wireVehiculo(parts[1]); }
+  else if(seg==="financiamiento"){ html=viewFinanciamiento(params); after=wireFinanciamiento; }
+  else if(seg==="tasacion"){ html=viewTasacion(); after=()=>{TAS.step=0;renderTas();}; }
+  else { html=viewNotFound(); }
+
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+  if(after) after();
+  syncNav(seg);
+  observeReveals();
+  closeDrawer();
+}
+function syncNav(seg){
+  const map={nuevos:"#/nuevos",usados:"#/usados",financiamiento:"#/financiamiento",tasacion:"#/tasacion"};
+  $$(".hd .nav a").forEach(a=>a.removeAttribute("aria-current"));
+  const active=map[seg];
+  if(active){ const a=$(`.hd .nav a[href="${active}"]`); if(a) a.setAttribute("aria-current","page"); }
+}
+
+let heroTimer=null;
+function wireHome(){
+  const slides=$$(".hslide"), dots=$$("[data-dot]");
+  if(slides.length<2) return;
+  let cur=0;
+  const go=n=>{
+    cur=(n+slides.length)%slides.length;
+    slides.forEach((s,i)=>{ s.dataset.on=i===cur; s.setAttribute("aria-hidden",i!==cur); });
+    dots.forEach((d,i)=>d.setAttribute("aria-current",i===cur));
+  };
+  const play=()=>{ clearInterval(heroTimer); if(!RM) heroTimer=setInterval(()=>go(cur+1),6500); };
+  dots.forEach((d,i)=>d.addEventListener("click",()=>{ go(i); play(); }));
+  const hero=$(".hero");
+  hero.addEventListener("mouseenter",()=>clearInterval(heroTimer));
+  hero.addEventListener("mouseleave",play);
+  play();
+}
+
+/* ============================================================
+   CHROME: scroll header, drawer, reveals
+   ============================================================ */
+const hd=$("#hd");
+addEventListener("scroll",()=>{ hd.dataset.solid = window.scrollY>60; },{passive:true});
+
+const menuBtn=$("#menuBtn"), drawer=$("#drawer");
+function closeDrawer(){ drawer.dataset.open="false"; drawer.setAttribute("aria-hidden","true"); menuBtn.setAttribute("aria-expanded","false"); document.body.style.overflow=""; }
+menuBtn.addEventListener("click",()=>{
+  const open = drawer.dataset.open!=="true";
+  drawer.dataset.open=open; drawer.setAttribute("aria-hidden",!open);
+  menuBtn.setAttribute("aria-expanded",open);
+  document.body.style.overflow=open?"hidden":"";
+});
+$$("#drawer a").forEach(a=>a.addEventListener("click",closeDrawer));
+
+let io;
+function observeReveals(){
+  if(RM) return;
+  io?.disconnect();
+  io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{rootMargin:"0px 0px -8% 0px"});
+  $$(".reveal").forEach(el=>io.observe(el));
+}
+
+addEventListener("hashchange",render);
+render();
+</script>
+</body>
+</html>
