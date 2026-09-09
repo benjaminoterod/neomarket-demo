@@ -427,9 +427,15 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised)}
 .veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover}
 .veh__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
-.veh__thumb{aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
-.veh__thumb[aria-current="true"]{border-color:var(--bone)}
-.veh__thumb img,.veh__thumb svg{width:100%;height:100%;object-fit:cover}
+.veh__thumb{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
+.veh__thumb[aria-current="true"]{border-color:var(--accent)}
+.veh__thumb img,.veh__thumb svg{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.veh__thumb:hover img{transform:scale(1.06)}
+.veh__thumb-lbl{
+  position:absolute;left:0;right:0;bottom:0;padding:.3rem .5rem;
+  font-family:var(--ff-body);font-weight:600;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--bone);background:linear-gradient(0deg,rgba(10,12,17,.85),transparent);text-align:left;
+}
 
 .veh__layout{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(1.5rem,5vw,4rem);margin-top:clamp(2rem,6vw,4rem);align-items:start}
 .veh__marca{color:var(--bone-dim)}
@@ -882,15 +888,24 @@ function imgHTML(v,cls=""){
   return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
 }
 /* galería: una foto de origen, varios encuadres */
+/* Tomas de referencia (interior, posterior, detalle) para la galería */
+const DETAIL = ["1449965408869-eaa3f722e40d","1568605117036-5fe5e7bab0b7","1493238792000-8113da705763"].map(U);
 function gallery(v){
   const base = PHOTOS[v.id];
-  if(!base) return [studio(v)];
-  if(!base.includes("w=1400")) return [base, studio(v)];
+  if(!base) return [{src:studio(v),label:"Render"}];
+  if(v.carroceria === "Motocicleta"){
+    if(!base.includes("w=1400")) return [{src:base,label:"Vista 1"}];
+    return [
+      {src:base,label:"Lateral"},
+      {src:base.replace("w=1400","w=1100&h=760&fit=crop&crop=left"),label:"Frontal"},
+      {src:base.replace("w=1400","w=1100&h=760&fit=crop&crop=right"),label:"Trasera"},
+    ];
+  }
   return [
-    base,
-    base.replace("w=1400","w=1000&h=720&crop=left"),
-    base.replace("w=1400","w=1000&h=720&crop=right"),
-    base.replace("w=1400","w=1000&h=720&crop=entropy"),
+    {src:base,label:"Exterior"},
+    {src:DETAIL[0],label:"Interior"},
+    {src:DETAIL[1],label:"Posterior"},
+    {src:DETAIL[2],label:"Detalle"},
   ];
 }
 
@@ -1200,8 +1215,8 @@ function viewVehiculo(id){
   <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
     <div class="veh__back"><a class="linkline" href="#/${v.cond==="nuevo"?"nuevos":"usados"}"><span class="arw">←</span> Volver al catálogo</a></div>
     <div class="veh__gallery">
-      <div class="veh__main" id="vehMain"><img src="${shots[0]}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
-      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s)}" aria-current="${i===0}"><img src="${esc(s)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}
+      <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
+      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`:""}
     </div>
     <div class="veh__layout">
       <div>
