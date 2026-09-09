@@ -436,6 +436,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   font-family:var(--ff-body);font-weight:600;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--bone);background:linear-gradient(0deg,rgba(10,12,17,.85),transparent);text-align:left;
 }
+.veh__imgnote{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.04em;color:var(--bone-faint);margin-top:.25rem}
 
 .veh__layout{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(1.5rem,5vw,4rem);margin-top:clamp(2rem,6vw,4rem);align-items:start}
 .veh__marca{color:var(--bone-dim)}
@@ -888,25 +889,12 @@ function imgHTML(v,cls=""){
   return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
 }
 /* galería: una foto de origen, varios encuadres */
-/* Tomas de referencia (interior, posterior, detalle) para la galería */
-const DETAIL = ["1449965408869-eaa3f722e40d","1568605117036-5fe5e7bab0b7","1493238792000-8113da705763"].map(U);
+/* Una foto por vehículo. Para cargar el set real de una unidad,
+   cambia PHOTOS[id] por un arreglo de URLs y este helper las devuelve todas. */
 function gallery(v){
-  const base = PHOTOS[v.id];
-  if(!base) return [{src:studio(v),label:"Render"}];
-  if(v.carroceria === "Motocicleta"){
-    if(!base.includes("w=1400")) return [{src:base,label:"Vista 1"}];
-    return [
-      {src:base,label:"Lateral"},
-      {src:base.replace("w=1400","w=1100&h=760&fit=crop&crop=left"),label:"Frontal"},
-      {src:base.replace("w=1400","w=1100&h=760&fit=crop&crop=right"),label:"Trasera"},
-    ];
-  }
-  return [
-    {src:base,label:"Exterior"},
-    {src:DETAIL[0],label:"Interior"},
-    {src:DETAIL[1],label:"Posterior"},
-    {src:DETAIL[2],label:"Detalle"},
-  ];
+  const p = PHOTOS[v.id];
+  const list = Array.isArray(p) ? p : (p ? [p] : [studio(v)]);
+  return list.map((src,i)=>({src, label: i===0 ? "Exterior" : "Vista "+(i+1)}));
 }
 
 /* ---------- gauges ---------- */
@@ -1216,7 +1204,8 @@ function viewVehiculo(id){
     <div class="veh__back"><a class="linkline" href="#/${v.cond==="nuevo"?"nuevos":"usados"}"><span class="arw">←</span> Volver al catálogo</a></div>
     <div class="veh__gallery">
       <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
-      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`:""}
+      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`
+        :`<p class="veh__imgnote">Imagen referencial del modelo. Las fotos de esta unidad se envían por WhatsApp.</p>`}
     </div>
     <div class="veh__layout">
       <div>
