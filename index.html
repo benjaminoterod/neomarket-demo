@@ -429,15 +429,16 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 .veh__back{margin-bottom:2rem}
 .veh__gallery{display:grid;gap:.75rem}
-.veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised)}
-.veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover}
+.veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised);pointer-events:none}
+.veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .veh__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
 .veh__thumb{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
 .veh__thumb[aria-current="true"]{border-color:var(--accent)}
-.veh__thumb img,.veh__thumb svg{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
-.veh__thumb:hover img{transform:scale(1.06)}
+.veh__thumb::after{content:"";position:absolute;inset:0;background:rgba(10,12,17,.35);transition:opacity .3s var(--ease)}
+.veh__thumb[aria-current="true"]::after,.veh__thumb:hover::after{opacity:0}
+.veh__thumb img,.veh__thumb svg{width:100%;height:100%;object-fit:cover}
 .veh__thumb-lbl{
-  position:absolute;left:0;right:0;bottom:0;padding:.3rem .5rem;
+  position:absolute;left:0;right:0;bottom:0;padding:.3rem .5rem;z-index:1;
   font-family:var(--ff-body);font-weight:600;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--bone);background:linear-gradient(0deg,rgba(10,12,17,.85),transparent);text-align:left;
 }
@@ -893,13 +894,28 @@ function imgHTML(v,cls=""){
   }
   return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
 }
-/* galería: una foto de origen, varios encuadres */
-/* Una foto por vehículo. Para cargar el set real de una unidad,
-   cambia PHOTOS[id] por un arreglo de URLs y este helper las devuelve todas. */
+/* GALERÍA
+   - Si PHOTOS[id] es un arreglo de URLs (fotos reales de la unidad) -> se usan tal cual.
+   - Si es una sola foto -> se generan encuadres del mismo auto por CSS (zoom + origen),
+     así se ven distintos ángulos sin cambiar de vehículo ni depender de más fotos. */
+const CAR_VIEWS = [
+  {label:"Vista completa", z:1,   ox:50, oy:50},
+  {label:"Frontal",        z:1.9, ox:33, oy:46},
+  {label:"Perfil",         z:1.7, ox:70, oy:44},
+  {label:"Detalle",        z:2.7, ox:26, oy:78},
+];
+const MOTO_VIEWS = [
+  {label:"Vista completa", z:1,   ox:50, oy:50},
+  {label:"Frontal",        z:2,   ox:26, oy:48},
+  {label:"Trasera",        z:2,   ox:74, oy:52},
+];
 function gallery(v){
   const p = PHOTOS[v.id];
-  const list = Array.isArray(p) ? p : (p ? [p] : [studio(v)]);
-  return list.map((src,i)=>({src, label: i===0 ? "Exterior" : "Vista "+(i+1)}));
+  if(Array.isArray(p)) return p.map((src,i)=>({src, label:"Foto "+(i+1), z:1, ox:50, oy:50}));
+  const src = p || studio(v);
+  if(!p) return [{src, label:"Referencia", z:1, ox:50, oy:50}];
+  const views = v.carroceria === "Motocicleta" ? MOTO_VIEWS : CAR_VIEWS;
+  return views.map(view=>({src, ...view}));
 }
 
 /* ---------- gauges ---------- */
@@ -1207,8 +1223,10 @@ function viewVehiculo(id){
   <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
     <div class="veh__back"><a class="linkline" href="#/${v.cond==="nuevo"?"nuevos":"usados"}"><span class="arw">←</span> Volver al catálogo</a></div>
     <div class="veh__gallery">
-      <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
-      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`
+      <div class="veh__main" id="vehMain">
+        <img src="${shots[0].src}" alt="${alt}" style="transform:scale(${shots[0].z});transform-origin:${shots[0].ox}% ${shots[0].oy}%" onerror="this.onerror=null;this.src='${studio(v)}';this.style.transform='none'">
+      </div>
+      ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" data-z="${s.z}" data-ox="${s.ox}" data-oy="${s.oy}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy" style="transform:scale(${(s.z*1.02).toFixed(2)});transform-origin:${s.ox}% ${s.oy}%"><span class="veh__thumb-lbl">${esc(s.label)}</span></button>`).join("")}</div>`
         :`<p class="veh__imgnote">Imagen referencial del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
     </div>
     <div class="veh__layout">
@@ -1251,7 +1269,10 @@ function wireVehiculo(id){
   $$(".veh__thumb").forEach(btn=>btn.addEventListener("click",()=>{
     $$(".veh__thumb").forEach(b=>b.setAttribute("aria-current", b===btn));
     const img = $("#vehMain img");
-    if(img) img.src = btn.dataset.src;
+    if(!img) return;
+    if(img.getAttribute("src") !== btn.dataset.src) img.src = btn.dataset.src;
+    img.style.transform = "scale("+btn.dataset.z+")";
+    img.style.transformOrigin = btn.dataset.ox+"% "+btn.dataset.oy+"%";
   }));
   $$("[data-testdrive]").forEach(b=>b.addEventListener("click",()=>openTestDrive(id)));
 }
