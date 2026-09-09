@@ -365,8 +365,11 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 .cat{display:grid;grid-template-columns:264px 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
 .cat__filters{position:sticky;top:96px}
+.cat__filters-bar{display:none}
+.cat__filters-done{display:none}
 .fgroup{border-top:1px solid var(--hairline);padding-block:1.25rem}
 .fgroup:first-child{border-top:0;padding-top:0}
+.fgroup.cat__filters-done{border-top:0}
 .fgroup__h{
   font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--bone-dim);margin-bottom:.9rem;
@@ -582,13 +585,25 @@ svg.brand-logo{height:22px;width:auto;display:block}
   .cat{grid-template-columns:1fr}
   .cat__filters{
     position:fixed;inset:0;z-index:120;background:var(--ink);
-    padding:5.5rem var(--pad) 6rem;overflow-y:auto;transform:translateX(-100%);
+    padding:0 var(--pad) 2rem;overflow-y:auto;transform:translateX(-100%);
     transition:transform .4s var(--ease);top:0;
   }
   .cat__filters[data-open="true"]{transform:none}
+  .cat__filters-bar{
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    position:sticky;top:0;z-index:2;background:var(--ink);
+    padding:1.15rem 0 1rem;border-bottom:1px solid var(--hairline);
+  }
+  .cat__filters-bar span{font-family:var(--ff-body);font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-dim)}
+  .cat__filters-bar button{
+    background:none;border:0;cursor:pointer;color:var(--bone);
+    font-family:var(--ff-body);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 0;
+  }
+  .cat__filters-done{display:block;position:sticky;bottom:0;background:var(--ink);padding-top:1rem;margin-top:.5rem}
   .filters-toggle{
     display:inline-flex;position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:110;
   }
+  .filters-toggle[aria-expanded="true"]{display:none}
   .fin{grid-template-columns:1fr}
   .fin__out{position:static}
   .veh__layout{grid-template-columns:1fr}
@@ -1066,6 +1081,10 @@ function viewCatalogo(cond){
     </div>
     <div class="cat">
       <form class="cat__filters" id="filters" data-cond="${cond}" aria-label="Filtros">
+        <div class="cat__filters-bar">
+          <span>Filtros</span>
+          <button type="button" id="closeFilters" aria-label="Cerrar filtros">Cerrar ✕</button>
+        </div>
         <div class="fgroup">
           <div class="fgroup__h">Buscar</div>
           <input type="search" data-f="q" value="${esc(st.q)}" placeholder="Marca o modelo" style="width:100%;background:var(--ink-raised);border:1px solid var(--hairline);padding:.6rem;font-family:var(--ff-mono);font-size:.8rem;color:var(--bone)">
@@ -1080,7 +1099,7 @@ function viewCatalogo(cond){
         ${fg("Combustible","comb",combs)}
         ${fg("Transmisión","trans",transs)}
         <div class="fgroup"><button type="button" class="btn btn--ghost btn--sm" id="clearAll" style="width:100%;justify-content:center">Limpiar filtros</button></div>
-        <div class="fgroup" style="display:none" id="closeFiltersWrap"><button type="button" class="btn btn--solid btn--sm" id="closeFilters" style="width:100%;justify-content:center">Ver resultados</button></div>
+        <div class="fgroup cat__filters-done"><button type="button" class="btn btn--solid btn--sm" id="closeFilters2" style="width:100%;justify-content:center">Ver resultados</button></div>
       </form>
 
       <div>
@@ -1186,12 +1205,12 @@ function wireCatalogo(cond){
     applyFilters(cond);
   });
 
-  // mobile toggle
-  const tg=$("#filtersToggle"), panel=$("#filters"), closeWrap=$("#closeFiltersWrap"), closeBtn=$("#closeFilters");
-  const setOpen=o=>{panel.dataset.open=o;tg.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";};
+  // panel de filtros en móvil
+  const tg=$("#filtersToggle"), panel=$("#filters");
+  const setOpen=o=>{panel.dataset.open=o;tg.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";if(o)panel.scrollTop=0;};
   tg.addEventListener("click",()=>setOpen(panel.dataset.open!=="true"));
-  if(closeWrap) closeWrap.style.display="block";
-  closeBtn?.addEventListener("click",()=>setOpen(false));
+  $("#closeFilters")?.addEventListener("click",()=>setOpen(false));
+  $("#closeFilters2")?.addEventListener("click",()=>setOpen(false));
 
   applyFilters(cond);
 }
