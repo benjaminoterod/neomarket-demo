@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    AUTOMOTORA NEOMARKET — concepto de rediseño (no oficial)
@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none}
 
   --ff-display:"Playfair Display", "Georgia", "Times New Roman", serif;
   --ff-body:"Manrope", system-ui, -apple-system, sans-serif;
-  --ff-mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ff-mono:"Manrope", system-ui, -apple-system, sans-serif;
 
   --ease:cubic-bezier(.2,.6,.2,1);
 }
@@ -66,12 +66,17 @@ body{
 /* ---------- typography helpers ---------- */
 .eyebrow{
   font-family:var(--ff-mono);
-  font-size:.72rem;
-  letter-spacing:.22em;
+  font-size:.7rem;
+  letter-spacing:.24em;
   text-transform:uppercase;
   color:var(--bone-dim);
-  font-weight:500;
+  font-weight:600;
 }
+/* alineación de dígitos ahora que las cifras usan Manrope, no monoespaciada */
+.mono,.eyebrow,.gauge__k,.gauge__v,.card__marca,.card__ver,.card__spec,.card__price,.card__cuota,
+.pricebox__k,.pricebox__price,.pricebox__cuota,.fin__cuota,.fin__cuota-k,.fin__cuota-sub,.fin__val,.fin__hint,.fin__row label,
+.tas__step,.tas__range,.tas__q,.field label,.spectable th,.spectable td,.cat__count,.select,.chip,.band__specline,
+.veh__marca,.veh__ver,.linkline,.nav a,.btn,.brand__tag,.ticker__i,.ft__legal,.ft__cols h4{font-variant-numeric:tabular-nums}
 .display{
   font-family:var(--ff-display);
   font-weight:600;
@@ -876,8 +881,8 @@ function studio(v,w=1200,h=750){
 <g transform='translate(58,406) scale(0.76,-0.76)' opacity='.08' stroke='#EDEBE7' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'>
 <path d='${sil}'/>
 </g>
-<text x='24' y='38' fill='#EDEBE7' fill-opacity='.5' font-family='IBM Plex Mono, monospace' font-size='10' letter-spacing='3'>${label}</text>
-<text x='476' y='296' text-anchor='end' fill='#EDEBE7' fill-opacity='.26' font-family='IBM Plex Mono, monospace' font-size='8' letter-spacing='2'>NEOMARKET</text>
+<text x='24' y='38' fill='#EDEBE7' fill-opacity='.5' font-family='Manrope, system-ui, sans-serif' font-size='10' letter-spacing='3'>${label}</text>
+<text x='476' y='296' text-anchor='end' fill='#EDEBE7' fill-opacity='.26' font-family='Manrope, system-ui, sans-serif' font-size='8' letter-spacing='2'>NEOMARKET</text>
 </svg>`);
 }
 function imgHTML(v,cls=""){
@@ -1014,10 +1019,9 @@ function viewHome(){
     <div class="intro">
       <h2 class="display">Tu auto<br>paga la entrada</h2>
       <div>
-        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. Financiamos con seis bancos y evaluamos sin costo.</p>
-        <div style="margin-top:1.75rem;display:flex;gap:1.75rem;flex-wrap:wrap">
+        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. El retiro y la transferencia los gestionamos nosotros.</p>
+        <div style="margin-top:1.75rem">
           <a class="linkline" href="#/tasacion">Tasar mi auto <span class="arw">→</span></a>
-          <a class="linkline" href="#/financiamiento">Simular crédito <span class="arw">→</span></a>
         </div>
       </div>
     </div>
@@ -1230,7 +1234,6 @@ function viewVehiculo(id){
         <div class="pricebox__actions">
           <a class="btn btn--solid" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola Neomarket, me interesa el "+v.marca+" "+v.modelo+" "+v.version+" ("+(v.cond==="nuevo"?"nuevo":v.anio)+") a "+clp(v.precio)+". ¿Sigue disponible?")}">Cotizar por WhatsApp</a>
           <button class="btn" data-testdrive="${v.id}">Agendar test drive</button>
-          <a class="btn btn--ghost" href="#/financiamiento?v=${v.id}">Simular crédito</a>
         </div>
         <p class="pricebox__note">${v.cond==="nuevo"
           ? "Precio referencial de lista. No incluye inscripción ni accesorios. Sujeto a stock."
