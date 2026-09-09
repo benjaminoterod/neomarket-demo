@@ -265,17 +265,21 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .hero__dots button[aria-current="true"]{width:46px;background:var(--bone)}
 .hero__dots button:focus-visible{outline:2px solid var(--bone);outline-offset:5px}
 
-.ticker{border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);background:rgba(10,11,12,.55);backdrop-filter:blur(6px);position:relative;z-index:4}
-.ticker__in{
-  max-width:var(--shell);margin-inline:auto;padding:0 var(--pad);
-  display:flex;flex-wrap:wrap;
+.brandstrip{
+  position:relative;z-index:4;
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+  background:rgba(10,11,12,.5);backdrop-filter:blur(6px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
-.ticker__i{
-  flex:1 1 auto;padding:1.1rem 0;padding-right:2rem;
-  font-family:var(--ff-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--bone-dim);display:flex;gap:.7rem;align-items:baseline;
-}
-.ticker__i b{color:var(--bone);font-weight:600}
+.brandstrip__track{display:flex;align-items:center;width:max-content;padding-block:1.05rem;animation:marquee 40s linear infinite}
+.brandstrip:hover .brandstrip__track{animation-play-state:paused}
+.brandstrip__set{display:flex;align-items:center;flex:none}
+.brand-logo{flex:none;margin:0 clamp(1.3rem,3.4vw,2.7rem);color:var(--bone-dim);opacity:.46;transition:opacity .3s var(--ease),color .3s var(--ease)}
+.brand-logo:hover{opacity:.95;color:var(--bone)}
+svg.brand-logo{height:22px;width:auto;display:block}
+.brand-logo--txt{font-family:var(--ff-body);font-weight:700;font-size:.92rem;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;line-height:1}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ============================================================
    HOME — editorial featured bands
@@ -284,22 +288,28 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .intro p{color:var(--bone-dim);font-size:clamp(1rem,1.4vw,1.15rem);max-width:40ch}
 
 .band{
-  display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);
-  align-items:center;padding-block:clamp(2.5rem,6vw,5rem);
+  display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(1.5rem,5vw,4.5rem);
+  align-items:center;padding-block:clamp(2.75rem,6vw,5rem);
   border-top:1px solid var(--hairline);
 }
 .band:nth-child(even) .band__media{order:2}
-.band__media{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised)}
+.band__media{display:block;position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised)}
 .band__media img,.band__media svg{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
-.band:hover .band__media img,.band:hover .band__media svg{transform:scale(1.045)}
-.band__no{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.2em;color:var(--bone-faint)}
-.band h3{margin-top:.5rem}
-.band__price{font-family:var(--ff-mono);font-size:clamp(1.4rem,2.6vw,2.1rem);font-weight:500;margin-top:1rem;letter-spacing:-.01em}
-.band__price small{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:.35rem;font-weight:400}
-.band__meta{margin-top:1.25rem}
-.band__meta .gauges{flex-wrap:nowrap}
-.band__meta .gauge__v{white-space:normal;font-size:.86rem;line-height:1.25}
-.band__cta{margin-top:1.75rem}
+.band:hover .band__media img,.band:hover .band__media svg{transform:scale(1.04)}
+.band__meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.pill{
+  font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--hairline);border-radius:999px;padding:.42rem .9rem;color:var(--bone-dim);white-space:nowrap;
+}
+.band__specline{font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-faint)}
+.band h3{margin:0}
+.band h3 a{
+  background-image:linear-gradient(var(--bone),var(--bone));
+  background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;
+  transition:background-size .45s var(--ease);
+}
+.band:hover h3 a{background-size:100% 1px}
+.band__desc{margin-top:1.5rem;color:var(--bone-dim);max-width:50ch;font-size:clamp(1rem,1.15vw,1.08rem);line-height:1.7}
 
 /* used cars rail */
 .rail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
@@ -560,10 +570,8 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
   .pricebox{position:static}
 }
 @media (max-width:760px){
-  .ticker__in{flex-direction:column}
-  .ticker__i{padding:.7rem 0;border-bottom:1px solid var(--hairline-soft)}
   .intro{grid-template-columns:1fr}
-  .band{grid-template-columns:1fr;gap:1.5rem}
+  .band{grid-template-columns:1fr;gap:1.75rem;padding-block:2.5rem}
   .band:nth-child(even) .band__media{order:0}
   .veh__thumbs{grid-template-columns:repeat(4,1fr)}
   .ft__cols{grid-template-columns:1fr 1fr}
@@ -578,6 +586,8 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .hslide[data-on="true"] .hero__media img,.hslide[data-on="true"] .hslide__in > *{animation:none}
+  .brandstrip__track{animation:none!important;transform:none!important}
+  .brandstrip{overflow-x:auto}
   .reveal{opacity:1;transform:none}
 }
 </style>
@@ -892,6 +902,33 @@ function card(v,rail=false){
   </article>`;
 }
 
+/* ---------- marquee de marcas ---------- */
+const BRAND_LOGOS = [
+  {n:"BMW", svg:`<svg class="brand-logo" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M18 18V1.5A16.5 16.5 0 0 1 34.5 18Z" fill="currentColor"/><path d="M18 18v16.5A16.5 16.5 0 0 1 1.5 18Z" fill="currentColor"/><circle cx="18" cy="18" r="11" fill="none" stroke="currentColor" stroke-width=".8"/></svg>`},
+  {n:"Nissan", txt:1},
+  {n:"Volkswagen", svg:`<svg class="brand-logo" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 8l10 15L28 8M11.5 16l4 11 2.5-7 2.5 7 4-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`},
+  {n:"Hyundai", txt:1},
+  {n:"Toyota", svg:`<svg class="brand-logo" viewBox="0 0 56 32"><g fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="28" cy="16" rx="26" ry="13.5"/><ellipse cx="28" cy="12" rx="7" ry="9"/><ellipse cx="28" cy="18.5" rx="18" ry="5"/></g></svg>`},
+  {n:"Kia", txt:1},
+  {n:"Audi", svg:`<svg class="brand-logo" viewBox="0 0 100 28"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="14" cy="14" r="12.5"/><circle cx="37" cy="14" r="12.5"/><circle cx="60" cy="14" r="12.5"/><circle cx="83" cy="14" r="12.5"/></g></svg>`},
+  {n:"Peugeot", txt:1},
+  {n:"Mercedes-Benz", svg:`<svg class="brand-logo" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M18 18V2M18 18 4.5 26M18 18 31.5 26" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`},
+  {n:"Mazda", txt:1},
+  {n:"Citroën", svg:`<svg class="brand-logo" viewBox="0 0 42 26"><path d="M4 12 21 3 38 12M4 23 21 14 38 23" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></svg>`},
+  {n:"Suzuki", txt:1},
+  {n:"Chevrolet", svg:`<svg class="brand-logo" viewBox="0 0 58 20"><path d="M1 5H21V1H37V5H57V15H37V19H21V15H1Z" fill="currentColor"/></svg>`},
+  {n:"Chery", txt:1},
+  {n:"Renault", svg:`<svg class="brand-logo" viewBox="0 0 30 36"><path d="M15 2 28 18 15 34 2 18Z M15 2 9 18 15 34M15 2 21 18 15 34M9 18h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`},
+  {n:"Geely", txt:1},
+];
+function brandStrip(){
+  const set = lbl => `<div class="brandstrip__set"${lbl?"":' aria-hidden="true"'}>${BRAND_LOGOS.map(b=>
+    b.txt ? `<span class="brand-logo brand-logo--txt"${lbl?` role="img" aria-label="${esc(b.n)}"`:""}>${esc(b.n)}</span>`
+          : b.svg.replace("<svg ", `<svg ${lbl?`role="img" aria-label="${esc(b.n)}" `:""}`)
+  ).join("")}</div>`;
+  return `<div class="brandstrip" aria-label="Marcas que representamos"><div class="brandstrip__track">${set(true)}${set(false)}</div></div>`;
+}
+
 /* ============================================================
    VISTAS
    ============================================================ */
@@ -914,12 +951,7 @@ function viewHome(){
     <div class="hero__dots" role="tablist" aria-label="Diapositivas">
       ${HERO_SLIDES.map((s,i)=>`<button type="button" role="tab" data-dot="${i}" aria-current="${i===0}" aria-label="${esc(s.title)}"></button>`).join("")}
     </div>
-    <div class="ticker"><div class="ticker__in">
-      <div class="ticker__i"><b>+2.500</b> autos entregados</div>
-      <div class="ticker__i"><b>120</b> puntos de revisión</div>
-      <div class="ticker__i"><b>2</b> sucursales en La Serena</div>
-      <div class="ticker__i"><b>+20</b> marcas representadas</div>
-    </div></div>
+    ${brandStrip()}
   </section>
 
   <section class="section shell reveal">
@@ -930,15 +962,16 @@ function viewHome(){
   </section>
 
   <section class="shell">
-    ${nuevosDest.map((v,i)=>`
+    ${nuevosDest.map((v)=>`
     <article class="band reveal">
-      <div class="band__media">${imgHTML(v)}</div>
-      <div>
-        <span class="band__no">NUEVO / 0${i+1}</span>
-        <h3 class="display">${esc(v.marca)}<br>${esc(v.modelo)}</h3>
-        <div class="band__price"><small>Desde</small>${clp(v.precio)}</div>
-        <div class="band__meta">${gaugeRow([["Combustible",v.combustible],["Caja",v.transmision.split(" ")[0]],["Cuota*",clp(cuotaRef(v.precio))+"/mes"]])}</div>
-        <div class="band__cta"><a class="linkline" href="#/vehiculo/${v.id}">Ver detalle <span class="arw">→</span></a></div>
+      <a class="band__media" href="#/vehiculo/${v.id}" tabindex="-1" aria-hidden="true">${imgHTML(v)}</a>
+      <div class="band__body">
+        <div class="band__meta">
+          <span class="pill">${v.cond==="nuevo"?"Nuevo · 0 km":"Seminuevo"}</span>
+          <span class="band__specline">${esc(v.combustible)} · ${esc(v.transmision.split(" ")[0])} · ${esc(v.specs.Potencia||v.anio)}</span>
+        </div>
+        <h3 class="display"><a href="#/vehiculo/${v.id}">${esc(v.marca)} ${esc(v.modelo)}</a></h3>
+        <p class="band__desc">${esc(v.desc)}</p>
       </div>
     </article>`).join("")}
   </section>
