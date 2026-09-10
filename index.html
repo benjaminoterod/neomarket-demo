@@ -77,7 +77,7 @@ body{
   font-weight:600;
 }
 /* alineación de dígitos ahora que las cifras usan Manrope, no monoespaciada */
-.mono,.eyebrow,.gauge__k,.gauge__v,.card__marca,.card__ver,.card__spec,.card__price,.card__cuota,
+.mono,.eyebrow,.gauge__k,.gauge__v,.card__marca,.card__meta,.card__price,.card__cuota,
 .pricebox__k,.pricebox__price,.pricebox__cuota,.fin__cuota,.fin__cuota-k,.fin__cuota-sub,.fin__val,.fin__hint,.fin__row label,
 .tas__step,.tas__range,.tas__q,.field label,.spectable th,.spectable td,.cat__count,.select,.chip,.band__specline,
 .veh__marca,.veh__ver,.linkline,.nav a,.btn,.brand__tag,.ticker__i,.ft__legal,.ft__cols h4{font-variant-numeric:tabular-nums}
@@ -348,37 +348,50 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
 .card{
   position:relative;
-  display:flex;flex-direction:column;background:var(--ink-raised);
-  border:1px solid var(--hairline-soft);transition:border-color .3s var(--ease);
+  display:flex;flex-direction:column;gap:.9rem;
+  background:var(--ink-raised-2);
+  border:1px solid var(--hairline-soft);border-radius:16px;
+  padding:1rem 1rem 1.15rem;
+  transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease);
 }
-.card:hover{border-color:var(--hairline)}
-.card--rail{width:clamp(232px,25vw,310px);min-width:0;flex:0 0 auto;background:transparent;border:0}
-.card__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised-2)}
-.card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
-.card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.05)}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(0,0,0,.7)}
+.card--rail{width:clamp(248px,26vw,320px);min-width:0;flex:0 0 auto}
+
+.card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.card__marca{font-family:var(--ff-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+.card__name{font-family:var(--ff-display);font-weight:600;font-size:1.24rem;line-height:1.14;margin-top:.25rem;letter-spacing:0}
+.card__ver{font-size:.8rem;color:var(--bone-dim);margin-top:.2rem}
+.card__badges{display:flex;align-items:center;gap:.4rem;flex:none;position:relative;z-index:2}
 .card__tag{
-  position:absolute;top:.8rem;left:.8rem;
-  font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
-  background:rgba(8,15,24,.72);border:1px solid var(--hairline);padding:.35rem .6rem;backdrop-filter:blur(4px);color:var(--bone);
+  font-family:var(--ff-mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--hairline);border-radius:999px;padding:.34rem .6rem;color:var(--bone-dim);
 }
 .card__tag--semi{border-color:var(--accent);color:var(--accent-2)}
 .card__tag--usado{border-color:var(--bone-faint);color:var(--bone-dim)}
-.card__body{padding:1.1rem 1.15rem 1.25rem;display:flex;flex-direction:column;flex:1}
-.card--rail .card__body{padding-inline:0}
-.card__marca{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint)}
-.card__name{font-family:var(--ff-display);font-weight:600;font-size:1.35rem;line-height:1.12;margin-top:.4rem;letter-spacing:0}
-.card__ver{font-size:.82rem;color:var(--bone-dim);margin-top:.3rem;min-height:1.2em}
-.card__spec{
-  display:flex;gap:.9rem;flex-wrap:wrap;margin-top:.9rem;
-  font-family:var(--ff-mono);font-size:.72rem;color:var(--bone-dim);
+.card__share{
+  width:30px;height:30px;flex:none;display:grid;place-items:center;cursor:pointer;
+  background:transparent;border:1px solid var(--hairline);border-radius:999px;color:var(--bone-dim);
+  transition:color .25s var(--ease),border-color .25s var(--ease);
 }
-.card__spec span{display:inline-flex;gap:.35rem}
-.card__foot{margin-top:auto;padding-top:1.1rem;display:flex;align-items:flex-end;justify-content:space-between;gap:.75rem}
-.card__price{font-family:var(--ff-mono);font-size:1.28rem;font-weight:600;letter-spacing:-.01em;color:var(--accent)}
-.card__price small{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint);font-weight:400;margin-bottom:.2rem}
-.card__cuota{font-family:var(--ff-mono);font-size:.7rem;color:var(--bone-dim);text-align:right}
-.card__link::after{content:"";position:absolute;inset:0}
-.card__media-wrap{position:relative}
+.card__share:hover{color:var(--accent);border-color:var(--accent)}
+.card__share svg{width:13px;height:13px}
+
+.card__media{
+  position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:11px;
+  background:radial-gradient(120% 120% at 50% 0%,var(--ink-raised) 0%,var(--ink) 100%);
+}
+.card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
+.card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.04)}
+
+.card__meta{
+  text-align:center;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;
+  color:var(--bone-dim);
+}
+.card__foot{margin-top:auto;padding-top:.35rem;display:flex;flex-direction:column;align-items:center;gap:.2rem;text-align:center}
+.card__price{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--bone-faint)}
+.card__price b{font-family:var(--ff-mono);display:block;margin-top:.25rem;font-size:1.3rem;font-weight:600;letter-spacing:-.01em;text-transform:none;color:var(--accent)}
+.card__cuota{font-family:var(--ff-mono);font-size:.68rem;color:var(--bone-dim)}
+.card__link::after{content:"";position:absolute;inset:0;border-radius:16px}
 
 /* ============================================================
    CATALOG
@@ -1030,6 +1043,17 @@ function gaugeRow(pairs){
 }
 
 /* ---------- card ---------- */
+const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>';
+
+function shareVeh(id, ev){
+  if(ev){ ev.preventDefault(); ev.stopPropagation(); }
+  const v = byId(id); if(!v) return;
+  const url = location.origin + location.pathname + "#/vehiculo/" + id;
+  const titulo = `${v.marca} ${v.modelo} ${v.version}`;
+  if(navigator.share){ navigator.share({title:titulo, url}).catch(()=>{}); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>toast("Link copiado al portapapeles")).catch(()=>{}); }
+}
+
 function card(v,rail=false){
   const specBits = v.cond==="nuevo"
     ? [v.anio, v.combustible, v.transmision.split(" ")[0]]
@@ -1037,21 +1061,24 @@ function card(v,rail=false){
   const seg = segmento(v);
   const tagMod = seg==="Seminuevo" ? " card__tag--semi" : seg==="Usado" ? " card__tag--usado" : "";
   return `<article class="card ${rail?'card--rail':''}">
-    <div class="card__media-wrap">
-      <div class="card__media">${imgHTML(v)}</div>
-      <span class="card__tag${tagMod}">${v.cond==="nuevo"?"0 km":seg}</span>
-    </div>
-    <div class="card__body">
-      <div class="card__marca">${esc(v.marca)}</div>
-      <h3 class="card__name">${esc(v.modelo)}</h3>
-      <div class="card__ver">${esc(v.version)}</div>
-      <div class="card__spec">${specBits.map(b=>`<span>${esc(b)}</span>`).join("")}</div>
-      <div class="card__foot">
-        <div class="card__price"><small>${v.cond==="nuevo"?"Desde":"Precio"}</small>${clp(v.precio)}</div>
-        <div class="card__cuota">${clp(cuotaRef(v.precio))}<br>x mes*</div>
+    <div class="card__top">
+      <div>
+        <div class="card__marca">${esc(v.marca)}</div>
+        <h3 class="card__name">${esc(v.modelo)}</h3>
+        <div class="card__ver">${esc(v.version)}</div>
       </div>
-      <a class="card__link" href="#/vehiculo/${v.id}" aria-label="Ver ${esc(v.marca+' '+v.modelo)}"></a>
+      <div class="card__badges">
+        <span class="card__tag${tagMod}">${v.cond==="nuevo"?"0 km":seg}</span>
+        <button type="button" class="card__share" aria-label="Compartir ${esc(v.marca+' '+v.modelo)}" onclick="shareVeh('${v.id}',event)">${SHARE_ICON}</button>
+      </div>
     </div>
+    <div class="card__media">${imgHTML(v)}</div>
+    <div class="card__meta">${specBits.map(esc).join(" · ")}</div>
+    <div class="card__foot">
+      <div class="card__price">${v.cond==="nuevo"?"Precio desde":"Precio"}<b>${clp(v.precio)}</b></div>
+      <div class="card__cuota">o ${clp(cuotaRef(v.precio))} x mes*</div>
+    </div>
+    <a class="card__link" href="#/vehiculo/${v.id}" aria-label="Ver ${esc(v.marca+' '+v.modelo)}"></a>
   </article>`;
 }
 
