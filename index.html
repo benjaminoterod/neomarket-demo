@@ -14,7 +14,7 @@
 /* ============================================================
    AUTOMOTORA NEOMARKET — concepto de rediseño (no oficial)
    Un archivo. Sin dependencias salvo fuentes de Google.
-   Autos del catálogo: ilustración de perfil por carrocería (studio()).
+   Fotos: mapa PHOTOS más abajo. Sin fotos => render de estudio SVG.
    ============================================================ */
 
 *,*::before,*::after{box-sizing:border-box}
@@ -314,7 +314,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   border-top:1px solid var(--hairline);
 }
 .band:nth-child(even) .band__media{order:2}
-.band__media{display:block;position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:12px;background:#EAF0F8}
+.band__media{display:block;position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised)}
 .band__media img,.band__media svg{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .band:hover .band__media img,.band:hover .band__media svg{transform:scale(1.04)}
 .band__meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
@@ -378,7 +378,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
 
 .card__media{
   position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:11px;
-  background:#EAF0F8;
+  background:radial-gradient(120% 120% at 50% 0%,var(--ink-raised) 0%,var(--ink) 100%);
 }
 .card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.04)}
@@ -511,7 +511,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 .veh__back{margin-bottom:2rem}
 .veh__gallery{display:grid;gap:.75rem}
-.veh__main{aspect-ratio:16/10;overflow:hidden;border-radius:14px;background:#EAF0F8}
+.veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised)}
 .veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover}
 .veh__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
 .veh__thumb{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
@@ -814,8 +814,10 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 const WA = "56951234567";
 
-/* Los autos del catálogo se dibujan como ilustración de perfil por carrocería
-   (ver studio() más abajo). No se usan fotos de stock ni de las marcas. */
+/* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
+   Si una clave no está, se genera un render de estudio en SVG como respaldo. */
+const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1400&q=75`;
+const HERO_PHOTO = U("1607603750909-408e193868c7");
 
 /* PORTADA: 3 diapositivas. Imagen en alta resolución + frase. */
 const HU = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=76`;
@@ -824,6 +826,35 @@ const HERO_SLIDES = [
   {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos y usados certificados", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
   {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
 ];
+const PHOTOS = {
+  n1:  U("1541443131876-44b03de101c5"), // BMW 220i coupé azul
+  n2:  U("1617531653332-bd46c24f2068"), // BMW M4 rojo
+  n3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
+  n4:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
+  n5:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
+  n6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
+  n7:  U("1541899481282-d53bffe3c35d"), // VW Virtus sedán
+  n8:  U("1546614042-7df3c24c9e5d"),    // BMW 520i negro
+  n9:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
+  n10: U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
+  u1:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
+  u2:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
+  u3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
+  u4:  U("1541899481282-d53bffe3c35d"), // VW Vento sedán
+  u6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
+  u7:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
+  u8:  U("1606664515524-ed2f786a0bd6"), // Audi A7 Sportback negro
+  u9:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
+  u10: U("1558981806-ec527fa84c39"),    // moto café racer
+  u11: U("1568772585407-9361f9bf3a87"), // Ducati SuperSport
+  u12: U("1449426468159-d96dbf08f19f"), // KTM 390 Duke
+  u13: U("1571127236794-81c0bbfe1ce3"), // Tesla Model 3
+  u14: U("1533473359331-0135ef1b58bf"), // Jeep Grand Cherokee
+  u15: U("1541899481282-d53bffe3c35d"), // Nissan Versa sedán (referencial)
+  u16: U("1550355291-bbee04a92027"),    // Kia Rio hatch (referencial)
+  u17: U("1533473359331-0135ef1b58bf"), // Chevrolet Captiva SUV (referencial)
+  // u5 (furgón): sin foto -> render de estudio SVG
+};
 
 const VEHICULOS = [
   // ---------- NUEVOS ----------
@@ -1023,10 +1054,17 @@ ${wheels}
 </svg>`);
 }
 function imgHTML(v,cls=""){
-  return `<img class="${cls}" src="${studio(v)}" alt="${esc(v.marca+' '+v.modelo+' '+v.version+' — ilustración de perfil')}" loading="lazy">`;
+  const real = PHOTOS[v.id];
+  const s = studio(v);
+  if(real){
+    return `<img class="${cls}" src="${esc(real)}" alt="${esc(v.marca+' '+v.modelo+' '+v.version)}" loading="lazy" onerror="this.onerror=null;this.src='${s}'">`;
+  }
+  return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
 }
 function gallery(v){
-  return [{src: studio(v), label: "Ilustración de perfil"}];
+  const p = PHOTOS[v.id];
+  const list = Array.isArray(p) ? p : (p ? [p] : [studio(v)]);
+  return list.map((src,i)=>({src, label:"Foto "+(i+1)}));
 }
 
 /* ---------- gauges ---------- */
@@ -1396,7 +1434,7 @@ function viewVehiculo(id){
     <div class="veh__gallery">
       <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
       ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"></button>`).join("")}</div>`
-        :`<p class="veh__imgnote">Ilustración de perfil del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
+        :`<p class="veh__imgnote">Imagen referencial del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
     </div>
     <div class="veh__layout">
       <div>
