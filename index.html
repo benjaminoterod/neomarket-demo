@@ -1056,6 +1056,7 @@ function viewHome(){
   const usados = VEHICULOS.filter(v=>v.cond==="usado").slice(0,8);
   const nTotal = VEHICULOS.filter(v=>v.cond==="nuevo").length;
   const uTotal = VEHICULOS.filter(v=>v.cond==="usado").length;
+  const kmTope = Math.ceil(Math.max(...VEHICULOS.filter(v=>v.cond==="usado").map(v=>v.km))/1e4)*1e4;
   return `
   <section class="hero" aria-roledescription="carrusel" aria-label="Portada">
     <div class="hero__slides">
@@ -1099,7 +1100,7 @@ function viewHome(){
   <section class="section section--alt reveal">
     <div class="shell">
       <div class="rail-head">
-        <div><p class="eyebrow">Inventario · 0 km</p><h2 class="display" style="margin-top:.5rem">Autos nuevos<br>con respaldo de red</h2></div>
+        <div><p class="eyebrow">Inventario · 0 km</p><h2 class="display" style="margin-top:.5rem">Autos nuevos</h2></div>
         <a class="linkline" href="#/nuevos">Ver los ${nTotal} nuevos <span class="arw">→</span></a>
       </div>
       <div class="rail">${nuevos.map(v=>card(v,true)).join("")}</div>
@@ -1108,23 +1109,10 @@ function viewHome(){
 
   <section class="section shell reveal">
     <div class="rail-head">
-      <div><p class="eyebrow">Seminuevos certificados</p><h2 class="display" style="margin-top:.5rem">Usados con<br>garantía extendida</h2></div>
-      <a class="linkline" href="#/usados">Ver los ${uTotal} seminuevos <span class="arw">→</span></a>
+      <div><p class="eyebrow">Certificados · bajo los ${kmTope.toLocaleString("es-CL")} km</p><h2 class="display" style="margin-top:.5rem">Autos seminuevos<br>y usados</h2></div>
+      <a class="linkline" href="#/usados">Ver los ${uTotal} disponibles <span class="arw">→</span></a>
     </div>
     <div class="rail">${usados.map(v=>card(v,true)).join("")}</div>
-  </section>
-
-  <section class="section shell reveal">
-    <div class="rule" style="margin-bottom:var(--s-7)"></div>
-    <div class="intro">
-      <h2 class="display">Tu auto<br>paga la entrada</h2>
-      <div>
-        <p style="color:var(--bone-dim);max-width:40ch">Tásalo online en un minuto y usa ese valor como pie de tu próximo auto. El retiro y la transferencia los gestionamos nosotros.</p>
-        <div style="margin-top:1.75rem">
-          <a class="linkline" href="#/tasacion">Tasar mi auto <span class="arw">→</span></a>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="section shell reveal section--glow">
