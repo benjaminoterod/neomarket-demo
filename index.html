@@ -801,7 +801,7 @@ const HERO_PHOTO = U("1607603750909-408e193868c7");
 const HU = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=76`;
 const HERO_SLIDES = [
   {img:HU("1607603750909-408e193868c7"), title:"El auto correcto, a la primera", sub:"Autos nuevos y seminuevos revisados punto por punto.", href:"#/nuevos"},
-  {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos con garantía escrita", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
+  {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos con garantía extendida", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
   {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
 ];
 const PHOTOS = {
@@ -1051,6 +1051,7 @@ function brandStrip(){
    VISTAS
    ============================================================ */
 function viewHome(){
+  const nuevosDest = VEHICULOS.filter(v=>v.cond==="nuevo"&&v.destacado).slice(0,3);
   const nuevos = VEHICULOS.filter(v=>v.cond==="nuevo").slice(0,8);
   const usados = VEHICULOS.filter(v=>v.cond==="usado").slice(0,8);
   const nTotal = VEHICULOS.filter(v=>v.cond==="nuevo").length;
@@ -1080,6 +1081,21 @@ function viewHome(){
     </div>
   </section>
 
+  <section class="shell">
+    ${nuevosDest.map((v)=>`
+    <article class="band reveal">
+      <a class="band__media" href="#/vehiculo/${v.id}" tabindex="-1" aria-hidden="true">${imgHTML(v)}</a>
+      <div class="band__body">
+        <div class="band__meta">
+          <span class="pill">${v.cond==="nuevo"?"Nuevo":"Seminuevo"}</span>
+          <span class="band__specline">${esc(v.combustible)} · ${esc(v.transmision.split(" ")[0])} · ${esc(v.specs.Potencia||v.anio)}</span>
+        </div>
+        <h3 class="display"><a href="#/vehiculo/${v.id}">${esc(v.marca)} ${esc(v.modelo)}</a></h3>
+        <p class="band__desc">${esc(v.desc)}</p>
+      </div>
+    </article>`).join("")}
+  </section>
+
   <section class="section section--alt reveal">
     <div class="shell">
       <div class="rail-head">
@@ -1092,7 +1108,7 @@ function viewHome(){
 
   <section class="section shell reveal">
     <div class="rail-head">
-      <div><p class="eyebrow">Seminuevos certificados</p><h2 class="display" style="margin-top:.5rem">Usados con<br>garantía escrita</h2></div>
+      <div><p class="eyebrow">Seminuevos certificados</p><h2 class="display" style="margin-top:.5rem">Usados con<br>garantía extendida</h2></div>
       <a class="linkline" href="#/usados">Ver los ${uTotal} seminuevos <span class="arw">→</span></a>
     </div>
     <div class="rail">${usados.map(v=>card(v,true)).join("")}</div>
@@ -1361,7 +1377,7 @@ function viewVehiculo(id){
         </div>
         <p class="pricebox__note">${v.cond==="nuevo"
           ? "Precio referencial de lista. No incluye inscripción ni accesorios. Sujeto a stock."
-          : "Precio con financiamiento. Incluye transferencia y garantía escrita de 6 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
+          : "Precio con financiamiento. Incluye transferencia y garantía extendida de 6 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
       </aside>
     </div>
     ${rel.length?`
