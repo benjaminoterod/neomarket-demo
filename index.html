@@ -397,17 +397,18 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .slider:focus-visible::-webkit-slider-thumb{outline:2px solid var(--bone);outline-offset:3px}
 
 .cat__bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--hairline)}
-.cat__count{font-family:var(--ff-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim)}
-.cat__count b{color:var(--bone)}
+.cat__count{font-family:var(--ff-body);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);display:flex;align-items:baseline;gap:.5em}
+.cat__count b{font-family:var(--ff-display);font-weight:600;font-size:1.5rem;letter-spacing:0;color:var(--bone)}
 .select{
-  background:var(--ink-raised);border:1px solid var(--hairline);
-  padding:.6rem 2rem .6rem .8rem;font-family:var(--ff-mono);font-size:.76rem;
-  text-transform:uppercase;letter-spacing:.08em;color:var(--bone);cursor:pointer;
-  -webkit-appearance:none;appearance:none;
+  background:var(--ink-raised);border:1px solid var(--hairline);border-radius:0;
+  padding:.62rem 2.1rem .62rem .9rem;font-family:var(--ff-body);font-weight:600;font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.13em;color:var(--bone);cursor:pointer;
+  -webkit-appearance:none;appearance:none;transition:border-color .3s var(--ease);
   background-image:linear-gradient(45deg,transparent 50%,var(--bone-dim) 50%),linear-gradient(135deg,var(--bone-dim) 50%,transparent 50%);
-  background-position:calc(100% - 15px) center,calc(100% - 10px) center;
+  background-position:calc(100% - 16px) center,calc(100% - 11px) center;
   background-size:5px 5px,5px 5px;background-repeat:no-repeat;
 }
+.select:hover,.select:focus{border-color:var(--accent);outline:none}
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
 .chip{
   font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
@@ -426,6 +427,36 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .reveal-grid > *{animation:pop .5s var(--ease) both}
 
 @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* entrada escalonada: filtros, barra y filas de ficha se despliegan una tras otra */
+.cat__filters .fgroup{animation:fadeup .5s var(--ease) both}
+.cat__filters .fgroup:nth-child(1){animation-delay:.04s}
+.cat__filters .fgroup:nth-child(2){animation-delay:.09s}
+.cat__filters .fgroup:nth-child(3){animation-delay:.14s}
+.cat__filters .fgroup:nth-child(4){animation-delay:.19s}
+.cat__filters .fgroup:nth-child(5){animation-delay:.24s}
+.cat__filters .fgroup:nth-child(6){animation-delay:.29s}
+.cat__filters .fgroup:nth-child(7){animation-delay:.34s}
+.cat__filters .fgroup:nth-child(8){animation-delay:.39s}
+.cat__filters .fgroup:nth-child(n+9){animation-delay:.44s}
+.cat__bar,.chips{animation:fadeup .55s var(--ease) both;animation-delay:.06s}
+.veh__gallery{animation:fadeup .6s var(--ease) both}
+.veh__layout > div > *{animation:fadeup .55s var(--ease) both}
+.veh__layout > div > *:nth-child(2){animation-delay:.05s}
+.veh__layout > div > *:nth-child(3){animation-delay:.1s}
+.veh__layout > div > *:nth-child(4){animation-delay:.15s}
+.veh__layout > div > *:nth-child(5){animation-delay:.2s}
+.pricebox{animation:fadeup .55s var(--ease) both;animation-delay:.12s}
+.spectable tbody tr{animation:fadeup .45s var(--ease) both}
+.spectable tbody tr:nth-child(1){animation-delay:.02s}
+.spectable tbody tr:nth-child(2){animation-delay:.06s}
+.spectable tbody tr:nth-child(3){animation-delay:.1s}
+.spectable tbody tr:nth-child(4){animation-delay:.14s}
+.spectable tbody tr:nth-child(5){animation-delay:.18s}
+.spectable tbody tr:nth-child(6){animation-delay:.22s}
+.spectable tbody tr:nth-child(7){animation-delay:.26s}
+.spectable tbody tr:nth-child(n+8){animation-delay:.3s}
 
 /* ============================================================
    VEHICLE DETAIL
