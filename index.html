@@ -14,7 +14,7 @@
 /* ============================================================
    AUTOMOTORA NEOMARKET — concepto de rediseño (no oficial)
    Un archivo. Sin dependencias salvo fuentes de Google.
-   Fotos: mapa PHOTOS más abajo. Sin fotos => render de estudio SVG.
+   Autos del catálogo: ilustración de perfil por carrocería (studio()).
    ============================================================ */
 
 *,*::before,*::after{box-sizing:border-box}
@@ -314,7 +314,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   border-top:1px solid var(--hairline);
 }
 .band:nth-child(even) .band__media{order:2}
-.band__media{display:block;position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised)}
+.band__media{display:block;position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:12px;background:#EAF0F8}
 .band__media img,.band__media svg{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .band:hover .band__media img,.band:hover .band__media svg{transform:scale(1.04)}
 .band__meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
@@ -378,7 +378,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
 
 .card__media{
   position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:11px;
-  background:radial-gradient(120% 120% at 50% 0%,var(--ink-raised) 0%,var(--ink) 100%);
+  background:#EAF0F8;
 }
 .card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.04)}
@@ -511,7 +511,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 .veh__back{margin-bottom:2rem}
 .veh__gallery{display:grid;gap:.75rem}
-.veh__main{aspect-ratio:16/10;overflow:hidden;background:var(--ink-raised)}
+.veh__main{aspect-ratio:16/10;overflow:hidden;border-radius:14px;background:#EAF0F8}
 .veh__main img,.veh__main svg{width:100%;height:100%;object-fit:cover}
 .veh__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
 .veh__thumb{position:relative;aspect-ratio:16/11;overflow:hidden;background:var(--ink-raised);border:1px solid transparent;cursor:pointer;padding:0}
@@ -814,11 +814,8 @@ svg.brand-logo{height:22px;width:auto;display:block}
    ============================================================ */
 const WA = "56951234567";
 
-/* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
-   Si una clave no está, se genera un render de estudio en SVG como respaldo.
-   Set actual: fotografía de stock de Unsplash (uso libre), elegida por carrocería. */
-const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1400&q=75`;
-const HERO_PHOTO = U("1607603750909-408e193868c7");
+/* Los autos del catálogo se dibujan como ilustración de perfil por carrocería
+   (ver studio() más abajo). No se usan fotos de stock ni de las marcas. */
 
 /* PORTADA: 3 diapositivas. Imagen en alta resolución + frase. */
 const HU = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=76`;
@@ -827,35 +824,6 @@ const HERO_SLIDES = [
   {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos y usados certificados", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
   {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
 ];
-const PHOTOS = {
-  n1:  U("1541443131876-44b03de101c5"), // BMW 220i coupé azul
-  n2:  U("1617531653332-bd46c24f2068"), // BMW M4 rojo
-  n3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
-  n4:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
-  n5:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
-  n6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
-  n7:  U("1541899481282-d53bffe3c35d"), // VW Virtus sedán
-  n8:  U("1546614042-7df3c24c9e5d"),    // BMW 520i negro
-  n9:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
-  n10: U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
-  u1:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
-  u2:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
-  u3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
-  u4:  U("1541899481282-d53bffe3c35d"), // VW Vento sedán
-  u6:  U("1550355291-bbee04a92027"),    // Hyundai i30 rojo
-  u7:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
-  u8:  U("1606664515524-ed2f786a0bd6"), // Audi A7 Sportback negro
-  u9:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
-  u10: U("1558981806-ec527fa84c39"),    // moto café racer
-  u11: U("1568772585407-9361f9bf3a87"), // Ducati SuperSport
-  u12: U("1449426468159-d96dbf08f19f"), // KTM 390 Duke
-  u13: U("1571127236794-81c0bbfe1ce3"), // Tesla Model 3
-  u14: U("1533473359331-0135ef1b58bf"), // Jeep Grand Cherokee
-  u15: U("1541899481282-d53bffe3c35d"), // Nissan Versa sedán (referencial)
-  u16: U("1550355291-bbee04a92027"),    // Kia Rio hatch (referencial)
-  u17: U("1533473359331-0135ef1b58bf"), // Chevrolet Captiva SUV (referencial)
-  // u5 (furgón): sin foto -> render de estudio SVG
-};
 
 const VEHICULOS = [
   // ---------- NUEVOS ----------
@@ -984,56 +952,81 @@ function cuotaRef(precio){
   return cuota(precio*0.8, TASA_DEFAULT, 48);
 }
 
-/* ---------- render de estudio SVG (fallback sin foto) ---------- */
+/* ---------- ilustración de perfil por carrocería (estilo catálogo) ----------
+   viewBox 0 0 480 300. Suelo/sombra en y~252. Cuerpo con base plana en y~196;
+   los pasos de rueda se "recortan" con círculos del color del panel. */
 const SIL = {
-  "SUV":"M40 150 L60 150 C70 105 95 92 150 90 L250 88 C300 88 330 100 355 128 L420 138 C445 142 455 150 455 150 L455 168 L40 168 Z M120 168 a24 24 0 1 0 .1 0 M360 168 a24 24 0 1 0 .1 0",
-  "Sedán":"M30 155 L70 155 C90 120 120 112 175 110 L250 108 C300 110 340 128 380 150 L465 156 L465 170 L30 170 Z M115 170 a22 22 0 1 0 .1 0 M370 170 a22 22 0 1 0 .1 0",
-  "Hatchback":"M40 152 L70 152 C88 118 118 110 168 108 L240 108 C290 110 320 128 345 152 L360 160 L360 168 L40 168 Z M120 168 a22 22 0 1 0 .1 0 M320 168 a22 22 0 1 0 .1 0",
-  "Camioneta":"M25 150 L60 150 C72 112 96 104 150 103 L215 103 L225 138 L470 138 L470 165 L25 165 Z M110 165 a24 24 0 1 0 .1 0 M395 165 a24 24 0 1 0 .1 0",
-  "Furgón":"M35 150 L48 92 C50 82 58 78 74 78 L300 78 C330 78 360 100 400 138 L460 146 L460 165 L35 165 Z M115 165 a23 23 0 1 0 .1 0 M395 165 a23 23 0 1 0 .1 0",
-  "Motocicleta":"M110 165 a38 38 0 1 0 .1 0 M360 165 a38 38 0 1 0 .1 0 M148 165 L230 120 L300 120 L345 160 M215 120 L250 95 L300 98 M170 130 L150 105 L120 105",
+  "Coupé":{
+    body:"M28 196 L28 177 C28 166 36 158 56 155 L150 150 C164 121 190 103 234 100 L266 100 C310 104 344 127 372 150 L440 156 C452 159 456 168 456 178 L456 196 Z",
+    glass:"M172 150 C194 122 226 108 260 107 C290 108 324 126 342 150 Z",
+    wr:33, wx:[112,366]
+  },
+  "Sedán":{
+    body:"M28 196 L28 175 C28 164 36 157 54 154 L150 149 C160 127 178 111 202 108 L298 108 C328 112 349 128 366 149 L436 155 C450 158 456 167 456 177 L456 196 Z",
+    glass:"M164 149 C174 129 190 117 210 115 L292 115 C314 119 330 131 340 149 Z",
+    wr:33, wx:[110,368]
+  },
+  "Hatchback":{
+    body:"M30 196 L30 177 C30 166 38 159 56 156 L148 151 C162 124 186 110 214 108 L298 108 C320 112 334 126 340 151 L346 176 L346 196 Z",
+    glass:"M162 151 C176 126 198 114 220 112 L290 113 C306 118 318 130 324 151 Z",
+    wr:32, wx:[112,330]
+  },
+  "SUV":{
+    body:"M32 194 L32 165 C32 148 44 139 68 135 L118 128 C128 104 148 92 176 90 L318 90 C348 94 370 111 382 135 L428 146 C446 150 452 160 452 176 L452 194 Z",
+    glass:"M126 135 C136 109 152 99 176 98 L240 97 L240 135 Z M252 135 L252 97 L312 99 C334 105 346 117 352 135 Z",
+    wr:35, wx:[118,364]
+  },
+  "Furgón":{
+    body:"M28 196 L28 118 C28 103 36 95 54 95 L248 95 C288 95 320 110 344 130 L398 148 L442 155 C452 158 456 167 456 177 L456 196 Z",
+    glass:"M146 130 L146 110 C146 106 148 104 152 104 L244 104 C272 106 300 116 322 130 Z",
+    wr:33, wx:[100,394]
+  },
+  "Camioneta":{
+    body:"M24 196 L24 172 C24 160 32 153 50 150 L118 145 C128 120 148 109 174 107 L226 107 L236 150 L456 150 L456 196 Z",
+    glass:"M130 145 C140 121 158 111 180 110 L222 109 L230 150 L130 150 Z",
+    wr:33, wx:[104,392]
+  },
+  "Motocicleta":{ moto:true, wr:40, wx:[110,360], wy:206 },
 };
-function studio(v,w=1200,h=750){
-  const sil = SIL[v.carroceria] || SIL["SUV"];
+function studio(v,w=960,h=600){
+  const t = SIL[v.carroceria] || SIL["SUV"];
   const label = esc((v.marca+" "+v.modelo).toUpperCase());
+  const wr = t.wr || 33, wy = t.wy || (239 - wr);
+  const wheel = cx =>
+    `<circle cx='${cx}' cy='${wy}' r='${wr}' fill='#12171E'/>`+
+    `<circle cx='${cx}' cy='${wy}' r='${(wr*0.60).toFixed(1)}' fill='#6C7C95'/>`+
+    `<circle cx='${cx}' cy='${wy}' r='${(wr*0.34).toFixed(1)}' fill='#1B222C'/>`+
+    `<circle cx='${cx}' cy='${wy}' r='${(wr*0.11).toFixed(1)}' fill='#8C9BB2'/>`;
+  const arches = t.moto ? "" : t.wx.map(cx=>`<circle cx='${cx}' cy='${wy}' r='${wr+8}' fill='url(#pnl)'/>`).join("");
+  const wheels = t.wx.map(wheel).join("");
+  const car = t.moto
+    ? `<path d='M150 210 L206 150 L282 150 L322 200 L306 210 Z' fill='url(#pt)'/>
+       <path d='M120 206 L164 150 M352 206 L296 154' stroke='#2A3543' stroke-width='10' fill='none' stroke-linecap='round'/>
+       <path d='M198 150 L172 120 L144 124' stroke='#2A3543' stroke-width='9' fill='none' stroke-linecap='round'/>`
+    : `<path d='${t.body}' fill='url(#pt)'/>
+       <path d='${t.glass}' fill='#AFC4D9'/>
+       ${arches}
+       <rect x='26' y='166' width='7' height='12' rx='2' fill='#EEF4FB' opacity='.9'/>
+       <rect x='450' y='164' width='6' height='13' rx='2' fill='#C4675F' opacity='.9'/>`;
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
-`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 500 312'>
+`<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}' viewBox='0 0 480 300'>
 <defs>
-<radialGradient id='g' cx='50%' cy='34%' r='80%'>
-<stop offset='0%' stop-color='#27292d'/><stop offset='55%' stop-color='#141518'/><stop offset='100%' stop-color='#0b0c0d'/>
-</radialGradient>
-<linearGradient id='f' x1='0' y1='0' x2='0' y2='1'>
-<stop offset='0%' stop-color='#1b1c1f'/><stop offset='100%' stop-color='#0b0c0d'/>
-</linearGradient>
+<linearGradient id='pnl' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='300'><stop offset='0' stop-color='#EEF3FB'/><stop offset='1' stop-color='#D4DFEE'/></linearGradient>
+<linearGradient id='pt' gradientUnits='userSpaceOnUse' x1='0' y1='84' x2='0' y2='200'><stop offset='0' stop-color='#64748E'/><stop offset='.55' stop-color='#3D4B5E'/><stop offset='1' stop-color='#2A3441'/></linearGradient>
+<filter id='sh' x='-30%' y='-120%' width='160%' height='340%'><feGaussianBlur stdDeviation='9'/></filter>
 </defs>
-<rect width='500' height='312' fill='url(#g)'/>
-<rect y='208' width='500' height='104' fill='url(#f)'/>
-<line x1='0' y1='208' x2='500' y2='208' stroke='#EDEBE7' stroke-opacity='.1'/>
-<g transform='translate(58,66) scale(0.76)' stroke='#EDEBE7' stroke-opacity='.85' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-<path d='${sil}'/>
-</g>
-<g transform='translate(58,406) scale(0.76,-0.76)' opacity='.08' stroke='#EDEBE7' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'>
-<path d='${sil}'/>
-</g>
-<text x='24' y='38' fill='#EDEBE7' fill-opacity='.5' font-family='Manrope, system-ui, sans-serif' font-size='10' letter-spacing='3'>${label}</text>
-<text x='476' y='296' text-anchor='end' fill='#EDEBE7' fill-opacity='.26' font-family='Manrope, system-ui, sans-serif' font-size='8' letter-spacing='2'>NEOMARKET</text>
+<rect width='480' height='300' fill='url(#pnl)'/>
+<ellipse cx='240' cy='${t.moto?250:242}' rx='186' ry='12' fill='#16233A' opacity='.22' filter='url(#sh)'/>
+${car}
+${wheels}
+<text x='24' y='40' fill='#2B3644' fill-opacity='.5' font-family='Manrope, system-ui, sans-serif' font-size='11' letter-spacing='3'>${label}</text>
 </svg>`);
 }
 function imgHTML(v,cls=""){
-  const real = PHOTOS[v.id];
-  const s = studio(v);
-  if(real){
-    return `<img class="${cls}" src="${esc(real)}" alt="${esc(v.marca+' '+v.modelo+' '+v.version)}" loading="lazy" onerror="this.onerror=null;this.src='${s}'">`;
-  }
-  return `<img class="${cls}" src="${s}" alt="${esc(v.marca+' '+v.modelo+' — render de estudio')}" loading="lazy">`;
+  return `<img class="${cls}" src="${studio(v)}" alt="${esc(v.marca+' '+v.modelo+' '+v.version+' — ilustración de perfil')}" loading="lazy">`;
 }
-/* GALERÍA — una foto por vehículo.
-   Para cargar el set real de una unidad, en PHOTOS pon un arreglo de URLs:
-   u2: ["frente.jpg","lado.jpg","interior.jpg"]  -> se muestran como miniaturas. */
 function gallery(v){
-  const p = PHOTOS[v.id];
-  const list = Array.isArray(p) ? p : (p ? [p] : [studio(v)]);
-  return list.map((src,i)=>({src, label:"Foto "+(i+1)}));
+  return [{src: studio(v), label: "Ilustración de perfil"}];
 }
 
 /* ---------- gauges ---------- */
@@ -1403,7 +1396,7 @@ function viewVehiculo(id){
     <div class="veh__gallery">
       <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
       ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"></button>`).join("")}</div>`
-        :`<p class="veh__imgnote">Imagen referencial del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
+        :`<p class="veh__imgnote">Ilustración de perfil del modelo.${v.cond==="usado"?" Te enviamos las fotos reales de esta unidad por WhatsApp.":""}</p>`}
     </div>
     <div class="veh__layout">
       <div>
