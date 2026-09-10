@@ -26,18 +26,21 @@ button,input,select,textarea{font:inherit;color:inherit}
 a{color:inherit;text-decoration:none}
 
 :root{
-  --ink:#0A0C11;
-  --ink-raised:#12151C;
-  --ink-raised-2:#1B1F29;
-  --bone:#E7EAF0;
-  --bone-dim:#939AA8;
-  --bone-faint:#646C7B;
-  --hairline:rgba(231,234,240,.14);
-  --hairline-soft:rgba(231,234,240,.08);
-  --chrome-hi:#F5F7FA;
-  --chrome-lo:#7E8794;
-  --accent:#7E9BC2;
-  --accent-soft:rgba(126,155,194,.14);
+  --ink:#0A121C;
+  --ink-raised:#101E2B;
+  --ink-raised-2:#182C3E;
+  --bone:#E9EEF3;
+  --bone-dim:#93A5B5;
+  --bone-faint:#5E7284;
+  --hairline:rgba(196,220,235,.14);
+  --hairline-soft:rgba(196,220,235,.07);
+  --chrome-hi:#EEF4F8;
+  --chrome-lo:#6C8698;
+  /* Paleta "montañas azules": del navy profundo al hielo */
+  --accent:#7CA0C2;
+  --accent-2:#A9C5D7;
+  --accent-deep:#2E4D6E;
+  --accent-soft:rgba(124,160,194,.16);
 
   --s-1:.5rem; --s-2:.75rem; --s-3:1rem; --s-4:1.5rem;
   --s-5:2rem; --s-6:3rem; --s-7:4.5rem; --s-8:7rem;
@@ -70,7 +73,7 @@ body{
   font-size:.7rem;
   letter-spacing:.24em;
   text-transform:uppercase;
-  color:var(--bone-dim);
+  color:var(--accent-2);
   font-weight:600;
 }
 /* alineación de dígitos ahora que las cifras usan Manrope, no monoespaciada */
@@ -90,7 +93,7 @@ h2.display{font-size:clamp(1.9rem,4.6vw,3.6rem)}
 h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .mono{font-family:var(--ff-mono);font-variant-numeric:tabular-nums}
 .chrome{
-  background:linear-gradient(180deg,var(--chrome-hi) 0%,#cfd0d3 38%,var(--chrome-lo) 62%,#dfe0e2 100%);
+  background:linear-gradient(180deg,var(--chrome-hi) 0%,#cdd7de 38%,var(--chrome-lo) 62%,#dde5ea 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 
@@ -100,7 +103,10 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .rule{height:1px;background:var(--hairline);border:0;margin:0}
 /* franjas de color: rompe el negro plano con un tono elevado a todo el ancho */
 .section--alt{position:relative;isolation:isolate}
-.section--alt::before{content:"";position:absolute;inset:0;left:50%;width:100vw;transform:translateX(-50%);background:var(--ink-raised);z-index:-1}
+.section--alt::before{content:"";position:absolute;inset:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;
+  background:linear-gradient(180deg,var(--ink-raised-2) 0%,var(--ink-raised) 55%)}
+.section--alt::after{content:"";position:absolute;top:0;left:50%;width:100vw;transform:translateX(-50%);height:1px;z-index:-1;
+  background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent) 50%,var(--accent-soft) 80%,transparent)}
 .section--glow{position:relative;isolation:isolate}
 .section--glow::before{content:"";position:absolute;inset:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;
   background:radial-gradient(60% 90% at 50% 0%,var(--accent-soft),transparent 70%)}
@@ -176,10 +182,10 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 }
 .hd::before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(10,12,17,.72) 0%,rgba(10,12,17,.25) 60%,transparent 100%);
+  background:linear-gradient(180deg,rgba(8,15,24,.74) 0%,rgba(8,15,24,.26) 60%,transparent 100%);
 }
 .hd[data-solid="true"]{
-  background:rgba(10,12,17,.9);
+  background:rgba(8,15,24,.9);
   backdrop-filter:blur(14px);
   border-bottom-color:var(--hairline);
 }
@@ -205,9 +211,9 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 }
 .nav a::after{
   content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
-  background:var(--bone);transition:right .3s var(--ease);
+  background:var(--accent);transition:right .3s var(--ease);
 }
-.nav a:hover,.nav a[aria-current="page"]{color:var(--bone)}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--accent-2)}
 .nav a[aria-current="page"]::after,.nav a:hover::after{right:0}
 @media (max-width:1240px){ .nav--desk{display:none} }
 
@@ -250,9 +256,9 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .hero__media::after{
   content:"";position:absolute;inset:0;
   background:
-    linear-gradient(90deg,rgba(10,12,17,.9) 0%,rgba(10,12,17,.55) 40%,rgba(10,12,17,.12) 72%,rgba(10,12,17,.05) 100%),
-    linear-gradient(0deg,rgba(10,12,17,.65) 0%,rgba(10,12,17,0) 42%),
-    linear-gradient(180deg,rgba(10,12,17,.55) 0%,rgba(10,12,17,0) 16%);
+    linear-gradient(90deg,rgba(8,15,24,.92) 0%,rgba(8,15,24,.58) 40%,rgba(8,15,24,.14) 72%,rgba(8,15,24,.05) 100%),
+    linear-gradient(0deg,rgba(8,15,24,.66) 0%,rgba(8,15,24,0) 42%),
+    linear-gradient(180deg,rgba(10,20,32,.5) 0%,rgba(10,20,32,0) 16%);
 }
 .hslide__in{
   position:relative;z-index:3;width:100%;
@@ -280,13 +286,13 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
   background:rgba(237,235,231,.26);
   transition:width .45s var(--ease),background .45s var(--ease);
 }
-.hero__dots button[aria-current="true"]{width:46px;background:var(--bone)}
+.hero__dots button[aria-current="true"]{width:46px;background:var(--accent-2)}
 .hero__dots button:focus-visible{outline:2px solid var(--bone);outline-offset:5px}
 
 .brandstrip{
   position:relative;z-index:4;
   border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
-  background:rgba(10,12,17,.5);backdrop-filter:blur(6px);overflow:hidden;
+  background:rgba(8,15,24,.5);backdrop-filter:blur(6px);overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
@@ -294,7 +300,7 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .brandstrip:hover .brandstrip__track{animation-play-state:paused}
 .brandstrip__set{display:flex;align-items:center;flex:none}
 .brand-logo{flex:none;margin:0 clamp(1.3rem,3.4vw,2.7rem);color:var(--bone-dim);opacity:.46;transition:opacity .3s var(--ease),color .3s var(--ease)}
-.brand-logo:hover{opacity:.95;color:var(--bone)}
+.brand-logo:hover{opacity:.95;color:var(--accent-2)}
 svg.brand-logo{height:22px;width:auto;display:block}
 .brand-logo--txt{font-family:var(--ff-body);font-weight:700;font-size:.92rem;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;line-height:1}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -319,6 +325,9 @@ svg.brand-logo{height:22px;width:auto;display:block}
   font-family:var(--ff-body);font-weight:600;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
   border:1px solid var(--hairline);border-radius:999px;padding:.44rem .95rem;color:var(--bone-dim);white-space:nowrap;
 }
+.pill--nuevo{border-color:var(--accent);color:var(--accent)}
+.pill--semi{border-color:var(--accent);color:var(--accent-2)}
+.pill--usado{border-color:var(--bone-faint);color:var(--bone-dim)}
 .band__specline{font-family:var(--ff-body);font-weight:500;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-faint)}
 .band h3{margin:0}
 .band h3 a{
@@ -353,8 +362,10 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .card__tag{
   position:absolute;top:.8rem;left:.8rem;
   font-family:var(--ff-mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
-  background:rgba(10,12,17,.72);border:1px solid var(--hairline);padding:.35rem .6rem;backdrop-filter:blur(4px);
+  background:rgba(8,15,24,.72);border:1px solid var(--hairline);padding:.35rem .6rem;backdrop-filter:blur(4px);color:var(--bone);
 }
+.card__tag--semi{border-color:var(--accent);color:var(--accent-2)}
+.card__tag--usado{border-color:var(--bone-faint);color:var(--bone-dim)}
 .card__body{padding:1.1rem 1.15rem 1.25rem;display:flex;flex-direction:column;flex:1}
 .card--rail .card__body{padding-inline:0}
 .card__marca{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint)}
@@ -564,7 +575,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   width:100%;background:var(--ink-raised);border:1px solid var(--hairline);
   padding:.85rem .9rem;font-family:var(--ff-body);font-size:.95rem;color:var(--bone);
 }
-.field input:focus,.field select:focus{outline:none;border-color:var(--bone)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
 .optgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem}
 .opt{
   border:1px solid var(--hairline);background:var(--ink-raised);padding:1rem .8rem;cursor:pointer;
@@ -602,7 +613,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .ft__cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;flex:1;min-width:0}
 .ft__cols h4{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:1.1rem}
 .ft__cols a,.ft__cols p{display:block;color:var(--bone-dim);font-size:.88rem;padding:.32rem 0}
-.ft__cols a:hover{color:var(--bone)}
+.ft__cols a:hover{color:var(--accent-2)}
 .ft__social{display:flex;gap:1.15rem;flex:none;padding-top:.2rem}
 .ft__social a{color:var(--bone-faint);transition:color .25s var(--ease)}
 .ft__social a:hover{color:var(--bone)}
@@ -612,6 +623,8 @@ svg.brand-logo{height:22px;width:auto;display:block}
   font-size:clamp(2.1rem,12vw,8.5rem);line-height:.9;letter-spacing:.02em;
   padding-block:clamp(1.5rem,4vw,2.5rem);border-top:1px solid var(--hairline);
   white-space:nowrap;overflow:hidden;
+  background:linear-gradient(180deg,var(--bone) 0%,var(--accent) 120%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .ft__legal{
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
@@ -750,7 +763,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
         <div>
           <h4>Inventario</h4>
           <a href="#/nuevos">Autos nuevos</a>
-          <a href="#/usados">Autos usados</a>
+          <a href="#/usados">Seminuevos y usados</a>
           <a href="#/financiamiento">Simulador de crédito</a>
           <a href="#/tasacion">Tasa tu auto</a>
         </div>
@@ -801,7 +814,7 @@ const HERO_PHOTO = U("1607603750909-408e193868c7");
 const HU = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=2000&q=76`;
 const HERO_SLIDES = [
   {img:HU("1607603750909-408e193868c7"), title:"El auto correcto, a la primera", sub:"Autos nuevos y seminuevos revisados punto por punto.", href:"#/nuevos"},
-  {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos con garantía extendida", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
+  {img:HU("1606664515524-ed2f786a0bd6"), title:"Seminuevos y usados certificados", sub:"120 puntos de revisión antes de entrar a la vitrina.", href:"#/usados"},
   {img:HU("1503376780353-7e6692767b70"), title:"Tu próximo auto, financiado hoy", sub:"Evaluamos con seis bancos, sin costo para ti.", href:"#/financiamiento"},
 ];
 const PHOTOS = {
@@ -828,6 +841,9 @@ const PHOTOS = {
   u12: U("1449426468159-d96dbf08f19f"), // KTM 390 Duke
   u13: U("1571127236794-81c0bbfe1ce3"), // Tesla Model 3
   u14: U("1533473359331-0135ef1b58bf"), // Jeep Grand Cherokee
+  u15: U("1541899481282-d53bffe3c35d"), // Nissan Versa sedán (referencial)
+  u16: U("1550355291-bbee04a92027"),    // Kia Rio hatch (referencial)
+  u17: U("1533473359331-0135ef1b58bf"), // Chevrolet Captiva SUV (referencial)
   // u5 (furgón): sin foto -> render de estudio SVG
 };
 
@@ -907,6 +923,16 @@ const VEHICULOS = [
   {id:"u14",cond:"usado",marca:"Jeep",modelo:"Grand Cherokee",version:"Limited 3.6 V6",anio:2018,km:82700,precio:22990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
    desc:"SUV grande con el Pentastar 3.6 V6 de 286 hp y tracción total Quadra-Trac. Cuero ventilado, techo panorámico y sistema de sonido premium.",
    specs:{Motor:"3.6 V6 Pentastar",Potencia:"286 hp",Torque:"347 Nm",Tracción:"Total Quadra-Trac",Dueños:"1","Extras":"Techo panorámico","Garantía":"6 meses motor y caja"}},
+
+  {id:"u15",cond:"usado",marca:"Nissan",modelo:"Versa",version:"1.6 Sense",anio:2016,km:118000,precio:6490000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Sedán",destacado:false,duenos:2,
+   desc:"Sedán familiar de kilometraje alto pero mecánica sencilla y barata de mantener. Maletero de 460 litros, aire acondicionado y motor 1.6 sin correa de distribución.",
+   specs:{Motor:"1.6 16v",Potencia:"107 hp","Kilometraje":"118.000 km",Dueños:"2",Transmisión:"Mecánica 5 vel.","Garantía":"3 meses motor y caja"}},
+  {id:"u16",cond:"usado",marca:"Kia",modelo:"Rio 5",version:"1.4 EX",anio:2017,km:104000,precio:6990000,combustible:"Bencina",transmision:"Mecánica",carroceria:"Hatchback",destacado:false,duenos:2,
+   desc:"Hatchback urbano con más de 100.000 km, mantenciones al día y neumáticos recién cambiados. Buena opción de entrada, económico en bencina y repuestos.",
+   specs:{Motor:"1.4 16v",Potencia:"98 hp","Kilometraje":"104.000 km",Dueños:"2",Transmisión:"Mecánica 6 vel.","Garantía":"3 meses motor y caja"}},
+  {id:"u17",cond:"usado",marca:"Chevrolet",modelo:"Captiva",version:"2.4 LS",anio:2015,km:139000,precio:7990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:false,duenos:2,
+   desc:"SUV de siete plazas con kilometraje alto, ideal para familia numerosa con presupuesto acotado. Recién mantenida, con distribución y kit de embrague al día.",
+   specs:{Motor:"2.4 Ecotec",Potencia:"167 hp","Kilometraje":"139.000 km",Plazas:"7",Dueños:"2","Garantía":"3 meses motor y caja"}},
 ];
 
 /* ============================================================
@@ -920,6 +946,16 @@ const clp = n => "$" + Math.round(n).toLocaleString("es-CL");
 const km = n => n.toLocaleString("es-CL") + " km";
 const byId = id => VEHICULOS.find(v=>v.id===id);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Clasificación seminuevo vs. usado.
+   Regla de mercado: hasta ~25.000 km por año de uso y ~70.000 km totales;
+   si un auto se pasa de cualquiera de los dos, se lista como "Usado". */
+const ANIO_ACTUAL = 2026;
+function segmento(v){
+  if(v.cond === "nuevo") return "Nuevo";
+  const uso = Math.max(1, ANIO_ACTUAL - v.anio);
+  return (v.km <= 70000 && v.km / uso <= 25000) ? "Seminuevo" : "Usado";
+}
 
 /* crédito: cuota fija sistema francés */
 function cuota(monto, tasaMensual, n){
@@ -1001,10 +1037,12 @@ function card(v,rail=false){
   const specBits = v.cond==="nuevo"
     ? [v.anio, v.combustible, v.transmision.split(" ")[0]]
     : [v.anio, km(v.km), v.combustible];
+  const seg = segmento(v);
+  const tagMod = seg==="Seminuevo" ? " card__tag--semi" : seg==="Usado" ? " card__tag--usado" : "";
   return `<article class="card ${rail?'card--rail':''}">
     <div class="card__media-wrap">
       <div class="card__media">${imgHTML(v)}</div>
-      <span class="card__tag">${v.cond==="nuevo"?"0 KM":"Seminuevo"}</span>
+      <span class="card__tag${tagMod}">${v.cond==="nuevo"?"0 km":seg}</span>
     </div>
     <div class="card__body">
       <div class="card__marca">${esc(v.marca)}</div>
@@ -1053,10 +1091,13 @@ function brandStrip(){
 function viewHome(){
   const nuevosDest = VEHICULOS.filter(v=>v.cond==="nuevo"&&v.destacado).slice(0,3);
   const nuevos = VEHICULOS.filter(v=>v.cond==="nuevo").slice(0,8);
-  const usados = VEHICULOS.filter(v=>v.cond==="usado").slice(0,8);
+  const uPool = VEHICULOS.filter(v=>v.cond==="usado");
+  const usados = [
+    ...uPool.filter(v=>segmento(v)==="Seminuevo").slice(0,5),
+    ...uPool.filter(v=>segmento(v)==="Usado").slice(0,3),
+  ];
   const nTotal = VEHICULOS.filter(v=>v.cond==="nuevo").length;
-  const uTotal = VEHICULOS.filter(v=>v.cond==="usado").length;
-  const kmTope = Math.ceil(Math.max(...VEHICULOS.filter(v=>v.cond==="usado").map(v=>v.km))/1e4)*1e4;
+  const uTotal = uPool.length;
   return `
   <section class="hero" aria-roledescription="carrusel" aria-label="Portada">
     <div class="hero__slides">
@@ -1088,7 +1129,7 @@ function viewHome(){
       <a class="band__media" href="#/vehiculo/${v.id}" tabindex="-1" aria-hidden="true">${imgHTML(v)}</a>
       <div class="band__body">
         <div class="band__meta">
-          <span class="pill">${v.cond==="nuevo"?"Nuevo":"Seminuevo"}</span>
+          <span class="pill pill--${segmento(v).toLowerCase()}">${segmento(v)}</span>
           <span class="band__specline">${esc(v.combustible)} · ${esc(v.transmision.split(" ")[0])} · ${esc(v.specs.Potencia||v.anio)}</span>
         </div>
         <h3 class="display"><a href="#/vehiculo/${v.id}">${esc(v.marca)} ${esc(v.modelo)}</a></h3>
@@ -1109,7 +1150,7 @@ function viewHome(){
 
   <section class="section shell reveal">
     <div class="rail-head">
-      <div><p class="eyebrow">Certificados · bajo los ${kmTope.toLocaleString("es-CL")} km</p><h2 class="display" style="margin-top:.5rem">Autos seminuevos<br>y usados</h2></div>
+      <div><p class="eyebrow">Revisión de 120 puntos</p><h2 class="display" style="margin-top:.5rem">Autos seminuevos<br>y usados</h2></div>
       <a class="linkline" href="#/usados">Ver los ${uTotal} disponibles <span class="arw">→</span></a>
     </div>
     <div class="rail">${usados.map(v=>card(v,true)).join("")}</div>
@@ -1144,7 +1185,7 @@ function viewHome(){
 /* ---------- catálogo ---------- */
 const FILTER_STATE = {};
 function catState(cond){
-  if(!FILTER_STATE[cond]) FILTER_STATE[cond] = {marcas:new Set(),carro:new Set(),comb:new Set(),trans:new Set(),pmax:null,q:"",sort:"precio-asc"};
+  if(!FILTER_STATE[cond]) FILTER_STATE[cond] = {marcas:new Set(),carro:new Set(),comb:new Set(),trans:new Set(),tipo:new Set(),pmax:null,q:"",sort:"precio-asc"};
   return FILTER_STATE[cond];
 }
 function viewCatalogo(cond){
@@ -1165,8 +1206,8 @@ function viewCatalogo(cond){
   return `
   <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
     <div style="margin-bottom:var(--s-6)">
-      <p class="eyebrow">${cond==="nuevo"?"Inventario · 0 km":"Inventario · Seminuevos"}</p>
-      <h1 class="display" style="margin-top:.6rem;font-size:clamp(2.4rem,6vw,4.5rem)">Autos ${cond==="nuevo"?"nuevos":"usados"}</h1>
+      <p class="eyebrow">${cond==="nuevo"?"Inventario · 0 km":"Inventario · Seminuevos y usados"}</p>
+      <h1 class="display" style="margin-top:.6rem;font-size:clamp(2.4rem,6vw,4.5rem)">${cond==="nuevo"?"Autos nuevos":"Seminuevos y usados"}</h1>
     </div>
     <div class="cat">
       <form class="cat__filters" id="filters" data-cond="${cond}" aria-label="Filtros">
@@ -1178,6 +1219,7 @@ function viewCatalogo(cond){
           <div class="fgroup__h">Buscar</div>
           <input type="search" data-f="q" value="${esc(st.q)}" placeholder="Marca o modelo" style="width:100%;background:var(--ink-raised);border:1px solid var(--hairline);padding:.6rem;font-family:var(--ff-mono);font-size:.8rem;color:var(--bone)">
         </div>
+        ${cond==="usado" ? fg("Tipo","tipo",["Seminuevo","Usado"]) : ""}
         ${fg("Marca","marcas",marcas)}
         ${fg("Carrocería","carro",carros)}
         <div class="fgroup">
@@ -1224,6 +1266,7 @@ function applyFilters(cond){
   if(st.carro.size) list=list.filter(v=>st.carro.has(v.carroceria));
   if(st.comb.size) list=list.filter(v=>st.comb.has(v.combustible));
   if(st.trans.size) list=list.filter(v=>st.trans.has(v.transmision.split(" ")[0]));
+  if(st.tipo && st.tipo.size) list=list.filter(v=>st.tipo.has(segmento(v)));
   if(st.pmax!=null) list=list.filter(v=>v.precio<=st.pmax);
   const [key,dir]=st.sort.split("-");
   list.sort((a,b)=>{const d=key==="precio"?a.precio-b.precio:key==="km"?a.km-b.km:a.anio-b.anio;return dir==="asc"?d:-d;});
@@ -1236,7 +1279,7 @@ function applyFilters(cond){
   // chips
   const chips = $("#chips");
   const bits=[];
-  ["marcas","carro","comb","trans"].forEach(f=>st[f].forEach(val=>bits.push([f,val,val])));
+  ["tipo","marcas","carro","comb","trans"].forEach(f=>st[f]&&st[f].forEach(val=>bits.push([f,val,val])));
   if(st.pmax!=null && st.pmax<st.cap) bits.push(["pmax",st.pmax,"Hasta "+clp(st.pmax)]);
   if(st.q) bits.push(["q",st.q,'"'+st.q+'"']);
   chips.innerHTML = bits.length
@@ -1256,7 +1299,7 @@ function applyFilters(cond){
 
 function resetFilters(cond){
   const st = catState(cond);
-  st.marcas.clear();st.carro.clear();st.comb.clear();st.trans.clear();st.q="";
+  st.marcas.clear();st.carro.clear();st.comb.clear();st.trans.clear();st.tipo&&st.tipo.clear();st.q="";
   st.pmax = st.cap;
   const f=$("#filters");
   if(f){
@@ -1283,7 +1326,7 @@ function wireCatalogo(cond){
   f.addEventListener("change",e=>{
     const t=e.target;
     if(t.type==="checkbox" && t.dataset.f){
-      const set = st[{marcas:"marcas",carro:"carro",comb:"comb",trans:"trans"}[t.dataset.f]];
+      const set = st[{marcas:"marcas",carro:"carro",comb:"comb",trans:"trans",tipo:"tipo"}[t.dataset.f]];
       t.checked ? set.add(t.value) : set.delete(t.value);
       applyFilters(cond);
     }
@@ -1308,7 +1351,7 @@ function wireCatalogo(cond){
     const fld=b.dataset.clearF, val=b.dataset.clearV;
     if(fld==="q"){st.q="";const q=$('[data-f=q]',f);if(q)q.value="";}
     else if(fld==="pmax"){setPmax(cond,0);return;}
-    else {const map={marcas:"marcas",carro:"carro",comb:"comb",trans:"trans"};st[map[fld]].delete(val);
+    else {const map={marcas:"marcas",carro:"carro",comb:"comb",trans:"trans",tipo:"tipo"};st[map[fld]].delete(val);
       const cb=$(`input[data-f="${fld}"][value="${CSS.escape(val)}"]`,f); if(cb) cb.checked=false;}
     applyFilters(cond);
   });
@@ -1342,6 +1385,7 @@ function viewVehiculo(id){
     <div class="veh__layout">
       <div>
         <p class="eyebrow veh__marca">${esc(v.marca)} · ${v.cond==="nuevo"?"0 km":v.anio}</p>
+        <div style="margin:.9rem 0 .2rem"><span class="pill pill--${segmento(v).toLowerCase()}">${segmento(v)}</span></div>
         <h1 class="display veh__title" style="font-size:clamp(2.2rem,5vw,3.6rem)">${esc(v.modelo)}</h1>
         <p class="veh__ver">${esc(v.version)}</p>
         <div style="margin-top:1.75rem">${gaugeRow(v.cond==="nuevo"
@@ -1365,7 +1409,9 @@ function viewVehiculo(id){
         </div>
         <p class="pricebox__note">${v.cond==="nuevo"
           ? "Precio referencial de lista. No incluye inscripción ni accesorios. Sujeto a stock."
-          : "Precio con financiamiento. Incluye transferencia y garantía extendida de 6 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
+          : segmento(v)==="Seminuevo"
+            ? "Precio con financiamiento. Incluye transferencia y garantía extendida de 6 meses en motor y caja."
+            : "Precio con financiamiento. Incluye transferencia y garantía mecánica de 3 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
       </aside>
     </div>
     ${rel.length?`
