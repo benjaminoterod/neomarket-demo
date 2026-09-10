@@ -1225,7 +1225,7 @@ function viewVehiculo(id){
   const alt = esc(v.marca+" "+v.modelo+" "+v.version);
   return `
   <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
-    <div class="veh__back"><a class="linkline" href="#/${v.cond==="nuevo"?"nuevos":"usados"}"><span class="arw">←</span> Volver al catálogo</a></div>
+    <div class="veh__back"><a class="linkline" href="#/"><span class="arw">←</span> Volver al inicio</a></div>
     <div class="veh__gallery">
       <div class="veh__main" id="vehMain"><img src="${shots[0].src}" alt="${alt}" onerror="this.onerror=null;this.src='${studio(v)}'"></div>
       ${shots.length>1?`<div class="veh__thumbs">${shots.map((s,i)=>`<button class="veh__thumb" data-src="${esc(s.src)}" aria-current="${i===0}" aria-label="${esc(s.label)}"><img src="${esc(s.src)}" alt="" loading="lazy"></button>`).join("")}</div>`
