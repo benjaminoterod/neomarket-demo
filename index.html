@@ -382,6 +382,14 @@ svg.brand-logo{height:22px;width:auto;display:block}
 }
 .card__media img,.card__media svg{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .card:hover .card__media img,.card:hover .card__media svg{transform:scale(1.04)}
+.card__warranty{
+  position:absolute;left:.65rem;bottom:.65rem;z-index:2;
+  display:inline-flex;align-items:center;gap:.32rem;
+  background:rgba(8,15,24,.78);backdrop-filter:blur(4px);
+  border:1px solid var(--hairline);border-radius:999px;padding:.32rem .6rem;
+  font-family:var(--ff-mono);font-size:.58rem;letter-spacing:.06em;color:var(--accent-2);white-space:nowrap;
+}
+.card__warranty svg{width:10px;height:10px;flex:none;color:var(--accent)}
 
 .card__meta{
   text-align:center;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.06em;
@@ -541,8 +549,12 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .spectable td{font-family:var(--ff-body);font-weight:700;font-size:1rem;line-height:1.3;color:var(--bone);text-align:right;letter-spacing:.01em}
 
 .pricebox{position:sticky;top:96px;border:1px solid var(--hairline);padding:1.5rem}
+.pricebox__tier{padding-bottom:1.1rem;margin-bottom:1.1rem;border-bottom:1px solid var(--hairline)}
+.pricebox__tier--fin{padding-bottom:0;margin-bottom:0;border-bottom:0}
 .pricebox__k{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint)}
+.pricebox__badge{display:inline-block;background:var(--accent-soft);color:var(--accent-2);border-radius:999px;padding:.12rem .52rem;font-size:.6rem;letter-spacing:.06em;margin-left:.35rem;vertical-align:middle}
 .pricebox__price{font-family:var(--ff-mono);font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.02em;margin:.3rem 0 .2rem;color:var(--bone)}
+.pricebox__price--contado{font-size:1.35rem;font-weight:500;color:var(--bone-dim)}
 .pricebox__cuota{font-family:var(--ff-mono);font-size:.8rem;color:var(--bone-dim)}
 .pricebox__cuota b{color:var(--accent);font-weight:600}
 .pricebox__actions{display:flex;flex-direction:column;gap:.7rem;margin-top:1.5rem}
@@ -598,6 +610,44 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .tas__result{text-align:center}
 .tas__range{font-family:var(--ff-mono);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;letter-spacing:-.02em;margin:1rem 0;color:var(--accent)}
 .tas__result p{color:var(--bone-dim);max-width:40ch;margin:0 auto 2rem}
+
+/* ============================================================
+   INICIO — selector de intención + testimonios
+   ============================================================ */
+.intent{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--hairline)}
+.intent__item{
+  display:flex;flex-direction:column;gap:.85rem;
+  padding:1.75rem 1.6rem;border-right:1px solid var(--hairline);
+  color:inherit;transition:background .25s var(--ease);
+}
+.intent__item:last-child{border-right:0}
+.intent__item:hover{background:var(--ink-raised)}
+.intent__item:nth-child(1){transition-delay:0s}
+.intent__item:nth-child(2){transition-delay:.08s}
+.intent__item:nth-child(3){transition-delay:.16s}
+.intent__item:nth-child(4){transition-delay:.24s}
+.intent__ico{width:26px;height:26px;color:var(--accent);display:block}
+.intent__ico svg{width:100%;height:100%;display:block}
+.intent__label{font-family:var(--ff-display);font-weight:600;font-size:1.1rem;color:var(--bone)}
+.intent__sub{font-size:.84rem;color:var(--bone-dim);line-height:1.4}
+@media (max-width:760px){
+  .intent{grid-template-columns:1fr 1fr}
+  .intent__item{border-bottom:1px solid var(--hairline)}
+  .intent__item:nth-child(2n){border-right:0}
+  .intent__item:nth-last-child(-n+2){border-bottom:0}
+}
+@media (max-width:480px){
+  .intent{grid-template-columns:1fr}
+  .intent__item{border-right:0!important}
+  .intent__item:last-child{border-bottom:0}
+}
+
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:var(--s-6)}
+.testi{display:flex;flex-direction:column;gap:1rem}
+.testi__stars{display:flex;gap:.2rem;color:var(--accent)}
+.testi__stars svg{width:15px;height:15px}
+.testi blockquote{margin:0;font-family:var(--ff-display);font-style:italic;font-size:1.08rem;line-height:1.55;color:var(--bone)}
+.testi figcaption{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-faint)}
 
 /* ============================================================
    CIERRE + FOOTER
@@ -983,6 +1033,16 @@ function cuotaRef(precio){
   return cuota(precio*0.8, TASA_DEFAULT, 48);
 }
 
+/* precio financiado: -3% sobre el contado, redondeado a la decena de mil */
+function precioFin(precio){
+  return Math.round(precio*0.97/10000)*10000;
+}
+function garantiaLabel(v){
+  const seg = segmento(v);
+  return seg==="Seminuevo" ? "Garantía 6 meses" : seg==="Usado" ? "Garantía 3 meses" : "Garantía de fábrica";
+}
+const CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>';
+
 /* ---------- ilustración de perfil por carrocería (estilo catálogo) ----------
    viewBox 0 0 480 300. Suelo/sombra en y~252. Cuerpo con base plana en y~196;
    los pasos de rueda se "recortan" con círculos del color del panel. */
@@ -1103,11 +1163,14 @@ function card(v,rail=false){
         <button type="button" class="card__share" aria-label="Compartir ${esc(v.marca+' '+v.modelo)}" onclick="shareVeh('${v.id}',event)">${SHARE_ICON}</button>
       </div>
     </div>
-    <div class="card__media">${imgHTML(v)}</div>
+    <div class="card__media">
+      ${imgHTML(v)}
+      <span class="card__warranty">${CHECK_ICON}${esc(garantiaLabel(v))}</span>
+    </div>
     <div class="card__meta">${specBits.map(esc).join(" · ")}</div>
     <div class="card__foot">
-      <div class="card__price">${v.cond==="nuevo"?"Precio desde":"Precio"}<b>${clp(v.precio)}</b></div>
-      <div class="card__cuota">o ${clp(cuotaRef(v.precio))} x mes*</div>
+      <div class="card__price">Precio desde<b>${clp(precioFin(v.precio))}</b></div>
+      <div class="card__cuota">o ${clp(cuotaRef(precioFin(v.precio)))} x mes financiado*</div>
     </div>
     <a class="card__link" href="#/vehiculo/${v.id}" aria-label="Ver ${esc(v.marca+' '+v.modelo)}"></a>
   </article>`;
@@ -1140,6 +1203,53 @@ function brandStrip(){
   return `<div class="brandstrip" aria-label="Marcas que representamos"><div class="brandstrip__track">${set(true)}${set(false)}</div></div>`;
 }
 
+/* ---------- selector de intención (portada) ---------- */
+const INTENT_ITEMS = [
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.8 12.2 20.5 2.5M17 6l2.5 2.5M14 9l2 2"/></svg>',
+   label:"Autos nuevos", sub:"0 km, con red de respaldo.", href:"#/nuevos"},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 9.5-3.8-1.3-7-4.5-7-9.5V6z"/><path d="M9 12l2 2 4-4.5"/></svg>',
+   label:"Seminuevos y usados", sub:"Revisados, con garantía.", href:"#/usados"},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
+   label:"Financiamiento", sub:"Simula tu crédito en línea.", href:"#/financiamiento"},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><line x1="8" y1="3" x2="8" y2="6.5"/><line x1="16" y1="3" x2="16" y2="6.5"/></svg>',
+   label:"Agenda tu visita", sub:"Coordina hora en la vitrina.", href:"#/", scroll:"visitForm"},
+];
+function intentGrid(){
+  return `<section class="section shell">
+    <div class="intent">
+      ${INTENT_ITEMS.map(it=>`
+      <a class="intent__item reveal" href="${it.href}"${it.scroll?` onclick="setTimeout(()=>document.getElementById('${it.scroll}')?.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'}),80)"`:""}>
+        <span class="intent__ico">${it.ico}</span>
+        <span class="intent__label">${esc(it.label)}</span>
+        <span class="intent__sub">${esc(it.sub)}</span>
+      </a>`).join("")}
+    </div>
+  </section>`;
+}
+
+/* ---------- testimonios ---------- */
+const TESTIMONIOS = [
+  {n:"Javiera R.", t:"Le compré mi RAV4 usada hace 8 meses. Llegó tal cual la foto y la garantía de 6 meses me dio tranquilidad para animarme.", r:5},
+  {n:"Matías S.", t:"Financié un 0 km en menos de una semana. Me explicaron la cuota sin letra chica y el proceso fue rápido.", r:5},
+  {n:"Constanza P.", t:"Tasé mi auto anterior online y usé eso como pie. El equipo se encargó de la transferencia completa.", r:4},
+  {n:"Felipe A.", t:"Buena atención en la vitrina, sin apuro para decidir. Volvería a comprar acá.", r:5},
+];
+function testimonios(){
+  const star = i => `<svg viewBox="0 0 24 24" fill="${i?'currentColor':'none'}" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.2 1 6-5.2-2.8-5.2 2.8 1-6L3.5 9.7l5.9-.8z"/></svg>`;
+  return `<section class="section shell reveal">
+      <p class="eyebrow">Clientes Neomarket</p>
+      <h2 class="display" style="margin-top:.5rem">Lo que dicen<br>quienes ya compraron</h2>
+      <div class="testi-grid">
+        ${TESTIMONIOS.map(x=>`
+        <figure class="testi">
+          <div class="testi__stars">${Array.from({length:5},(_,i)=>star(i<x.r)).join("")}</div>
+          <blockquote>“${esc(x.t)}”</blockquote>
+          <figcaption>${esc(x.n)}</figcaption>
+        </figure>`).join("")}
+      </div>
+  </section>`;
+}
+
 /* ============================================================
    VISTAS
    ============================================================ */
@@ -1170,6 +1280,8 @@ function viewHome(){
     </div>
     ${brandStrip()}
   </section>
+
+  ${intentGrid()}
 
   <section class="section shell reveal">
     <div class="intro">
@@ -1210,6 +1322,8 @@ function viewHome(){
     </div>
     <div class="rail">${usados.map(v=>card(v,true)).join("")}</div>
   </section>
+
+  ${testimonios()}
 
   <section class="section shell reveal section--alt">
     <div class="joincta">
@@ -1425,7 +1539,8 @@ function viewVehiculo(id){
   const v = byId(id);
   if(!v) return viewNotFound();
   const rel = VEHICULOS.filter(x=>x.cond===v.cond && x.id!==v.id && (x.carroceria===v.carroceria || x.marca===v.marca)).slice(0,3);
-  const c = cuotaRef(v.precio);
+  const pFin = precioFin(v.precio);
+  const c = cuotaRef(pFin);
   const shots = gallery(v);
   const alt = esc(v.marca+" "+v.modelo+" "+v.version);
   return `
@@ -1454,18 +1569,24 @@ function viewVehiculo(id){
         </div>
       </div>
       <aside class="pricebox">
-        <div class="pricebox__k">${v.cond==="nuevo"?"Precio desde":"Precio"}</div>
-        <div class="pricebox__price">${clp(v.precio)}</div>
-        <div class="pricebox__cuota">o <b>${clp(c)}</b> x mes · 48 cuotas*</div>
+        <div class="pricebox__tier">
+          <div class="pricebox__k">Precio contado</div>
+          <div class="pricebox__price pricebox__price--contado">${clp(v.precio)}</div>
+        </div>
+        <div class="pricebox__tier pricebox__tier--fin">
+          <div class="pricebox__k">Precio financiado <span class="pricebox__badge">-3%</span></div>
+          <div class="pricebox__price">${clp(pFin)}</div>
+          <div class="pricebox__cuota">o <b>${clp(c)}</b> x mes · 48 cuotas*</div>
+        </div>
         <div class="pricebox__actions">
           <a class="btn btn--solid" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent("Hola Neomarket, me interesa el "+v.marca+" "+v.modelo+" "+v.version+" ("+(v.cond==="nuevo"?"nuevo":v.anio)+") a "+clp(v.precio)+". ¿Sigue disponible?")}">Cotizar por WhatsApp</a>
           <button class="btn" data-testdrive="${v.id}">Agendar test drive</button>
         </div>
         <p class="pricebox__note">${v.cond==="nuevo"
-          ? "Precio referencial de lista. No incluye inscripción ni accesorios. Sujeto a stock."
+          ? "El precio financiado incluye 3% de descuento por evaluar tu crédito con nosotros. No incluye inscripción ni accesorios. Sujeto a stock."
           : segmento(v)==="Seminuevo"
-            ? "Precio con financiamiento. Incluye transferencia y garantía extendida de 6 meses en motor y caja."
-            : "Precio con financiamiento. Incluye transferencia y garantía mecánica de 3 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
+            ? "El precio financiado incluye 3% de descuento, transferencia y garantía extendida de 6 meses en motor y caja."
+            : "El precio financiado incluye 3% de descuento, transferencia y garantía mecánica de 3 meses en motor y caja."}<br>*Cuota estimada, pie 20%, tasa ${TASA_DEFAULT}% mensual.</p>
       </aside>
     </div>
     ${rel.length?`
