@@ -302,6 +302,20 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .brand-logo--txt{font-family:var(--ff-body);font-weight:700;font-size:.92rem;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;line-height:1}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+.promo{background:var(--accent-soft);border-bottom:1px solid var(--hairline);padding:.9rem var(--pad)}
+.promo__track{position:relative;max-width:var(--shell);margin-inline:auto;min-height:1.6em}
+.promo__item{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;text-align:center;
+  font-family:var(--ff-body);font-size:.85rem;color:var(--accent-2);transition:opacity .5s var(--ease);
+}
+.promo__item[aria-hidden="true"]{opacity:0;pointer-events:none}
+.promo__item[aria-hidden="false"]{opacity:1}
+.promo__item b{color:var(--bone);font-weight:600}
+.promo__item .arw{color:var(--accent);white-space:nowrap}
+.promo__dots{display:flex;gap:.35rem;justify-content:center;margin-top:.55rem}
+.promo__dots span{width:14px;height:2px;background:var(--hairline)}
+.promo__dots span[aria-current="true"]{background:var(--accent)}
+
 /* ============================================================
    HOME — editorial featured bands
    ============================================================ */
@@ -473,6 +487,10 @@ svg.brand-logo{height:22px;width:auto;display:block}
 }
 .chip:hover{color:var(--bone);border-color:var(--bone);background:var(--ink-raised)}
 .chip--clear{border-style:dashed;border-color:var(--hairline);background:var(--ink-raised);color:var(--bone-dim)}
+.quick-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.chip--quick{border-color:var(--hairline);background:var(--ink-raised);color:var(--bone-dim)}
+.chip--quick:hover{border-color:var(--bone);color:var(--bone);background:var(--ink-raised)}
+.chip--quick[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 
 .empty{border:1px solid var(--hairline);padding:clamp(2rem,6vw,4rem);text-align:center}
 .empty h3{margin-bottom:.75rem}
@@ -650,6 +668,23 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .testi figcaption{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-faint)}
 
 /* ============================================================
+   SERVICIO TÉCNICO + SUCURSALES + INSTITUCIONAL
+   ============================================================ */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:var(--s-6)}
+.svc-item{border:1px solid var(--hairline);padding:1.75rem 1.6rem;transition:border-color .25s var(--ease)}
+.svc-item:hover{border-color:var(--accent)}
+.svc-item h3{font-family:var(--ff-display);font-weight:600;font-size:1.1rem;margin-bottom:.6rem;color:var(--bone)}
+.svc-item p{color:var(--bone-dim);font-size:.9rem;line-height:1.55}
+
+.suc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.75rem;margin-top:var(--s-6)}
+.suc-card{border:1px solid var(--hairline)}
+.suc-card__map{aspect-ratio:16/9;background:var(--ink-raised)}
+.suc-card__map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.3) invert(.92) contrast(.9)}
+.suc-card__body{padding:1.5rem 1.6rem}
+.suc-card__body h3{font-size:1.3rem;margin-bottom:.5rem}
+.suc-card__body p{color:var(--bone-dim);font-size:.92rem}
+
+/* ============================================================
    CIERRE + FOOTER
    ============================================================ */
 .joincta{text-align:center;max-width:560px;margin-inline:auto;padding-block:clamp(1.5rem,4vw,3.5rem)}
@@ -670,7 +705,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
 
 .ft{border-top:1px solid var(--hairline);margin-top:var(--section-pad)}
 .ft__top{display:flex;justify-content:space-between;gap:clamp(2rem,5vw,4rem);align-items:flex-start;padding-block:clamp(3rem,7vw,5rem)}
-.ft__cols{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:2rem;flex:1;min-width:0}
+.ft__cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.1fr;gap:2rem;flex:1;min-width:0}
 .ft__cols h4{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:1.1rem}
 .ft__cols a,.ft__cols p{display:block;color:var(--bone-dim);font-size:.88rem;padding:.32rem 0}
 .ft__cols a:hover{color:var(--accent-2)}
@@ -794,7 +829,8 @@ svg.brand-logo{height:22px;width:auto;display:block}
     <div class="hd__right">
       <nav class="nav nav--desk" aria-label="Secundaria">
         <a href="#/tasacion">Tasación</a>
-        <a href="https://wa.me/56951234567?text=Hola%20Neomarket%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener">Contacto</a>
+        <a href="#/servicio">Servicio técnico</a>
+        <a href="#/contacto">Contacto</a>
       </nav>
     </div>
   </div>
@@ -805,9 +841,13 @@ svg.brand-logo{height:22px;width:auto;display:block}
   <a href="#/nuevos">Nuevos</a>
   <a href="#/usados">Usados</a>
   <a href="#/financiamiento">Financiamiento</a>
+  <a href="#/servicio">Servicio técnico</a>
   <a href="#/tasacion">Tasación</a>
-  <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp</a>
-  <p class="mono">Av. del Mar 1234, La Serena · +56 51 234 5678</p>
+  <a href="#/sucursales">Sucursales</a>
+  <a href="#/nosotros">Nosotros</a>
+  <a href="#/contacto">Contacto</a>
+  <a href="https://wa.me/56982570969" target="_blank" rel="noopener">WhatsApp</a>
+  <p class="mono">+56 9 8257 0969 · neomarket.chile@neomarket-chile.com</p>
 </div>
 
 <main id="main"><div id="app"></div></main>
@@ -828,22 +868,28 @@ svg.brand-logo{height:22px;width:auto;display:block}
           <a href="#/tasacion">Tasa tu auto</a>
         </div>
         <div>
+          <h4>Empresa</h4>
+          <a href="#/servicio">Servicio técnico</a>
+          <a href="#/sucursales">Sucursales</a>
+          <a href="#/nosotros">Nosotros</a>
+          <a href="#/contacto">Contacto</a>
+        </div>
+        <div>
           <h4>Sucursales</h4>
           <p>La Serena Centro<br>Av. Francisco de Aguirre 1200</p>
           <p>La Serena Norte<br>Ruta 5 Norte km 470</p>
         </div>
         <div>
           <h4>Contacto</h4>
-          <a href="tel:+56512345678">+56 51 234 5678</a>
-          <a href="https://wa.me/56951234567" target="_blank" rel="noopener">WhatsApp ventas</a>
+          <a href="tel:+56982570969">+56 9 8257 0969</a>
+          <a href="mailto:neomarket.chile@neomarket-chile.com">neomarket.chile@neomarket-chile.com</a>
+          <a href="https://wa.me/56982570969" target="_blank" rel="noopener">WhatsApp ventas</a>
           <p>Lun a Vie 09–19h · Sáb 10–14h</p>
         </div>
       </div>
       <div class="ft__social">
-        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.65C16.35 3.6 15.3 3.5 14.1 3.5c-2.5 0-4.1 1.5-4.1 4.25v2.15H7.3V13h2.7v8z"/></svg></a>
-        <a href="https://wa.me/56951234567" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.8l-.3-.2-2.6.8.8-2.5-.2-.3A8 8 0 0 1 12 4zM8.9 7.6c-.15 0-.4.05-.6.3-.2.25-.8.8-.8 1.9s.85 2.2.95 2.35c.1.15 1.65 2.6 4.05 3.55 2 .8 2.4.65 2.85.6.45-.05 1.4-.55 1.6-1.1.2-.55.2-1 .15-1.1-.05-.1-.2-.15-.45-.3-.25-.15-1.4-.7-1.6-.75-.2-.1-.35-.15-.5.1-.15.25-.6.75-.7.9-.15.15-.25.15-.5.05-.25-.15-1-.4-1.9-1.2-.7-.6-1.15-1.35-1.3-1.6-.15-.25 0-.35.1-.5.1-.1.25-.3.35-.45.1-.15.15-.25.25-.4.05-.15 0-.3-.05-.4-.05-.1-.5-1.25-.7-1.7-.2-.4-.35-.35-.5-.35z"/></svg></a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.2 3c.3 2.15 1.55 3.5 3.8 3.7v2.85c-1.45.1-2.75-.35-3.85-1.1v6.45A6.25 6.25 0 1 1 9.9 8.7v3.05a3.2 3.2 0 1 0 3.4 3.15V3z"/></svg></a>
+        <a href="https://wa.me/56982570969" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.8l-.3-.2-2.6.8.8-2.5-.2-.3A8 8 0 0 1 12 4zM8.9 7.6c-.15 0-.4.05-.6.3-.2.25-.8.8-.8 1.9s.85 2.2.95 2.35c.1.15 1.65 2.6 4.05 3.55 2 .8 2.4.65 2.85.6.45-.05 1.4-.55 1.6-1.1.2-.55.2-1 .15-1.1-.05-.1-.2-.15-.45-.3-.25-.15-1.4-.7-1.6-.75-.2-.1-.35-.15-.5.1-.15.25-.6.75-.7.9-.15.15-.25.15-.5.05-.25-.15-1-.4-1.9-1.2-.7-.6-1.15-1.35-1.3-1.6-.15-.25 0-.35.1-.5.1-.1.25-.3.35-.45.1-.15.15-.25.25-.4.05-.15 0-.3-.05-.4-.05-.1-.5-1.25-.7-1.7-.2-.4-.35-.35-.5-.35z"/></svg></a>
+        <a href="mailto:neomarket.chile@neomarket-chile.com" aria-label="Correo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 6.5l8 6.5 8-6.5"/></svg></a>
       </div>
     </div>
   </div>
@@ -862,7 +908,8 @@ svg.brand-logo{height:22px;width:auto;display:block}
 /* ============================================================
    DATOS
    ============================================================ */
-const WA = "56951234567";
+const WA = "56982570969";
+const EMAIL = "neomarket.chile@neomarket-chile.com";
 
 /* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
    Si una clave no está, se genera un render de estudio en SVG como respaldo. */
@@ -1203,6 +1250,30 @@ function brandStrip(){
   return `<div class="brandstrip" aria-label="Marcas que representamos"><div class="brandstrip__track">${set(true)}${set(false)}</div></div>`;
 }
 
+/* ---------- banner de campaña (portada) ---------- */
+const PROMO_MSGS = [
+  {t:"Liquidación de temporada", d:"Hasta 15% de descuento en seminuevos seleccionados, válido hasta el 30 de septiembre.", href:"#/usados", cta:"Ver ofertas"},
+  {t:"Tasa preferencial", d:"Financia tu próximo 0 km con tasa preferencial este mes.", href:"#/financiamiento", cta:"Simular crédito"},
+  {t:"Bono por tu usado", d:"Trae tu auto actual y llévate hasta $500.000 extra al cambiarlo.", href:"#/tasacion", cta:"Tasar mi auto"},
+];
+function promoBar(){
+  return `<div class="promo" aria-label="Promociones">
+    <div class="promo__track">
+      ${PROMO_MSGS.map((p,i)=>`<a class="promo__item" href="${p.href}" aria-hidden="${i!==0}">
+        <b>${esc(p.t)}</b> — ${esc(p.d)} <span class="arw">${esc(p.cta)} →</span>
+      </a>`).join("")}
+    </div>
+    <div class="promo__dots">${PROMO_MSGS.map((_,i)=>`<span data-pdot="${i}" aria-current="${i===0}"></span>`).join("")}</div>
+  </div>`;
+}
+function wirePromo(){
+  const items=$$(".promo__item"), dots=$$("[data-pdot]");
+  if(items.length<2) return;
+  let cur=0;
+  const go=n=>{cur=(n+items.length)%items.length; items.forEach((it,i)=>it.setAttribute("aria-hidden",String(i!==cur))); dots.forEach((d,i)=>d.setAttribute("aria-current",String(i===cur)));};
+  if(!RM) promoTimer=setInterval(()=>go(cur+1),4500);
+}
+
 /* ---------- selector de intención (portada) ---------- */
 const INTENT_ITEMS = [
   {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.8 12.2 20.5 2.5M17 6l2.5 2.5M14 9l2 2"/></svg>',
@@ -1281,6 +1352,7 @@ function viewHome(){
     ${brandStrip()}
   </section>
 
+  ${promoBar()}
   ${intentGrid()}
 
   <section class="section shell reveal">
@@ -1356,6 +1428,26 @@ function catState(cond){
   if(!FILTER_STATE[cond]) FILTER_STATE[cond] = {marcas:new Set(),carro:new Set(),comb:new Set(),trans:new Set(),tipo:new Set(),pmax:null,q:"",sort:"precio-asc"};
   return FILTER_STATE[cond];
 }
+/* atajos de un clic sobre el mismo filtro de siempre (checkboxes/precio) */
+function QUICK_FILTERS(cond){
+  const common = [
+    {label:"Menos de $10.000.000", test:st=>st.pmax<=10000000, on:st=>{st.pmax=Math.min(10000000,st.cap);}, off:st=>{st.pmax=st.cap;}},
+    {label:"SUV", test:st=>st.carro.has("SUV"), on:st=>st.carro.add("SUV"), off:st=>st.carro.delete("SUV")},
+    {label:"Híbridos y eléctricos", test:st=>st.comb.has("Híbrido")&&st.comb.has("Eléctrico"), on:st=>{st.comb.add("Híbrido");st.comb.add("Eléctrico");}, off:st=>{st.comb.delete("Híbrido");st.comb.delete("Eléctrico");}},
+    {label:"Automática", test:st=>st.trans.has("Automática"), on:st=>st.trans.add("Automática"), off:st=>st.trans.delete("Automática")},
+  ];
+  const extra = cond==="usado"
+    ? [{label:"Seminuevos", test:st=>st.tipo.has("Seminuevo"), on:st=>st.tipo.add("Seminuevo"), off:st=>st.tipo.delete("Seminuevo")}]
+    : [{label:"Sedán", test:st=>st.carro.has("Sedán"), on:st=>st.carro.add("Sedán"), off:st=>st.carro.delete("Sedán")}];
+  return [...common, ...extra];
+}
+function matchesCarro(v, set){
+  if(!set.size) return true;
+  if(set.has(v.carroceria)) return true;
+  if(set.has("Eléctrico") && v.combustible.includes("Eléctrico")) return true;
+  if(set.has("Híbrido") && v.combustible.includes("Híbrido")) return true;
+  return false;
+}
 function viewCatalogo(cond){
   const pool = VEHICULOS.filter(v=>v.cond===cond);
   const st = catState(cond);
@@ -1363,7 +1455,7 @@ function viewCatalogo(cond){
   st.cap = priceCap;
   if(st.pmax===null) st.pmax = priceCap;
   const marcas = [...new Set(pool.map(v=>v.marca))].sort();
-  const carros = [...new Set(pool.map(v=>v.carroceria))].sort();
+  const carros = [...new Set([...pool.map(v=>v.carroceria), "Eléctrico", "Híbrido"])].sort();
   const combs = [...new Set(pool.map(v=>v.combustible))].sort();
   const transs = [...new Set(pool.map(v=>v.transmision.split(" ")[0]))].sort();
 
@@ -1376,6 +1468,9 @@ function viewCatalogo(cond){
     <div style="margin-bottom:var(--s-6)">
       <p class="eyebrow">${cond==="nuevo"?"Inventario · 0 km":"Inventario · Seminuevos y usados"}</p>
       <h1 class="display" style="margin-top:.6rem;font-size:clamp(2.4rem,6vw,4.5rem)">${cond==="nuevo"?"Autos nuevos":"Seminuevos y usados"}</h1>
+      <div class="quick-filters" id="quickFilters">
+        ${QUICK_FILTERS(cond).map((q,i)=>`<button type="button" class="chip chip--quick" data-qf="${i}" aria-pressed="false">${esc(q.label)}</button>`).join("")}
+      </div>
     </div>
     <div class="cat">
       <form class="cat__filters" id="filters" data-cond="${cond}" aria-label="Filtros">
@@ -1426,12 +1521,30 @@ function viewCatalogo(cond){
   </section>`;
 }
 
+function syncFilterUI(cond){
+  const st = catState(cond);
+  const f = $("#filters");
+  if(f){
+    const map = {marcas:"marcas",carro:"carro",comb:"comb",trans:"trans",tipo:"tipo"};
+    $$('input[type=checkbox][data-f]',f).forEach(cb=>{
+      const key = map[cb.dataset.f];
+      if(key) cb.checked = st[key].has(cb.value);
+    });
+    const box = $("#pmaxBox"); if(box) box.value = st.pmax<st.cap ? clp(st.pmax) : "";
+    $$(".pmax-preset",f).forEach(b=>b.setAttribute("aria-current", String((+b.dataset.pmax||st.cap)===st.pmax)));
+  }
+  QUICK_FILTERS(cond).forEach((q,i)=>{
+    const b = $(`.chip--quick[data-qf="${i}"]`);
+    if(b) b.setAttribute("aria-pressed", String(q.test(st)));
+  });
+}
 function applyFilters(cond){
   const st = catState(cond);
+  syncFilterUI(cond);
   let list = VEHICULOS.filter(v=>v.cond===cond);
   if(st.q){const q=st.q.toLowerCase();list=list.filter(v=>(v.marca+" "+v.modelo+" "+v.version).toLowerCase().includes(q));}
   if(st.marcas.size) list=list.filter(v=>st.marcas.has(v.marca));
-  if(st.carro.size) list=list.filter(v=>st.carro.has(v.carroceria));
+  if(st.carro.size) list=list.filter(v=>matchesCarro(v,st.carro));
   if(st.comb.size) list=list.filter(v=>st.comb.has(v.combustible));
   if(st.trans.size) list=list.filter(v=>st.trans.has(v.transmision.split(" ")[0]));
   if(st.tipo && st.tipo.size) list=list.filter(v=>st.tipo.has(segmento(v)));
@@ -1513,6 +1626,12 @@ function wireCatalogo(cond){
   $$(".pmax-preset",f).forEach(b=>b.addEventListener("click",()=>setPmax(cond, +b.dataset.pmax)));
   $("#sort").addEventListener("change",e=>{ st.sort=e.target.value; applyFilters(cond); });
   $("#clearAll").addEventListener("click",()=>resetFilters(cond));
+  $("#quickFilters")?.addEventListener("click",e=>{
+    const b=e.target.closest("[data-qf]"); if(!b) return;
+    const qf=QUICK_FILTERS(cond)[+b.dataset.qf];
+    qf.test(st) ? qf.off(st) : qf.on(st);
+    applyFilters(cond);
+  });
   $("#chips").addEventListener("click",e=>{
     const b=e.target.closest("button"); if(!b) return;
     if(b.id==="chipClear") return resetFilters(cond);
@@ -1691,7 +1810,7 @@ function wireFinanciamiento(){
 
 /* ---------- tasación ---------- */
 const TAS = {tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0};
-const TAS_BASE = {"Sedán":11500000,"Hatchback":10500000,"SUV":16500000,"Camioneta":23000000,"Furgón":12500000};
+const TAS_BASE = {"Sedán":11500000,"Hatchback":10500000,"SUV":16500000,"Camioneta":23000000,"Furgón":12500000,"Híbrido":18000000,"Eléctrico":21000000};
 function tasEstimate(){
   const base = TAS_BASE[TAS.tipo]||13000000;
   const age = Math.max(0, 2026 - (+TAS.anio||2026));
@@ -1702,6 +1821,26 @@ function tasEstimate(){
   const estadoMult = TAS.estado==="Excelente"?1.05:TAS.estado==="Regular"?0.88:1;
   const mid = base*dep*kmAdj*estadoMult;
   return [mid*0.93, mid*1.07];
+}
+/* Sitio sin backend: el mínimo funcional es un mailto: con los datos precargados.
+   TODO CRM: cuando se integre el CRM (Walcu/HubSpot), este envío pasa a un POST real. */
+function tasacionMailto(){
+  const [lo,hi] = tasEstimate();
+  const asunto = `Tasación online — ${TAS.marca||"auto"} ${TAS.modelo||""} ${TAS.anio||""}`.replace(/\s+/g," ").trim();
+  const cuerpo = [
+    `Nombre: ${TAS.nombre||"-"}`,
+    `Teléfono: ${TAS.fono||"-"}`,
+    `Email: ${TAS.email||"-"}`,
+    "",
+    `Tipo: ${TAS.tipo||"-"}`,
+    `Marca / modelo / año: ${TAS.marca||"-"} / ${TAS.modelo||"-"} / ${TAS.anio||"-"}`,
+    `Kilometraje: ${TAS.km?km(+TAS.km):"-"}`,
+    `Transmisión: ${TAS.trans||"-"}`,
+    `Estado: ${TAS.estado||"-"}`,
+    "",
+    `Rango estimado: ${clp(lo)} - ${clp(hi)}`,
+  ].join("\n");
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 }
 function viewTasacion(){
   return `
@@ -1753,12 +1892,13 @@ function renderTas(){
       <div class="tas__range mono">${clp(lo)} – ${clp(hi)}</div>
       <p>Para ${esc(TAS.marca||"tu auto")} ${esc(TAS.modelo)} ${esc(TAS.anio)} · ${TAS.km?km(+TAS.km):"km s/i"} · estado ${esc(TAS.estado.toLowerCase())}.</p>
       <p style="font-size:.8rem;color:var(--bone-faint)">Estimación referencial de lo que Neomarket pagaría al recibirlo en parte de pago. El valor final lo confirma un tasador tras revisar el vehículo y sus papeles.</p>
-      <div class="hero__actions" style="justify-content:center;margin-top:2rem">
-        <a class="btn btn--solid" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola Neomarket, tasé mi ${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km} km) y me interesa avanzar.`)}">Hablar con un ejecutivo</a>
+      <div class="hero__actions" style="justify-content:center;margin-top:2rem;flex-wrap:wrap">
+        <a class="btn btn--solid" href="${tasacionMailto()}">Enviar tasación por correo</a>
+        <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola Neomarket, tasé mi ${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km} km) y me interesa avanzar.`)}">Hablar por WhatsApp</a>
         <button class="btn" id="tasRestart">Tasar otro auto</button>
       </div>
+      <p style="font-size:.72rem;color:var(--bone-faint);margin-top:1.25rem">Al presionar "Enviar tasación por correo" se abre tu app de correo con los datos precargados. Este sitio no tiene backend propio; en producción esto se conecta directo a tu CRM.</p>
     </div>`;
-    toast("Tasación enviada a "+(TAS.email||"tu correo")+".");
   }
   wireTas();
 }
@@ -1776,6 +1916,190 @@ function wireTas(){
   next?.addEventListener("click",()=>{save();TAS.step++;renderTas();window.scrollTo({top:$("#tas").offsetTop-100,behavior:RM?"auto":"smooth"});});
   back?.addEventListener("click",()=>{save();TAS.step--;renderTas();});
   $("#tasRestart")?.addEventListener("click",()=>{Object.assign(TAS,{tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0});renderTas();});
+}
+
+/* ---------- contacto ---------- */
+function viewContacto(){
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <p class="eyebrow">Contacto</p>
+    <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Hablemos de<br>tu próximo auto</h1>
+    <p style="color:var(--bone-dim);max-width:52ch;margin-bottom:var(--s-6)">Cuéntanos qué necesitas y te contactamos por el medio que prefieras. También puedes escribirnos directo por WhatsApp o correo.</p>
+    <div class="veh__layout">
+      <div>
+        <form class="visitform" id="contactForm" novalidate>
+          <div class="visitform__grid">
+            <label>Nombre<input name="nombre" autocomplete="name" required></label>
+            <label>Teléfono<input name="fono" inputmode="tel" autocomplete="tel" placeholder="+56 9 …" required></label>
+          </div>
+          <label class="visitform__full">Email<input name="email" type="email" autocomplete="email" required></label>
+          <label class="visitform__full">Motivo de contacto
+            <select name="motivo">
+              <option>Comprar auto</option>
+              <option>Vender auto</option>
+              <option>Financiamiento</option>
+              <option>Servicio técnico</option>
+              <option>Otro</option>
+            </select>
+          </label>
+          <label class="visitform__full">Mensaje<textarea name="mensaje" rows="4" placeholder="Cuéntanos qué buscas"></textarea></label>
+          <p class="visitform__err" id="contactErr" hidden>Completa nombre, teléfono y email.</p>
+          <button class="btn btn--solid" type="submit">Enviar mensaje</button>
+        </form>
+      </div>
+      <aside class="pricebox">
+        <p class="eyebrow" style="margin-bottom:1.1rem">Contacto directo</p>
+        <div style="display:flex;flex-direction:column;gap:.9rem;align-items:flex-start">
+          <a class="linkline" href="tel:+56982570969">+56 9 8257 0969</a>
+          <a class="linkline" href="https://wa.me/${WA}" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="linkline" href="mailto:${EMAIL}">${EMAIL}</a>
+        </div>
+        <div class="rule" style="margin:1.5rem 0"></div>
+        <p class="pricebox__k">Horario</p>
+        <p style="color:var(--bone-dim);font-size:.9rem;margin-top:.4rem">Lun a Vie 09–19h<br>Sáb 10–14h</p>
+      </aside>
+    </div>
+  </section>`;
+}
+function wireContacto(){
+  const f = $("#contactForm");
+  f?.addEventListener("submit", e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(f));
+    const err = $("#contactErr");
+    if(!d.nombre?.trim() || !d.fono?.trim() || !d.email?.trim()){ err.hidden=false; return; }
+    err.hidden = true;
+    const asunto = `Contacto sitio — ${d.motivo}`;
+    const cuerpo = [`Nombre: ${d.nombre}`,`Teléfono: ${d.fono}`,`Email: ${d.email}`,`Motivo: ${d.motivo}`,"",d.mensaje||""].join("\n");
+    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    toast("Se abrió tu correo con el mensaje precargado.");
+    f.reset();
+  });
+  f?.addEventListener("input", ()=>{ const err=$("#contactErr"); if(err) err.hidden=true; });
+}
+
+/* ---------- servicio técnico / repuestos ---------- */
+const SVC_ITEMS = [
+  {t:"Mantención preventiva", d:"Cambio de aceite y filtros, revisión de frenos, suspensión y niveles según la pauta del fabricante."},
+  {t:"Diagnóstico computarizado", d:"Escaneo electrónico completo para detectar fallas antes de que se conviertan en un problema mayor."},
+  {t:"Repuestos originales", d:"Trabajamos con repuestos originales y alternativos certificados, con garantía sobre la instalación."},
+  {t:"Carrocería y pintura", d:"Reparación de choques, pulido y pintura al horno con igualación de color computarizada."},
+];
+const SCHED_SLOTS = ["09:00","10:30","12:00","15:00","16:30","18:00"];
+let schedSel = {day:null, slot:null};
+function proximosDias(n){
+  const out=[]; let d=new Date(); d.setHours(0,0,0,0);
+  while(out.length<n){
+    d=new Date(d.getTime()+86400000);
+    if(d.getDay()!==0) out.push(new Date(d)); // se salta el domingo
+  }
+  return out;
+}
+function viewServicio(){
+  schedSel = {day:null, slot:null};
+  const dias = proximosDias(6);
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <p class="eyebrow">Postventa</p>
+    <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Servicio técnico<br>y repuestos</h1>
+    <p style="color:var(--bone-dim);max-width:52ch">El mismo estándar de revisión que usamos para certificar cada auto de la vitrina, disponible para tu auto aunque no lo hayas comprado con nosotros.</p>
+    <div class="svc-grid">
+      ${SVC_ITEMS.map(s=>`<div class="svc-item"><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>`).join("")}
+    </div>
+  </section>
+
+  <section class="section shell reveal section--alt">
+    <p class="eyebrow">Agenda tu hora</p>
+    <h2 class="display" style="margin-top:.5rem">Reserva tu mantención<br>en dos minutos</h2>
+    <p style="color:var(--bone-dim);max-width:52ch;margin:1rem 0 var(--s-6)">Elige día y horario disponible. Confirmamos por WhatsApp antes de las 24 horas.</p>
+    <div class="sched">
+      <div class="fgroup__h" style="margin-bottom:.9rem">Elige un día</div>
+      <div class="optgrid" id="schedDays">
+        ${dias.map((d,i)=>`<button type="button" class="opt" data-day="${i}" aria-pressed="false">
+          <b style="display:block;font-family:var(--ff-display);font-size:1.15rem;text-transform:none;letter-spacing:0">${d.getDate()}</b>
+          ${esc(d.toLocaleDateString("es-CL",{weekday:"short"}))}
+        </button>`).join("")}
+      </div>
+      <div class="fgroup__h" style="margin:1.75rem 0 .9rem">Elige un horario</div>
+      <div class="optgrid" id="schedSlots">
+        ${SCHED_SLOTS.map(s=>`<button type="button" class="opt" data-slot="${s}" aria-pressed="false">${s}</button>`).join("")}
+      </div>
+      <div style="margin-top:2rem">
+        <p id="schedMsg" style="color:var(--bone-dim);margin-bottom:1rem">Elige un día y un horario.</p>
+        <a class="btn btn--solid" id="schedConfirm" style="pointer-events:none;opacity:.5">Confirmar por WhatsApp</a>
+      </div>
+    </div>
+    <!-- TODO CRM: este selector de horas es un mínimo funcional sin backend.
+         Cuando el cliente tenga cuenta, reemplazar por el embed real de Calendly
+         o el módulo de agendamiento del CRM (Walcu/HubSpot), por ejemplo:
+         <div class="calendly-inline-widget" data-url="https://calendly.com/tu-cuenta/mantencion" style="min-width:320px;height:700px"></div>
+         <script src="https://assets.calendly.com/assets/external/widget.js" async></script> -->
+  </section>`;
+}
+function wireServicio(){
+  const dias = proximosDias(6);
+  const fmt = d => d.toLocaleDateString("es-CL",{weekday:"long",day:"numeric",month:"long"});
+  const update = ()=>{
+    const btn = $("#schedConfirm"), msg = $("#schedMsg");
+    $$(".opt[data-day]").forEach(b=>b.setAttribute("aria-pressed", String(+b.dataset.day===schedSel.day)));
+    $$(".opt[data-slot]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.slot===schedSel.slot)));
+    if(schedSel.day!=null && schedSel.slot){
+      const d = dias[schedSel.day];
+      msg.textContent = `${fmt(d)} a las ${schedSel.slot} hrs.`;
+      btn.style.pointerEvents=""; btn.style.opacity="";
+      btn.href = `https://wa.me/${WA}?text=`+encodeURIComponent(`Hola Neomarket, quiero agendar hora de servicio técnico para el ${fmt(d)} a las ${schedSel.slot} hrs.`);
+      btn.target="_blank"; btn.rel="noopener";
+    } else {
+      msg.textContent = "Elige un día y un horario.";
+      btn.style.pointerEvents="none"; btn.style.opacity=".5"; btn.removeAttribute("href");
+    }
+  };
+  $$(".opt[data-day]").forEach(b=>b.addEventListener("click",()=>{schedSel.day=+b.dataset.day;update();}));
+  $$(".opt[data-slot]").forEach(b=>b.addEventListener("click",()=>{schedSel.slot=b.dataset.slot;update();}));
+  update();
+}
+
+/* ---------- sucursales ---------- */
+const SUCURSALES = [
+  {n:"La Serena Centro", dir:"Av. Francisco de Aguirre 1200, La Serena", tel:"+56 9 8257 0969", horario:"Lun a Vie 09–19h · Sáb 10–14h"},
+  {n:"La Serena Norte", dir:"Ruta 5 Norte km 470, La Serena", tel:"+56 9 8257 0969", horario:"Lun a Vie 09–19h · Sáb 10–14h"},
+];
+function mapEmbed(dir){
+  return `https://maps.google.com/maps?q=${encodeURIComponent(dir+", Chile")}&output=embed`;
+}
+function viewSucursales(){
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem)">
+    <p class="eyebrow">Dónde estamos</p>
+    <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Nuestras<br>sucursales</h1>
+    <div class="suc-grid">
+      ${SUCURSALES.map(s=>`
+      <article class="suc-card">
+        <div class="suc-card__map"><iframe src="${mapEmbed(s.dir)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Mapa de ${esc(s.n)}"></iframe></div>
+        <div class="suc-card__body">
+          <h3 class="display">${esc(s.n)}</h3>
+          <p>${esc(s.dir)}</p>
+          <a class="linkline" href="tel:${s.tel.replace(/\s/g,"")}">${esc(s.tel)}</a>
+          <p style="color:var(--bone-faint);font-size:.82rem;margin-top:.6rem">${esc(s.horario)}</p>
+        </div>
+      </article>`).join("")}
+    </div>
+  </section>`;
+}
+
+/* ---------- nosotros ---------- */
+function viewNosotros(){
+  return `
+  <section class="section shell" style="padding-top:clamp(5rem,9vw,7rem);max-width:900px">
+    <p class="eyebrow">Nosotros</p>
+    <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Compramos autos<br>como si fueran nuestros</h1>
+    <div style="color:var(--bone-dim);font-size:1.05rem;line-height:1.85;display:flex;flex-direction:column;gap:1.5rem;max-width:68ch">
+      <p>Neomarket es una automotora multimarca de La Serena. Vendemos autos nuevos con respaldo de red y seminuevos revisados punto por punto, con la misma exigencia con la que elegiríamos un auto para nosotros mismos.</p>
+      <p>No listamos todo lo que existe: seleccionamos modelos con repuestos disponibles en Chile, buen valor de reventa y una red de servicio que responde cuando algo falla. Cada seminuevo pasa por una revisión de 120 puntos antes de entrar a la vitrina.</p>
+      <p>Operamos como intermediarios de compraventa e inscribimos cada transferencia ante el Registro Civil conforme a la normativa vigente. Los precios publicados son referenciales y están sujetos a stock; el valor final de tasación lo confirma un tasador tras revisar el vehículo y sus papeles.</p>
+    </div>
+    <a class="btn btn--solid" href="#/contacto" style="margin-top:2.5rem">Conversemos</a>
+  </section>`;
 }
 
 function viewNotFound(){
@@ -1825,8 +2149,14 @@ function openTestDrive(id){
   </form>`);
   $("#tdForm").addEventListener("submit",e=>{
     e.preventDefault();
+    const d=Object.fromEntries(new FormData(e.target));
     closeModal();
-    toast(`Listo. Te llamamos para confirmar el test drive del ${esc(v.modelo)}.`);
+    // Sitio sin backend: mínimo funcional = mailto: con los datos precargados.
+    // TODO CRM: cuando se integre el CRM (Walcu/HubSpot) esto pasa a un POST real.
+    const asunto=`Test drive — ${v.marca} ${v.modelo}`;
+    const cuerpo=[`Nombre: ${d.n}`,`Teléfono: ${d.f}`,`Día preferido: ${d.d}`,`Sucursal: ${d.s}`,`Auto: ${v.marca} ${v.modelo} ${v.version}`].join("\n");
+    location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    toast(`Listo, se abrió tu correo con el test drive del ${esc(v.modelo)} para que lo envíes.`);
   });
 }
 
@@ -1856,12 +2186,17 @@ function render(){
 
   if(prevSeg==="nuevos" || prevSeg==="usados") catScroll[prevSeg] = window.scrollY;
   clearInterval(heroTimer);
+  clearInterval(promoTimer);
   if(!seg){ html=viewHome(); after=wireHome; }
   else if(seg==="nuevos"){ html=viewCatalogo("nuevo"); after=()=>wireCatalogo("nuevo"); }
   else if(seg==="usados"){ html=viewCatalogo("usado"); after=()=>wireCatalogo("usado"); }
   else if(seg==="vehiculo" && parts[1]){ html=viewVehiculo(parts[1]); after=()=>wireVehiculo(parts[1]); }
   else if(seg==="financiamiento"){ html=viewFinanciamiento(params); after=wireFinanciamiento; }
   else if(seg==="tasacion"){ html=viewTasacion(); after=()=>{TAS.step=0;renderTas();}; }
+  else if(seg==="contacto"){ html=viewContacto(); after=wireContacto; }
+  else if(seg==="servicio"){ html=viewServicio(); after=wireServicio; }
+  else if(seg==="sucursales"){ html=viewSucursales(); }
+  else if(seg==="nosotros"){ html=viewNosotros(); }
   else { html=viewNotFound(); }
 
   app.innerHTML = html;
@@ -1878,13 +2213,14 @@ function render(){
   prevSeg = seg;
 }
 function syncNav(seg){
-  const map={nuevos:"#/nuevos",usados:"#/usados",financiamiento:"#/financiamiento",tasacion:"#/tasacion"};
+  const map={nuevos:"#/nuevos",usados:"#/usados",financiamiento:"#/financiamiento",servicio:"#/servicio",tasacion:"#/tasacion",contacto:"#/contacto"};
   $$(".hd .nav a").forEach(a=>a.removeAttribute("aria-current"));
   const active=map[seg];
   if(active){ const a=$(`.hd .nav a[href="${active}"]`); if(a) a.setAttribute("aria-current","page"); }
 }
 
 let heroTimer=null;
+let promoTimer=null;
 function wireHome(){
   const vf=$("#visitForm");
   if(vf) vf.addEventListener("submit",e=>{
@@ -1894,10 +2230,16 @@ function wireHome(){
     if(!d.nombre.trim() || !d.fono.trim()){ err.hidden=false; return; }
     err.hidden=true;
     const nom=d.nombre.trim().split(" ")[0];
-    toast(`Listo ${nom}, te contactamos para confirmar tu visita a ${d.sucursal}.`);
+    // Sitio sin backend: mínimo funcional = mailto: con los datos precargados.
+    // TODO CRM: cuando se integre el CRM (Walcu/HubSpot) esto pasa a un POST real.
+    const asunto=`Agenda de visita — ${d.sucursal}`;
+    const cuerpo=[`Nombre: ${d.nombre}`,`Teléfono: ${d.fono}`,`Email: ${d.email||"-"}`,`Fecha: ${d.fecha||"-"}`,`Sucursal: ${d.sucursal}`,"",d.msg||""].join("\n");
+    location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    toast(`Listo ${nom}, se abrió tu correo con la visita a ${d.sucursal} para que la envíes.`);
     vf.reset();
   });
   vf?.addEventListener("input",()=>{ const err=$("#visitErr"); if(err) err.hidden=true; });
+  wirePromo();
 
   const slides=$$(".hslide"), dots=$$("[data-dot]");
   if(slides.length<2) return;
