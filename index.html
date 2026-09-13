@@ -913,6 +913,35 @@ svg.brand-logo{height:22px;width:auto;display:block}
 const WA = "56982570969";
 const EMAIL = "neomarket.chile@neomarket-chile.com";
 
+/* Integración HubSpot — portal "Neomarket - Captura sitio web".
+   PENDIENTE por confirmar en HubSpot (Contactos → Propiedades) antes de dar esto por cerrado:
+   los 4 nombres internos de propiedad personalizada de abajo son los que pasó el equipo,
+   pero HubSpot los autogenera y pueden no calzar textualmente con la etiqueta visible. */
+const HUBSPOT_PORTAL_ID = "52023371";
+const HUBSPOT_FORM_GUID = "7d787b44-8758-48d1-a22c-e34c15365de3";
+async function enviarAHubSpot(datos){
+  const payload = {
+    fields: [
+      { name: "firstname", value: datos.nombre || "" },
+      { name: "email", value: datos.email || "" },
+      { name: "phone", value: datos.telefono || "" },
+      { name: "auto_tasado", value: datos.autoTasado || "" },
+      { name: "motivo_de_contacto", value: datos.motivo || "" },
+      { name: "sucursal_y_fecha_de_visita", value: datos.sucursalFecha || "" },
+      { name: "servicio_y_hora_agendada", value: datos.servicioHora || "" },
+    ],
+  };
+  try{
+    await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  }catch(e){
+    console.error("Error enviando a HubSpot:", e);
+  }
+}
+
 /* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
    Si una clave no está, se genera un render de estudio en SVG como respaldo. */
 const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1400&q=75`;
@@ -1895,8 +1924,8 @@ function renderTas(){
       <p>Para ${esc(TAS.marca||"tu auto")} ${esc(TAS.modelo)} ${esc(TAS.anio)} · ${TAS.km?km(+TAS.km):"km s/i"} · estado ${esc(TAS.estado.toLowerCase())}.</p>
       <p style="font-size:.8rem;color:var(--bone-faint)">Estimación referencial de lo que Neomarket pagaría al recibirlo en parte de pago. El valor final lo confirma un tasador tras revisar el vehículo y sus papeles.</p>
       <div class="hero__actions" style="justify-content:center;margin-top:2rem;flex-wrap:wrap">
-        <a class="btn btn--solid" href="${tasacionMailto()}">Enviar tasación por correo</a>
-        <a class="btn btn--ghost" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola Neomarket, tasé mi ${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km} km) y me interesa avanzar.`)}">Hablar por WhatsApp</a>
+        <a class="btn btn--solid" id="tasMailBtn" href="${tasacionMailto()}">Enviar tasación por correo</a>
+        <a class="btn btn--ghost" id="tasWaBtn" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola Neomarket, tasé mi ${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km} km) y me interesa avanzar.`)}">Hablar por WhatsApp</a>
         <button class="btn" id="tasRestart">Tasar otro auto</button>
       </div>
       <p style="font-size:.72rem;color:var(--bone-faint);margin-top:1.25rem">Al presionar "Enviar tasación por correo" se abre tu app de correo con los datos precargados. Este sitio no tiene backend propio; en producción esto se conecta directo a tu CRM.</p>
@@ -1918,6 +1947,12 @@ function wireTas(){
   next?.addEventListener("click",()=>{save();TAS.step++;renderTas();window.scrollTo({top:$("#tas").offsetTop-100,behavior:RM?"auto":"smooth"});});
   back?.addEventListener("click",()=>{save();TAS.step--;renderTas();});
   $("#tasRestart")?.addEventListener("click",()=>{Object.assign(TAS,{tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0});renderTas();});
+  const enviarTasHubSpot = ()=>{
+    const autoTasado = `${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km?km(+TAS.km):"km s/i"}, ${TAS.estado})`;
+    enviarAHubSpot({ nombre:TAS.nombre, email:TAS.email, telefono:TAS.fono, autoTasado });
+  };
+  $("#tasMailBtn")?.addEventListener("click", enviarTasHubSpot);
+  $("#tasWaBtn")?.addEventListener("click", enviarTasHubSpot);
 }
 
 /* ---------- contacto ---------- */
@@ -1971,10 +2006,9 @@ function wireContacto(){
     const err = $("#contactErr");
     if(!d.nombre?.trim() || !d.fono?.trim() || !d.email?.trim()){ err.hidden=false; return; }
     err.hidden = true;
-    const asunto = `Contacto sitio — ${d.motivo}`;
-    const cuerpo = [`Nombre: ${d.nombre}`,`Teléfono: ${d.fono}`,`Email: ${d.email}`,`Motivo: ${d.motivo}`,"",d.mensaje||""].join("\n");
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-    toast("Se abrió tu correo con el mensaje precargado.");
+    const motivo = d.mensaje?.trim() ? `${d.motivo} — ${d.mensaje.trim()}` : d.motivo;
+    enviarAHubSpot({ nombre:d.nombre, email:d.email, telefono:d.fono, motivo });
+    toast("¡Gracias! Recibimos tu mensaje, te contactamos pronto.");
     f.reset();
   });
   f?.addEventListener("input", ()=>{ const err=$("#contactErr"); if(err) err.hidden=true; });
@@ -2058,6 +2092,11 @@ function wireServicio(){
   };
   $$(".opt[data-day]").forEach(b=>b.addEventListener("click",()=>{schedSel.day=+b.dataset.day;update();}));
   $$(".opt[data-slot]").forEach(b=>b.addEventListener("click",()=>{schedSel.slot=b.dataset.slot;update();}));
+  $("#schedConfirm")?.addEventListener("click",()=>{
+    if(schedSel.day==null || !schedSel.slot) return;
+    const d = dias[schedSel.day];
+    enviarAHubSpot({ servicioHora: `${fmt(d)} a las ${schedSel.slot} hrs.` });
+  });
   update();
 }
 
@@ -2232,12 +2271,9 @@ function wireHome(){
     if(!d.nombre.trim() || !d.fono.trim()){ err.hidden=false; return; }
     err.hidden=true;
     const nom=d.nombre.trim().split(" ")[0];
-    // Sitio sin backend: mínimo funcional = mailto: con los datos precargados.
-    // TODO CRM: cuando se integre el CRM (Walcu/HubSpot) esto pasa a un POST real.
-    const asunto=`Agenda de visita — ${d.sucursal}`;
-    const cuerpo=[`Nombre: ${d.nombre}`,`Teléfono: ${d.fono}`,`Email: ${d.email||"-"}`,`Fecha: ${d.fecha||"-"}`,`Sucursal: ${d.sucursal}`,"",d.msg||""].join("\n");
-    location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-    toast(`Listo ${nom}, se abrió tu correo con la visita a ${d.sucursal} para que la envíes.`);
+    const sucursalFecha = `${d.sucursal}${d.fecha?" — "+d.fecha:""}${d.msg?.trim()?" — "+d.msg.trim():""}`;
+    enviarAHubSpot({ nombre:d.nombre, email:d.email, telefono:d.fono, sucursalFecha });
+    toast(`Listo ${nom}, quedaste agendado para visitar ${d.sucursal}. Te contactamos para confirmar.`);
     vf.reset();
   });
   vf?.addEventListener("input",()=>{ const err=$("#visitErr"); if(err) err.hidden=true; });
