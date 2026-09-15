@@ -2101,8 +2101,12 @@ function viewServicio(){
       <div class="optgrid" id="schedSlots">
         ${SCHED_SLOTS.map(s=>`<button type="button" class="opt" data-slot="${s}" aria-pressed="false">${s}</button>`).join("")}
       </div>
+      <div class="fgroup__h" style="margin:1.75rem 0 .9rem">Tus datos</div>
+      <div class="field"><label>Nombre</label><input id="schedNombre" placeholder="Tu nombre"></div>
+      <div class="field"><label>Teléfono</label><input id="schedFono" inputmode="tel" placeholder="+56 9 …"></div>
+      <div class="field"><label>Email</label><input id="schedEmail" type="email" placeholder="tu@correo.cl"></div>
       <div style="margin-top:2rem">
-        <p id="schedMsg" style="color:var(--bone-dim);margin-bottom:1rem">Elige un día y un horario.</p>
+        <p id="schedMsg" style="color:var(--bone-dim);margin-bottom:1rem">Elige un día, un horario y completa tus datos.</p>
         <a class="btn btn--solid" id="schedConfirm" style="pointer-events:none;opacity:.5">Confirmar por WhatsApp</a>
       </div>
     </div>
@@ -2116,27 +2120,35 @@ function viewServicio(){
 function wireServicio(){
   const dias = proximosDias(6);
   const fmt = d => d.toLocaleDateString("es-CL",{weekday:"long",day:"numeric",month:"long"});
+  const datos = ()=>({
+    nombre: $("#schedNombre")?.value.trim(),
+    fono: $("#schedFono")?.value.trim(),
+    email: $("#schedEmail")?.value.trim(),
+  });
   const update = ()=>{
     const btn = $("#schedConfirm"), msg = $("#schedMsg");
     $$(".opt[data-day]").forEach(b=>b.setAttribute("aria-pressed", String(+b.dataset.day===schedSel.day)));
     $$(".opt[data-slot]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.slot===schedSel.slot)));
-    if(schedSel.day!=null && schedSel.slot){
+    const {nombre,fono,email} = datos();
+    if(schedSel.day!=null && schedSel.slot && nombre && fono && email){
       const d = dias[schedSel.day];
       msg.textContent = `${fmt(d)} a las ${schedSel.slot} hrs.`;
       btn.style.pointerEvents=""; btn.style.opacity="";
-      btn.href = `https://wa.me/${WA}?text=`+encodeURIComponent(`Hola Neomarket, quiero agendar hora de servicio técnico para el ${fmt(d)} a las ${schedSel.slot} hrs.`);
+      btn.href = `https://wa.me/${WA}?text=`+encodeURIComponent(`Hola Neomarket, soy ${nombre}. Quiero agendar hora de servicio técnico para el ${fmt(d)} a las ${schedSel.slot} hrs.`);
       btn.target="_blank"; btn.rel="noopener";
     } else {
-      msg.textContent = "Elige un día y un horario.";
+      msg.textContent = "Elige un día, un horario y completa tus datos.";
       btn.style.pointerEvents="none"; btn.style.opacity=".5"; btn.removeAttribute("href");
     }
   };
   $$(".opt[data-day]").forEach(b=>b.addEventListener("click",()=>{schedSel.day=+b.dataset.day;update();}));
   $$(".opt[data-slot]").forEach(b=>b.addEventListener("click",()=>{schedSel.slot=b.dataset.slot;update();}));
+  ["#schedNombre","#schedFono","#schedEmail"].forEach(id=>$(id)?.addEventListener("input",update));
   $("#schedConfirm")?.addEventListener("click",()=>{
-    if(schedSel.day==null || !schedSel.slot) return;
+    const {nombre,fono,email} = datos();
+    if(schedSel.day==null || !schedSel.slot || !nombre || !fono || !email) return;
     const d = dias[schedSel.day];
-    enviarAHubSpot({ servicioHora: `${fmt(d)} a las ${schedSel.slot} hrs.` });
+    enviarAHubSpot({ nombre, telefono:fono, email, servicioHora: `${fmt(d)} a las ${schedSel.slot} hrs.` });
   });
   update();
 }
