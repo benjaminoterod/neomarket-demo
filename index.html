@@ -629,7 +629,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .field label{display:block;font-family:var(--ff-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:.55rem}
 .field input,.field select{
   width:100%;background:var(--ink-raised);border:1px solid var(--hairline);
-  padding:.85rem .9rem;font-family:var(--ff-body);font-size:.95rem;color:var(--bone);
+  padding:.85rem .9rem;font-family:var(--ff-body);font-size:1rem;color:var(--bone);
 }
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
 .optgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.6rem}
@@ -663,7 +663,10 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .intent__ico{width:26px;height:26px;color:var(--accent);display:block}
 .intent__ico svg{width:100%;height:100%;display:block}
 .intent__label{font-family:var(--ff-display);font-weight:600;font-size:1.1rem;color:var(--bone)}
-.intent__sub{font-size:.84rem;color:var(--bone-dim);line-height:1.4}
+.intent__sub{font-size:.95rem;color:var(--bone-dim);line-height:1.5}
+.cta-line{display:inline-flex;align-items:center;gap:.5em;color:var(--accent);font-family:var(--ff-mono);font-size:.78rem;font-weight:600;letter-spacing:.04em;margin-top:.3rem}
+.cta-line .arw{transition:transform .3s var(--ease)}
+.intent__item:hover .cta-line .arw,.svc-item:hover .cta-line .arw{transform:translateX(3px)}
 @media (max-width:760px){
   .intent{grid-template-columns:1fr 1fr}
   .intent__item{border-bottom:1px solid var(--hairline)}
@@ -684,13 +687,40 @@ svg.brand-logo{height:22px;width:auto;display:block}
 .testi figcaption{font-family:var(--ff-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-faint)}
 
 /* ============================================================
+   PÁGINAS DE MARCA
+   ============================================================ */
+.marca-hero{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.marca-hero__media{position:absolute;inset:0;z-index:-2}
+.marca-hero__media img,.marca-hero__media svg{width:100%;height:100%;object-fit:cover}
+.marca-hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(0deg,rgba(8,15,24,.95) 0%,rgba(8,15,24,.6) 42%,rgba(8,15,24,.18) 72%,transparent 100%);
+}
+.marca-hero__in{padding-block:clamp(3rem,7vw,5rem);position:relative}
+.marca-hero__logo{width:clamp(38px,5vw,54px);height:clamp(38px,5vw,54px);color:var(--marca-color);margin-bottom:1.25rem}
+.marca-hero__sub{color:var(--bone-dim);max-width:48ch;margin:1rem 0 2rem;font-size:1.05rem;line-height:1.65}
+.marca-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+@media (max-width:980px){ .marca-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:620px){ .marca-grid{grid-template-columns:1fr} }
+
+.marca-focus{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.75rem;padding:1.5rem 0;margin-bottom:1.5rem;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.marca-focus__label{font-family:var(--ff-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint);flex:none}
+.marca-focus a{display:flex;align-items:center;color:var(--bone-dim);transition:color .25s var(--ease)}
+.marca-focus a:hover{color:var(--marca-color,var(--accent))}
+.marca-focus svg{width:25px;height:25px;display:block}
+
+/* ============================================================
    SERVICIO TÉCNICO + SUCURSALES + INSTITUCIONAL
    ============================================================ */
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:var(--s-6)}
-.svc-item{border:1px solid var(--hairline);padding:1.75rem 1.6rem;transition:border-color .25s var(--ease)}
+.svc-item{
+  display:block;width:100%;text-align:left;background:none;cursor:pointer;color:inherit;
+  border:1px solid var(--hairline);padding:1.75rem 1.6rem;transition:border-color .25s var(--ease);font-family:inherit;
+}
 .svc-item:hover{border-color:var(--accent)}
-.svc-item h3{font-family:var(--ff-display);font-weight:600;font-size:1.1rem;margin-bottom:.6rem;color:var(--bone)}
-.svc-item p{color:var(--bone-dim);font-size:.9rem;line-height:1.55}
+.svc-item__ico{display:block;width:26px;height:26px;color:var(--accent);margin-bottom:1rem}
+.svc-item h3{font-family:var(--ff-display);font-weight:600;font-size:1.15rem;margin-bottom:.6rem;color:var(--bone)}
+.svc-item p{color:var(--bone-dim);font-size:1rem;line-height:1.6;margin-bottom:.9rem}
 
 .suc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.75rem;margin-top:var(--s-6)}
 .suc-card{border:1px solid var(--hairline)}
@@ -712,7 +742,7 @@ svg.brand-logo{height:22px;width:auto;display:block}
   font-family:var(--ff-body);font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint)}
 .visitform input,.visitform select,.visitform textarea{
   width:100%;background:var(--ink);border:1px solid var(--hairline);
-  padding:.8rem .85rem;font-family:var(--ff-body);font-weight:400;font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--bone);
+  padding:.8rem .85rem;font-family:var(--ff-body);font-weight:400;font-size:1rem;letter-spacing:0;text-transform:none;color:var(--bone);
 }
 .visitform input:focus,.visitform select:focus,.visitform textarea:focus{outline:none;border-color:var(--accent)}
 .visitform textarea{resize:vertical;min-height:3.2rem}
@@ -1014,6 +1044,9 @@ const PHOTOS = {
   n8:  U("1546614042-7df3c24c9e5d"),    // BMW 520i negro
   n9:  U("1549317661-bd32c8ce0db2"),    // Fiat 500 celeste
   n10: U("1617469767053-d3b523a0b982"), // Toyota RAV4 Hybrid
+  n11: U("1606664515524-ed2f786a0bd6"), // Audi Q5 (referencial)
+  n12: U("1571127236794-81c0bbfe1ce3"), // Tesla Model Y (referencial)
+  n13: U("1533473359331-0135ef1b58bf"), // Jeep Compass (referencial)
   u1:  U("1617469767053-d3b523a0b982"), // Toyota RAV4 plata
   u2:  U("1519641471654-76ce0107ad1b"), // Honda CR-V blanco
   u3:  U("1533473359331-0135ef1b58bf"), // Ford Explorer blanco
@@ -1065,6 +1098,15 @@ const VEHICULOS = [
   {id:"n10",cond:"nuevo",marca:"Toyota",modelo:"RAV4",version:"2.5 Hybrid XLE AWD",anio:2026,km:0,precio:37490000,combustible:"Híbrido",transmision:"Automática",carroceria:"SUV",destacado:false,
    desc:"La versión híbrida del RAV4: 222 hp combinados, tracción total eléctrica y consumo homologado cercano a los 22 km/l en ciudad.",
    specs:{Motor:"2.5 + 2 eléctricos",Potencia:"222 hp",Tracción:"Total (E-Four)",Asientos:"5",Consumo:"4,7 L/100 km",Maletero:"580 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n11",cond:"nuevo",marca:"Audi",modelo:"Q5",version:"45 TFSI quattro",anio:2026,km:0,precio:52900000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,
+   desc:"El SUV mediano de Audi con el 2.0 TFSI de 265 hp y tracción quattro permanente. Suspensión adaptativa y virtual cockpit de serie.",
+   specs:{Motor:"2.0 TFSI",Potencia:"265 hp",Tracción:"quattro",Asientos:"5",Maletero:"550 L","Garantía":"3 años / 100.000 km"}},
+  {id:"n12",cond:"nuevo",marca:"Tesla",modelo:"Model Y",version:"Long Range AWD",anio:2026,km:0,precio:44900000,combustible:"Eléctrico",transmision:"Automática",carroceria:"SUV",destacado:true,
+   desc:"Doble motor, tracción total y piloto automático incluido. Autonomía real cercana a los 530 km y acceso a la red de Superchargers.",
+   specs:{Motor:"Eléctrico doble motor",Potencia:"384 hp",Autonomía:"~531 km (WLTP)","0-100":"5,0 s",Tracción:"Total","Garantía batería":"8 años"}},
+  {id:"n13",cond:"nuevo",marca:"Jeep",modelo:"Compass",version:"Longitude 1.3 Turbo",anio:2026,km:0,precio:24900000,combustible:"Bencina turbo",transmision:"Automática",carroceria:"SUV",destacado:false,
+   desc:"SUV compacto con el 1.3 turbo de 185 hp, caja automática de 7 velocidades y la capacidad todo terreno que la marca exige a cada concesionario.",
+   specs:{Motor:"1.3 turbo",Potencia:"185 hp",Tracción:"Delantera",Asientos:"5",Maletero:"438 L","Garantía":"3 años / 100.000 km"}},
 
   // ---------- USADOS / SEMINUEVOS ----------
   {id:"u1",cond:"usado",marca:"Toyota",modelo:"RAV4",version:"2.0 XLI",anio:2019,km:62400,precio:19990000,combustible:"Bencina",transmision:"Automática",carroceria:"SUV",destacado:true,duenos:1,
@@ -1330,6 +1372,59 @@ function brandStrip(){
   return `<div class="brandstrip" aria-label="Marcas que representamos"><div class="brandstrip__track">${set(true)}${set(false)}</div></div>`;
 }
 
+/* ---------- páginas de marca (foco de marca) ----------
+   Audi/BMW/Tesla: por prestigio, no se mezclan con el listado general.
+   Ford/Jeep: exigencia de estándares de marca del fabricante al concesionario.
+   Mismo tratamiento visual y de datos para las 5 — solo cambia la vitrina. */
+const MARCAS_FOCO = [
+  {marca:"BMW",   slug:"bmw",   color:"#1C69D4", copy:"Rendimiento alemán, con la red de respaldo que exige la marca."},
+  {marca:"Audi",  slug:"audi",  color:"#C9CDD3", copy:"Diseño progresivo y tracción quattro, seleccionados uno a uno."},
+  {marca:"Tesla", slug:"tesla", color:"#E31937", copy:"Movilidad eléctrica de referencia, lista para la ruta."},
+  {marca:"Ford",  slug:"ford",  color:"#2F6FE4", copy:"Fuerza y versatilidad, con el respaldo directo de fábrica."},
+  {marca:"Jeep",  slug:"jeep",  color:"#6B8E4E", copy:"Capacidad todo terreno, sin comprometer el confort."},
+];
+function marcaLogo(nombre){ return BRAND_LOGOS.find(b=>b.n===nombre)?.d || ""; }
+const MARCAS_FOCO_SET = new Set(MARCAS_FOCO.map(m=>m.marca));
+/* En el listado general de Nuevos no se mezclan las marcas con página propia
+   (quedan solo accesibles vía /marca/<slug>). Usados no se toca. */
+function catalogoPool(cond){
+  const base = VEHICULOS.filter(v=>v.cond===cond);
+  return cond==="nuevo" ? base.filter(v=>!MARCAS_FOCO_SET.has(v.marca)) : base;
+}
+function marcaFocusStrip(){
+  return `<div class="marca-focus">
+    <span class="marca-focus__label">Marcas con foco propio</span>
+    ${MARCAS_FOCO.map(m=>`<a href="#/marca/${m.slug}" style="--marca-color:${m.color}" aria-label="${esc(m.marca)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${marcaLogo(m.marca)}" fill="currentColor"/></svg></a>`).join("")}
+  </div>`;
+}
+function viewMarca(slug){
+  const foco = MARCAS_FOCO.find(m=>m.slug===String(slug).toLowerCase());
+  if(!foco) return viewNotFound();
+  const autos = VEHICULOS.filter(v=>v.marca===foco.marca);
+  if(!autos.length) return viewNotFound();
+  const destacado = autos.find(v=>v.destacado) || autos[0];
+  return `
+  <section class="marca-hero" style="--marca-color:${foco.color}">
+    <div class="marca-hero__media">${imgHTML(destacado)}</div>
+    <div class="marca-hero__in shell">
+      <svg class="marca-hero__logo" viewBox="0 0 24 24" role="img" aria-label="${esc(foco.marca)}"><path d="${marcaLogo(foco.marca)}" fill="currentColor"/></svg>
+      <h1 class="display">${esc(foco.marca)}<br>en Neomarket</h1>
+      <p class="marca-hero__sub">${esc(foco.copy)}</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#/vehiculo/${destacado.id}">Ver ${esc(destacado.modelo)}</a>
+        <button type="button" class="btn btn--ghost" onclick="document.getElementById('marcaGrid').scrollIntoView({behavior:'smooth',block:'start'})">Ver todos los modelos</button>
+      </div>
+    </div>
+  </section>
+  <section class="section shell reveal" id="marcaGrid">
+    <div class="rail-head">
+      <div><p class="eyebrow">${autos.length===1?"1 disponible":autos.length+" disponibles"}</p><h2 class="display" style="margin-top:.5rem">Modelos ${esc(foco.marca)}</h2></div>
+      <a class="linkline" href="#/nuevos">Ver todo el catálogo <span class="arw">→</span></a>
+    </div>
+    <div class="marca-grid">${autos.map(v=>card(v)).join("")}</div>
+  </section>`;
+}
+
 /* ---------- banner de campaña (portada) ---------- */
 const PROMO_MSGS = [
   {t:"Liquidación de temporada", d:"Hasta 15% de descuento en seminuevos seleccionados, válido hasta el 30 de septiembre.", href:"#/usados", cta:"Ver ofertas"},
@@ -1357,13 +1452,13 @@ function wirePromo(){
 /* ---------- selector de intención (portada) ---------- */
 const INTENT_ITEMS = [
   {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.8 12.2 20.5 2.5M17 6l2.5 2.5M14 9l2 2"/></svg>',
-   label:"Autos nuevos", sub:"0 km, con red de respaldo.", href:"#/nuevos"},
+   label:"Estrena tu 0 km", sub:"Modelos con red de respaldo en toda la región.", cta:"Ver modelos", href:"#/nuevos"},
   {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 9.5-3.8-1.3-7-4.5-7-9.5V6z"/><path d="M9 12l2 2 4-4.5"/></svg>',
-   label:"Seminuevos y usados", sub:"Revisados, con garantía.", href:"#/usados"},
+   label:"Seminuevos certificados", sub:"120 puntos revisados, con garantía real.", cta:"Ver catálogo", href:"#/usados"},
   {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
-   label:"Financiamiento", sub:"Simula tu crédito en línea.", href:"#/financiamiento"},
+   label:"Simula tu crédito", sub:"Cuota estimada al instante, sin compromiso.", cta:"Cotizar", href:"#/financiamiento"},
   {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><line x1="8" y1="3" x2="8" y2="6.5"/><line x1="16" y1="3" x2="16" y2="6.5"/></svg>',
-   label:"Agenda tu visita", sub:"Coordina hora en la vitrina.", href:"#/", scroll:"visitForm"},
+   label:"Agenda tu visita", sub:"Coordina hora y te recibimos en la vitrina.", cta:"Agendar", href:"#/", scroll:"visitForm"},
 ];
 function intentGrid(){
   return `<section class="section shell">
@@ -1373,6 +1468,7 @@ function intentGrid(){
         <span class="intent__ico">${it.ico}</span>
         <span class="intent__label">${esc(it.label)}</span>
         <span class="intent__sub">${esc(it.sub)}</span>
+        <span class="cta-line">${esc(it.cta)} <span class="arw">→</span></span>
       </a>`).join("")}
     </div>
   </section>`;
@@ -1529,7 +1625,7 @@ function matchesCarro(v, set){
   return false;
 }
 function viewCatalogo(cond){
-  const pool = VEHICULOS.filter(v=>v.cond===cond);
+  const pool = catalogoPool(cond);
   const st = catState(cond);
   const priceCap = Math.ceil(Math.max(...pool.map(v=>v.precio))/1e6)*1e6;
   st.cap = priceCap;
@@ -1552,6 +1648,7 @@ function viewCatalogo(cond){
         ${QUICK_FILTERS(cond).map((q,i)=>`<button type="button" class="chip chip--quick" data-qf="${i}" aria-pressed="false">${esc(q.label)}</button>`).join("")}
       </div>
     </div>
+    ${cond==="nuevo" ? marcaFocusStrip() : ""}
     <div class="cat">
       <form class="cat__filters" id="filters" data-cond="${cond}" aria-label="Filtros">
         <div class="cat__filters-bar">
@@ -1621,7 +1718,7 @@ function syncFilterUI(cond){
 function applyFilters(cond){
   const st = catState(cond);
   syncFilterUI(cond);
-  let list = VEHICULOS.filter(v=>v.cond===cond);
+  let list = catalogoPool(cond);
   if(st.q){const q=st.q.toLowerCase();list=list.filter(v=>(v.marca+" "+v.modelo+" "+v.version).toLowerCase().includes(q));}
   if(st.marcas.size) list=list.filter(v=>st.marcas.has(v.marca));
   if(st.carro.size) list=list.filter(v=>matchesCarro(v,st.carro));
@@ -2079,11 +2176,22 @@ function wireContacto(){
 
 /* ---------- servicio técnico / repuestos ---------- */
 const SVC_ITEMS = [
-  {t:"Mantención preventiva", d:"Cambio de aceite y filtros, revisión de frenos, suspensión y niveles según la pauta del fabricante."},
-  {t:"Diagnóstico computarizado", d:"Escaneo electrónico completo para detectar fallas antes de que se conviertan en un problema mayor."},
-  {t:"Repuestos originales", d:"Trabajamos con repuestos originales y alternativos certificados, con garantía sobre la instalación."},
-  {t:"Carrocería y pintura", d:"Reparación de choques, pulido y pintura al horno con igualación de color computarizada."},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7a4 4 0 0 1-5.3 3.7L6.8 19.6a2 2 0 1 1-2.8-2.8l8.9-8.9A4 4 0 1 1 21 7z"/></svg>',
+   t:"Mantén tu auto al día", d:"Aceite, filtros y frenos según la pauta del fabricante.", cta:"Agendar hora", scroll:"schedDays"},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>',
+   t:"Diagnóstico a tiempo", d:"Escaneo electrónico antes de que sea un problema mayor.", cta:"Agendar hora", scroll:"schedDays"},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+   t:"Repuestos con garantía", d:"Originales y alternativos certificados, con respaldo.", cta:"Cotiza por WhatsApp", wa:"Hola Neomarket, quiero cotizar un repuesto."},
+  {ico:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg>',
+   t:"Como recién salido", d:"Pulido y pintura con igualación de color computarizada.", cta:"Cotiza por WhatsApp", wa:"Hola Neomarket, quiero cotizar carrocería y pintura."},
 ];
+function svcItemHTML(s){
+  const inner = `<span class="svc-item__ico">${s.ico}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p><span class="cta-line">${esc(s.cta)} <span class="arw">→</span></span>`;
+  if(s.scroll){
+    return `<button type="button" class="svc-item" onclick="document.getElementById('${s.scroll}').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'})">${inner}</button>`;
+  }
+  return `<a class="svc-item" href="https://wa.me/${WA}?text=${encodeURIComponent(s.wa)}" target="_blank" rel="noopener">${inner}</a>`;
+}
 const SCHED_SLOTS = ["09:00","10:30","12:00","15:00","16:30","18:00"];
 let schedSel = {day:null, slot:null};
 function proximosDias(n){
@@ -2103,7 +2211,7 @@ function viewServicio(){
     <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Servicio técnico<br>y repuestos</h1>
     <p style="color:var(--bone-dim);max-width:52ch">El mismo estándar de revisión que usamos para certificar cada auto de la vitrina, disponible para tu auto aunque no lo hayas comprado con nosotros.</p>
     <div class="svc-grid">
-      ${SVC_ITEMS.map(s=>`<div class="svc-item"><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>`).join("")}
+      ${SVC_ITEMS.map(svcItemHTML).join("")}
     </div>
   </section>
 
@@ -2211,7 +2319,7 @@ function viewNosotros(){
   <section class="section shell reveal" style="padding-top:clamp(5rem,9vw,7rem);max-width:900px">
     <p class="eyebrow">Nosotros</p>
     <h1 class="display" style="margin:.6rem 0 1.5rem;font-size:clamp(2.2rem,5vw,3.6rem)">Compramos autos<br>como si fueran nuestros</h1>
-    <div style="color:var(--bone-dim);font-size:1.05rem;line-height:1.85;display:flex;flex-direction:column;gap:1.5rem;max-width:68ch">
+    <div style="color:var(--bone-dim);font-size:1.1rem;line-height:1.85;display:flex;flex-direction:column;gap:1.5rem;max-width:68ch">
       <p>Neomarket es una automotora multimarca de La Serena. Vendemos autos nuevos con respaldo de red y seminuevos revisados punto por punto, con la misma exigencia con la que elegiríamos un auto para nosotros mismos.</p>
       <p>No listamos todo lo que existe: seleccionamos modelos con repuestos disponibles en Chile, buen valor de reventa y una red de servicio que responde cuando algo falla. Cada seminuevo pasa por una revisión de 120 puntos antes de entrar a la vitrina.</p>
       <p>Operamos como intermediarios de compraventa e inscribimos cada transferencia ante el Registro Civil conforme a la normativa vigente. Los precios publicados son referenciales y están sujetos a stock; el valor final de tasación lo confirma un tasador tras revisar el vehículo y sus papeles.</p>
@@ -2317,6 +2425,7 @@ function render(){
     else if(seg==="servicio"){ html=viewServicio(); after=wireServicio; }
     else if(seg==="sucursales"){ html=viewSucursales(); }
     else if(seg==="nosotros"){ html=viewNosotros(); }
+    else if(seg==="marca" && parts[1]){ html=viewMarca(parts[1]); }
     else { html=viewNotFound(); }
 
     app.innerHTML = html;
