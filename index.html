@@ -138,6 +138,7 @@ h3.display{font-size:clamp(1.35rem,2.4vw,2rem)}
 .btn--ghost{--bd:var(--hairline)}
 .btn--ghost:hover{--bd:var(--bone)}
 .btn--sm{padding:.7em 1.1em;font-size:.72rem}
+.btn[data-sending="true"]{opacity:.6;pointer-events:none}
 .btn--wa{--bd:var(--hairline)}
 .btn--wa:hover{--bg:#EDEBE7;--fg:var(--ink)}
 .hero__actions{display:flex;flex-wrap:wrap;gap:.9rem}
@@ -981,6 +982,13 @@ async function enviarAHubSpot(datos){
   }catch(e){
     console.error("Error enviando a HubSpot:", e);
   }
+}
+/* Evita doble envío (doble clic, Enter + clic, etc.): bloquea el botón mientras
+   la petición está en curso y lo libera cuando termina, éxito o error. */
+function enviarConGuard(btn, datos){
+  if(!btn || btn.dataset.sending==="true") return Promise.resolve();
+  btn.dataset.sending = "true";
+  return enviarAHubSpot(datos).finally(()=>{ btn.dataset.sending = "false"; });
 }
 
 /* FOTOS. Cambia cualquier URL por la foto real del auto (misma clave = id del vehículo).
@@ -1988,12 +1996,24 @@ function wireTas(){
   next?.addEventListener("click",()=>{save();TAS.step++;renderTas();window.scrollTo({top:$("#tas").offsetTop-100,behavior:RM?"auto":"smooth"});});
   back?.addEventListener("click",()=>{save();TAS.step--;renderTas();});
   $("#tasRestart")?.addEventListener("click",()=>{Object.assign(TAS,{tipo:"",marca:"",modelo:"",anio:"",km:"",estado:"",trans:"",nombre:"",fono:"",email:"",step:0});renderTas();});
-  const enviarTasHubSpot = ()=>{
+  const tasDatos = ()=>{
     const autoTasado = `${TAS.marca} ${TAS.modelo} ${TAS.anio} (${TAS.km?km(+TAS.km):"km s/i"}, ${TAS.estado})`;
-    enviarAHubSpot({ nombre:TAS.nombre, email:TAS.email, telefono:TAS.fono, autoTasado });
+    return { nombre:TAS.nombre, email:TAS.email, telefono:TAS.fono, autoTasado };
   };
-  $("#tasMailBtn")?.addEventListener("click", enviarTasHubSpot);
-  $("#tasWaBtn")?.addEventListener("click", enviarTasHubSpot);
+  // El botón de correo navega con mailto:, que en algunos navegadores cancela
+  // peticiones en curso. Por eso acá SÍ se espera a que HubSpot responda antes
+  // de abrir el correo (WhatsApp abre en otra pestaña, no tiene ese problema).
+  const mailBtn = $("#tasMailBtn");
+  if(mailBtn){
+    mailBtn.addEventListener("click", async e=>{
+      e.preventDefault();
+      if(mailBtn.dataset.sending==="true") return;
+      const href = mailBtn.getAttribute("href");
+      await enviarConGuard(mailBtn, tasDatos());
+      location.href = href;
+    });
+  }
+  $("#tasWaBtn")?.addEventListener("click", e=>{ enviarConGuard(e.currentTarget, tasDatos()); });
 }
 
 /* ---------- contacto ---------- */
@@ -2043,12 +2063,14 @@ function wireContacto(){
   const f = $("#contactForm");
   f?.addEventListener("submit", e=>{
     e.preventDefault();
+    const btn = f.querySelector('button[type="submit"]');
+    if(btn.dataset.sending==="true") return;
     const d = Object.fromEntries(new FormData(f));
     const err = $("#contactErr");
     if(!d.nombre?.trim() || !d.fono?.trim() || !d.email?.trim()){ err.hidden=false; return; }
     err.hidden = true;
     const motivo = d.mensaje?.trim() ? `${d.motivo} — ${d.mensaje.trim()}` : d.motivo;
-    enviarAHubSpot({ nombre:d.nombre, email:d.email, telefono:d.fono, motivo });
+    enviarConGuard(btn, { nombre:d.nombre, email:d.email, telefono:d.fono, motivo });
     toast("¡Gracias! Recibimos tu mensaje, te contactamos pronto.");
     f.reset();
   });
@@ -2144,11 +2166,13 @@ function wireServicio(){
   $$(".opt[data-day]").forEach(b=>b.addEventListener("click",()=>{schedSel.day=+b.dataset.day;update();}));
   $$(".opt[data-slot]").forEach(b=>b.addEventListener("click",()=>{schedSel.slot=b.dataset.slot;update();}));
   ["#schedNombre","#schedFono","#schedEmail"].forEach(id=>$(id)?.addEventListener("input",update));
-  $("#schedConfirm")?.addEventListener("click",()=>{
+  $("#schedConfirm")?.addEventListener("click",e=>{
+    const btn = e.currentTarget;
+    if(btn.dataset.sending==="true") return;
     const {nombre,fono,email} = datos();
     if(schedSel.day==null || !schedSel.slot || !nombre || !fono || !email) return;
     const d = dias[schedSel.day];
-    enviarAHubSpot({ nombre, telefono:fono, email, servicioHora: `${fmt(d)} a las ${schedSel.slot} hrs.` });
+    enviarConGuard(btn, { nombre, telefono:fono, email, servicioHora: `${fmt(d)} a las ${schedSel.slot} hrs.` });
   });
   update();
 }
@@ -2326,13 +2350,15 @@ function wireHome(){
   const vf=$("#visitForm");
   if(vf) vf.addEventListener("submit",e=>{
     e.preventDefault();
+    const btn = vf.querySelector('button[type="submit"]');
+    if(btn.dataset.sending==="true") return;
     const d=Object.fromEntries(new FormData(vf));
     const err=$("#visitErr");
     if(!d.nombre.trim() || !d.fono.trim()){ err.hidden=false; return; }
     err.hidden=true;
     const nom=d.nombre.trim().split(" ")[0];
     const sucursalFecha = `${d.sucursal}${d.fecha?" — "+d.fecha:""}${d.msg?.trim()?" — "+d.msg.trim():""}`;
-    enviarAHubSpot({ nombre:d.nombre, email:d.email, telefono:d.fono, sucursalFecha });
+    enviarConGuard(btn, { nombre:d.nombre, email:d.email, telefono:d.fono, sucursalFecha });
     toast(`Listo ${nom}, quedaste agendado para visitar ${d.sucursal}. Te contactamos para confirmar.`);
     vf.reset();
   });
